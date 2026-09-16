@@ -112,7 +112,7 @@ export function CaseStudy({
         className="container-main mt-4 grid gap-6 border-t border-border py-10 sm:grid-cols-2"
       >
         {previous ? (
-          <TextLink href={getProjectHref(previous)} variant="plain" className="min-w-0">
+          <TextLink href={getProjectHref(previous)} variant="plain" className="title-link min-w-0">
             <span className="meta block">Previous</span>
             <span className="mt-2 block text-[1.05rem] tracking-[-0.02em] text-foreground">
               {previous.title}
@@ -125,7 +125,7 @@ export function CaseStudy({
           <TextLink
             href={getProjectHref(next)}
             variant="plain"
-            className="min-w-0 sm:text-right"
+            className="title-link min-w-0 sm:text-right"
           >
             <span className="meta block">Next</span>
             <span className="mt-2 block text-[1.05rem] tracking-[-0.02em] text-foreground">

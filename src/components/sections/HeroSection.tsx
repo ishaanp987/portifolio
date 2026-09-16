@@ -35,7 +35,7 @@ export function HeroSection() {
           </p>
           <h1
             id="site-name"
-            className="max-w-[12ch] text-[length:var(--text-hero)] font-medium tracking-[-0.045em] text-foreground"
+            className="max-w-[20ch] text-[length:var(--text-hero)] font-medium tracking-[-0.045em] text-foreground"
           >
             {site.name}
           </h1>

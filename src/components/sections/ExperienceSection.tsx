@@ -49,7 +49,7 @@ export function ExperienceSection() {
                       <TextLink
                         href={item.link}
                         variant="plain"
-                        className="hover:text-accent-hover"
+                        className="title-link"
                       >
                         {item.organization}
                       </TextLink>

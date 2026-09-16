@@ -14,7 +14,7 @@ export function ProjectsSection() {
 
   return (
     <section id="projects" aria-labelledby="projects-heading" className="section-anchor">
-      <Container className="section-space">
+      <Container width="wide" className="section-space">
         <SectionHeading index={index} label="Projects" />
         <h2 id="projects-heading" className="sr-only">
           Projects

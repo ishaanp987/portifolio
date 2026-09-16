@@ -65,7 +65,7 @@ export function SchematicCover({ seed, title, code, className }: SchematicCoverP
         .filter(Boolean)
         .join(" ")}
     >
-      <rect width={width} height={height} fill="#121211" />
+      <rect width={width} height={height} fill="var(--background-secondary)" />
       {Array.from({ length: cols + 1 }, (_, i) => (
         <line
           key={`v-${i}`}
@@ -73,7 +73,7 @@ export function SchematicCover({ seed, title, code, className }: SchematicCoverP
           y1={0}
           x2={i * cellX}
           y2={height}
-          stroke="#2b2b26"
+          stroke="var(--border)"
           strokeWidth="1"
         />
       ))}
@@ -84,7 +84,7 @@ export function SchematicCover({ seed, title, code, className }: SchematicCoverP
           y1={i * cellY}
           x2={width}
           y2={i * cellY}
-          stroke="#2b2b26"
+          stroke="var(--border)"
           strokeWidth="1"
         />
       ))}
@@ -96,7 +96,7 @@ export function SchematicCover({ seed, title, code, className }: SchematicCoverP
           width={box.w}
           height={box.h}
           fill="none"
-          stroke="#45453c"
+          stroke="var(--border-strong)"
           strokeWidth="1.25"
         />
       ))}
@@ -107,7 +107,7 @@ export function SchematicCover({ seed, title, code, className }: SchematicCoverP
           y1={line.y1}
           x2={line.x2}
           y2={line.y2}
-          stroke="#8a9364"
+          stroke="var(--accent)"
           strokeWidth="1.25"
         />
       ))}
@@ -119,7 +119,7 @@ export function SchematicCover({ seed, title, code, className }: SchematicCoverP
             cy={node.y}
             r={node.r}
             fill="none"
-            stroke="#8a9364"
+            stroke="var(--accent)"
             strokeWidth="1.25"
           />
         ) : (
@@ -129,8 +129,8 @@ export function SchematicCover({ seed, title, code, className }: SchematicCoverP
             y={node.y - 3.5}
             width="7"
             height="7"
-            fill="#0c0c0b"
-            stroke="#eceae2"
+            fill="var(--background)"
+            stroke="var(--text-primary)"
             strokeWidth="1"
           />
         ),
@@ -138,7 +138,7 @@ export function SchematicCover({ seed, title, code, className }: SchematicCoverP
       <text
         x="28"
         y="36"
-        fill="#8a9364"
+        fill="var(--accent)"
         fontFamily="ui-monospace, SFMono-Regular, monospace"
         fontSize="14"
         letterSpacing="2.4"
@@ -148,7 +148,7 @@ export function SchematicCover({ seed, title, code, className }: SchematicCoverP
       <text
         x="28"
         y={height - 24}
-        fill="#7d7b71"
+        fill="var(--text-muted)"
         fontFamily="ui-monospace, SFMono-Regular, monospace"
         fontSize="13"
         letterSpacing="1.8"

@@ -34,15 +34,22 @@ export function FeaturedProject({ project, index }: FeaturedProjectProps) {
         </p>
       </div>
 
-      <h3 className="max-w-[18ch] text-[length:var(--text-project)] font-medium tracking-[-0.038em] text-foreground">
-        <TextLink href={href} variant="plain" className="hover:text-accent-hover">
+      <h3 className="max-w-[24ch] text-[length:var(--text-project)] font-medium tracking-[-0.038em] text-foreground">
+        <TextLink href={href} variant="plain" className="title-link">
           {project.title}
         </TextLink>
       </h3>
 
       {variant === "stacked" ? (
         <div className="mt-6 grid gap-6">
-          <ProjectCover project={project} priority={index === 0} />
+          <div>
+            <p className="meta mb-2 text-muted">
+              Fig. {displayIndex}
+              <span className="text-border-strong"> / </span>
+              Cover
+            </p>
+            <ProjectCover project={project} priority={index === 0} />
+          </div>
           <div className="grid gap-8 @min-[720px]:grid-cols-[minmax(0,1.2fr)_minmax(0,0.8fr)]">
             <ProjectBody project={project} href={href} />
             <ProjectMeta project={project} />
