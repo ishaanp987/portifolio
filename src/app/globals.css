@@ -383,10 +383,9 @@
 
   .link-mark {
     display: inline-block;
-    font-size: 0.85em;
-    line-height: 1;
-    opacity: 0.8;
-    transform: translateY(-0.02em);
+    flex-shrink: 0;
+    opacity: 0.85;
+    overflow: visible;
     transition: transform var(--duration-base) var(--ease-out);
   }
 
