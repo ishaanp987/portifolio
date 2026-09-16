@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1000" fill="none">
+  <rect width="1600" height="1000" fill="#121211"/>
+  <g stroke="#2b2b26">
+    <path d="M80 80h1440v840H80z"/>
+    <path d="M80 80v840M400 80v840M720 80v840M1040 80v840M1360 80v840M1520 80v840"/>
+    <path d="M80 80h1440M80 280h1440M80 480h1440M80 680h1440M80 880h1440"/>
+  </g>
+  <rect x="400" y="280" width="640" height="200" stroke="#45453c"/>
+  <rect x="880" y="480" width="320" height="200" stroke="#45453c"/>
+  <path d="M400 380h800M720 280v400" stroke="#8a9364"/>
+  <circle cx="400" cy="380" r="8" stroke="#8a9364"/>
+  <circle cx="720" cy="380" r="8" stroke="#eceae2"/>
+  <circle cx="1040" cy="580" r="8" stroke="#8a9364"/>
+  <text x="100" y="56" fill="#8a9364" font-family="ui-monospace, monospace" font-size="22" letter-spacing="3">FIG. 01 / DESKTOP  PLACEHOLDER</text>
+  <text x="100" y="960" fill="#7d7b71" font-family="ui-monospace, monospace" font-size="20" letter-spacing="2">REPLACE WITH A REAL SCREENSHOT</text>
+</svg>
