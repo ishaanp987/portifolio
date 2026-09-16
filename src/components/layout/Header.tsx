@@ -77,7 +77,7 @@ export function Header() {
           aria-label="Primary"
           className="flex min-w-0 flex-1 items-center lg:justify-between"
         >
-          <ul className="nav-list -mx-2 lg:mx-0 lg:overflow-visible">
+          <ul className="nav-list -mx-1 lg:mx-0">
             {navigation.map((item) => {
               const id = item.href.split("#")[1] ?? item.id;
               return (

@@ -3,10 +3,31 @@ import { hasContent } from "@/lib/links";
 
 const AREAS = site.focusAreas;
 
+const SLOTS: Record<string, { x: number; y: number; w: number; h: number }> = {
+  software: { x: 58, y: 36, w: 118, h: 38 },
+  ai: { x: 244, y: 36, w: 118, h: 38 },
+  robotics: { x: 58, y: 128, w: 118, h: 38 },
+  engineering: { x: 244, y: 128, w: 118, h: 38 },
+  products: { x: 151, y: 212, w: 118, h: 38 },
+};
+
+const LINKS: Array<[string, string]> = [
+  ["software", "ai"],
+  ["software", "robotics"],
+  ["ai", "engineering"],
+  ["robotics", "engineering"],
+  ["robotics", "products"],
+  ["engineering", "products"],
+];
+
 function coreIndex(areas: readonly string[]): number {
   const named = areas.findIndex((area) => area.toLowerCase() === "engineering");
   if (named >= 0) return named;
   return Math.min(3, Math.max(0, areas.length - 1));
+}
+
+function canUseNamedMap(areas: readonly string[]): boolean {
+  return areas.length === 5 && areas.every((area) => SLOTS[area.toLowerCase()]);
 }
 
 export function SystemsBoard() {
@@ -33,7 +54,7 @@ export function SystemsBoard() {
         role="img"
         aria-label={`System map of ${AREAS.join(", ")}.`}
       >
-        {AREAS.length === 5 ? (
+        {canUseNamedMap(AREAS) ? (
           <FiveSystemMap areas={AREAS} core={core} />
         ) : (
           <SpineSystemMap areas={AREAS} core={core} />
@@ -59,38 +80,42 @@ export function SystemsBoard() {
 }
 
 function FiveSystemMap({ areas, core }: { areas: readonly string[]; core: number }) {
-  const nodes = [
-    { x: 58, y: 36, w: 118, h: 38 },
-    { x: 244, y: 36, w: 118, h: 38 },
-    { x: 58, y: 128, w: 118, h: 38 },
-    { x: 244, y: 128, w: 118, h: 38 },
-    { x: 151, y: 212, w: 118, h: 38 },
-  ];
-  const links: Array<[number, number]> = [
-    [0, 1],
-    [0, 2],
-    [1, 3],
-    [2, 3],
-    [2, 4],
-    [3, 4],
-  ];
+  const nodes = areas.map((label) => ({
+    label,
+    key: label.toLowerCase(),
+    ...SLOTS[label.toLowerCase()],
+  }));
+  const byKey = Object.fromEntries(nodes.map((node) => [node.key, node]));
 
   return (
     <svg viewBox="0 0 420 276" className="h-auto w-full">
       <Axis />
-      {links.map(([a, b]) => (
-        <line
-          key={`${a}-${b}`}
-          x1={nodes[a].x + nodes[a].w / 2}
-          y1={nodes[a].y + nodes[a].h / 2}
-          x2={nodes[b].x + nodes[b].w / 2}
-          y2={nodes[b].y + nodes[b].h / 2}
-          stroke="var(--accent)"
-          strokeWidth="1.15"
-        />
-      ))}
+      {LINKS.map(([a, b]) => {
+        const from = byKey[a];
+        const to = byKey[b];
+        if (!from || !to) return null;
+        return (
+          <line
+            key={`${a}-${b}`}
+            x1={from.x + from.w / 2}
+            y1={from.y + from.h / 2}
+            x2={to.x + to.w / 2}
+            y2={to.y + to.h / 2}
+            stroke="var(--accent)"
+            strokeWidth="1.15"
+          />
+        );
+      })}
       {nodes.map((node, index) => (
-        <Node key={areas[index]} {...node} label={areas[index]} core={index === core} />
+        <Node
+          key={node.label}
+          x={node.x}
+          y={node.y}
+          w={node.w}
+          h={node.h}
+          label={node.label}
+          core={index === core}
+        />
       ))}
     </svg>
   );
