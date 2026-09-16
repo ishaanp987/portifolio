@@ -27,34 +27,31 @@ export function SchematicCover({ seed, title, code, className }: SchematicCoverP
   const random = mulberry32(hashString(seed));
   const width = 960;
   const height = 600;
+  const padX = 96;
+  const padY = 88;
   const cols = 12;
   const rows = 8;
   const cellX = width / cols;
   const cellY = height / rows;
 
-  const nodes = Array.from({ length: 6 }, (_, i) => ({
-    x: Math.floor(random() * (cols - 2) + 1) * cellX,
-    y: Math.floor(random() * (rows - 2) + 1) * cellY,
-    r: i % 3 === 0 ? 18 : 4,
+  const modules = [
+    { x: padX + random() * 40, y: padY + random() * 24, w: 220, h: 120 },
+    { x: 380 + random() * 50, y: padY + 16 + random() * 20, w: 200, h: 108 },
+    { x: 640 + random() * 30, y: 210 + random() * 30, w: 188, h: 132 },
+    { x: padX + 40 + random() * 40, y: 330 + random() * 20, w: 260, h: 116 },
+  ];
+
+  const centers = modules.map((mod) => ({
+    x: mod.x + mod.w / 2,
+    y: mod.y + mod.h / 2,
   }));
 
-  const lines = nodes.slice(0, -1).map((node, i) => ({
-    x1: node.x,
-    y1: node.y,
-    x2: nodes[i + 1].x,
-    y2: nodes[i + 1].y,
-  }));
-
-  const boxes = Array.from({ length: 2 }, () => {
-    const x = Math.floor(random() * 7 + 1) * cellX;
-    const y = Math.floor(random() * 4 + 1) * cellY;
-    return {
-      x,
-      y,
-      w: Math.floor(random() * 3 + 2) * cellX,
-      h: Math.floor(random() * 2 + 1) * cellY,
-    };
-  });
+  const links = [
+    [0, 1],
+    [1, 2],
+    [0, 3],
+    [3, 2],
+  ];
 
   return (
     <svg
@@ -88,53 +85,68 @@ export function SchematicCover({ seed, title, code, className }: SchematicCoverP
           strokeWidth="1"
         />
       ))}
-      {boxes.map((box, i) => (
-        <rect
-          key={`box-${i}`}
-          x={box.x}
-          y={box.y}
-          width={box.w}
-          height={box.h}
-          fill="none"
-          stroke="var(--border-strong)"
-          strokeWidth="1.25"
-        />
+      <line
+        x1={padX - 24}
+        y1={padY - 24}
+        x2={padX - 24}
+        y2={height - 48}
+        stroke="var(--border-strong)"
+        strokeWidth="1"
+      />
+      <line
+        x1={padX - 24}
+        y1={height - 48}
+        x2={width - 48}
+        y2={height - 48}
+        stroke="var(--border-strong)"
+        strokeWidth="1"
+      />
+      {modules.map((mod, i) => (
+        <g key={`m-${i}`}>
+          <rect
+            x={mod.x}
+            y={mod.y}
+            width={mod.w}
+            height={mod.h}
+            fill="var(--background)"
+            stroke={i === 1 ? "var(--accent)" : "var(--border-strong)"}
+            strokeWidth="1.25"
+          />
+          <text
+            x={mod.x + 14}
+            y={mod.y + 28}
+            fill="var(--text-muted)"
+            fontFamily="ui-monospace, SFMono-Regular, monospace"
+            fontSize="12"
+            letterSpacing="1.6"
+          >
+            {`BLK ${String(i + 1).padStart(2, "0")}`}
+          </text>
+        </g>
       ))}
-      {lines.map((line, i) => (
+      {links.map(([a, b], i) => (
         <line
-          key={`l-${i}`}
-          x1={line.x1}
-          y1={line.y1}
-          x2={line.x2}
-          y2={line.y2}
+          key={`link-${i}`}
+          x1={centers[a].x}
+          y1={centers[a].y}
+          x2={centers[b].x}
+          y2={centers[b].y}
           stroke="var(--accent)"
           strokeWidth="1.25"
         />
       ))}
-      {nodes.map((node, i) =>
-        node.r > 8 ? (
-          <circle
-            key={`n-${i}`}
-            cx={node.x}
-            cy={node.y}
-            r={node.r}
-            fill="none"
-            stroke="var(--accent)"
-            strokeWidth="1.25"
-          />
-        ) : (
-          <rect
-            key={`n-${i}`}
-            x={node.x - 3.5}
-            y={node.y - 3.5}
-            width="7"
-            height="7"
-            fill="var(--background)"
-            stroke="var(--text-primary)"
-            strokeWidth="1"
-          />
-        ),
-      )}
+      {centers.map((center, i) => (
+        <rect
+          key={`n-${i}`}
+          x={center.x - 4}
+          y={center.y - 4}
+          width="8"
+          height="8"
+          fill="var(--background)"
+          stroke="var(--text-primary)"
+          strokeWidth="1"
+        />
+      ))}
       <text
         x="28"
         y="36"
@@ -147,7 +159,7 @@ export function SchematicCover({ seed, title, code, className }: SchematicCoverP
       </text>
       <text
         x="28"
-        y={height - 24}
+        y={height - 22}
         fill="var(--text-muted)"
         fontFamily="ui-monospace, SFMono-Regular, monospace"
         fontSize="13"

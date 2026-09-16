@@ -16,7 +16,8 @@ export function TextLink({
   variant = "underline",
   ariaLabel,
 }: TextLinkProps) {
-  const external = isExternalHref(href) || href.startsWith("mailto:");
+  const httpExternal = isExternalHref(href);
+  const mail = href.startsWith("mailto:");
   const variantClass =
     variant === "action"
       ? "action-link"
@@ -30,16 +31,23 @@ export function TextLink({
 
   const classes = [variantClass, className].filter(Boolean).join(" ");
   const extra = {
-    ...(external ? { "data-external": "true" } : {}),
     ...(ariaLabel ? { "aria-label": ariaLabel } : {}),
   };
 
-  if (external) {
-    const rel = href.startsWith("mailto:") ? undefined : "noopener noreferrer";
-    const target = href.startsWith("mailto:") ? undefined : "_blank";
+  const mark =
+    httpExternal || variant === "action" ? (
+      <span className="link-mark font-mono" aria-hidden="true">
+        {httpExternal ? "↗" : "→"}
+      </span>
+    ) : null;
+
+  if (httpExternal || mail) {
+    const rel = mail ? undefined : "noopener noreferrer";
+    const target = mail ? undefined : "_blank";
     return (
       <a href={href} className={classes} target={target} rel={rel} {...extra}>
         {children}
+        {httpExternal ? mark : null}
       </a>
     );
   }
@@ -47,6 +55,7 @@ export function TextLink({
   return (
     <Link href={href} className={classes} {...extra}>
       {children}
+      {variant === "action" ? mark : null}
     </Link>
   );
 }

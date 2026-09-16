@@ -5,7 +5,7 @@ import { site } from "@/config/site";
 
 export function Header() {
   return (
-    <header className="sticky top-0 z-30 border-b border-border bg-background">
+    <header className="site-header sticky top-0 z-30 border-b border-border">
       <Container className="flex flex-col gap-1 py-2 lg:h-[3.65rem] lg:flex-row lg:items-center lg:justify-between lg:gap-6 lg:py-0">
         <div className="flex min-h-11 items-center justify-between gap-4">
           <TextLink

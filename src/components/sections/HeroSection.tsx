@@ -24,7 +24,7 @@ export function HeroSection() {
       aria-labelledby="site-name"
       className="section-anchor border-b border-border"
     >
-      <Container className="grid gap-10 py-12 md:py-16 lg:grid-cols-[minmax(0,1.15fr)_minmax(18rem,0.85fr)] lg:items-end lg:gap-16 lg:py-20">
+      <Container className="grid gap-10 py-12 md:py-16 lg:grid-cols-[minmax(0,1.15fr)_minmax(18rem,0.85fr)] lg:items-start lg:gap-16 lg:py-20">
         <div className="min-w-0">
           <p className="section-kicker mb-8 max-w-[12rem] after:hidden">
             <span>
@@ -61,7 +61,7 @@ export function HeroSection() {
           </div>
         </div>
 
-        <div className="grid gap-6 lg:justify-items-end">
+        <div className="grid gap-6 lg:mt-11 lg:justify-items-end">
           <dl className="title-block w-full max-w-[24rem]">
             <dt>Name</dt>
             <dd>{site.name}</dd>
