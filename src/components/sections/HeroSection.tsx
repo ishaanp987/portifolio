@@ -1,5 +1,5 @@
 import { Container } from "@/components/layout/Container";
-import { SystemsDiagram } from "@/components/sections/SystemsDiagram";
+import { SystemsBoard } from "@/components/sections/SystemsBoard";
 import { TextLink } from "@/components/ui/TextLink";
 import { site } from "@/config/site";
 import { hasContent } from "@/lib/links";
@@ -17,6 +17,7 @@ export function HeroSection() {
     : hasContent(site.email)
       ? "Email"
       : "Contact";
+  const index = getSectionIndex("hero");
 
   return (
     <section
@@ -24,63 +25,46 @@ export function HeroSection() {
       aria-labelledby="site-name"
       className="section-anchor border-b border-border"
     >
-      <Container className="grid gap-10 py-12 md:py-16 lg:grid-cols-[minmax(0,1.15fr)_minmax(18rem,0.85fr)] lg:items-start lg:gap-16 lg:py-20">
-        <div className="min-w-0">
-          <p className="section-kicker mb-8 max-w-[12rem] after:hidden">
-            <span>
-              {getSectionIndex("hero")}
-              <span className="text-muted"> / </span>
-              Index
-            </span>
-          </p>
-          <h1
-            id="site-name"
-            className="max-w-[20ch] text-[length:var(--text-hero)] font-medium tracking-[-0.045em] text-foreground"
-          >
-            {site.name}
+      <Container width="wide" className="py-9 md:py-12 lg:py-16">
+        <p className="section-kicker mb-8 md:mb-10">
+          <span>
+            <span className="text-accent">{index}</span>
+            <span className="text-muted"> / </span>
+            Portfolio
+          </span>
+          <span className="section-kicker-rule" aria-hidden="true" />
+          <span className="text-muted">DWG {index}</span>
+        </p>
+        <div className="hero-stage">
+          <h1 id="site-name" className="hero-name name-stack text-foreground">
+            <span className="block">{site.firstName}</span>
+            <span className="block">{site.lastName}</span>
           </h1>
-          <p className="mt-6 max-w-[28rem] text-[1.05rem] leading-8 text-secondary md:text-[1.12rem]">
-            {site.headline}
-          </p>
-          <p className="mt-4 max-w-[32rem] text-[0.95rem] leading-7 text-muted">
-            {site.description}
-          </p>
-          <div className="mt-8 flex flex-wrap items-center gap-x-6">
-            {projectsEnabled ? (
-              <TextLink href="/#projects" variant="action">
-                View projects
-              </TextLink>
-            ) : (
-              <TextLink href="/projects" variant="action">
-                View projects
-              </TextLink>
-            )}
-            <TextLink href={secondaryHref} variant="ghost">
-              {secondaryLabel}
-            </TextLink>
+          <div className="hero-board">
+            <SystemsBoard />
           </div>
-        </div>
-
-        <div className="grid gap-6 lg:mt-11 lg:justify-items-end">
-          <dl className="title-block w-full max-w-[24rem]">
-            <dt>Name</dt>
-            <dd>{site.name}</dd>
-            <dt>Focus</dt>
-            <dd>{site.focus}</dd>
-            {hasContent(site.availability) ? (
-              <>
-                <dt>Status</dt>
-                <dd>{site.availability}</dd>
-              </>
-            ) : null}
-            {hasContent(site.location) ? (
-              <>
-                <dt>Loc</dt>
-                <dd>{site.location}</dd>
-              </>
-            ) : null}
-          </dl>
-          <SystemsDiagram />
+          <div className="hero-copy">
+            <hr className="olive-rule mt-1 mb-6" />
+            <ul className="discipline-stack m-0 list-none p-0">
+              {site.disciplines.map((item) => (
+                <li key={item}>{item}</li>
+              ))}
+            </ul>
+            <p className="mt-8 max-w-[24ch] text-[length:var(--text-lead)] leading-7 text-secondary">
+              {site.headline}
+            </p>
+            <div className="mt-8 flex flex-wrap items-center gap-x-6">
+              <TextLink
+                href={projectsEnabled ? "/#projects" : "/projects"}
+                variant="action"
+              >
+                View projects
+              </TextLink>
+              <TextLink href={secondaryHref} variant="ghost">
+                {secondaryLabel}
+              </TextLink>
+            </div>
+          </div>
         </div>
       </Container>
     </section>

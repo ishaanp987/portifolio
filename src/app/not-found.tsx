@@ -4,21 +4,20 @@ import { TextLink } from "@/components/ui/TextLink";
 export default function NotFound() {
   return (
     <div className="section-space">
-      <Container className="max-w-3xl">
-        <p className="section-kicker mb-8 after:hidden">
+      <Container width="wide">
+        <p className="section-kicker mb-10">
           <span>
-            ERR
+            <span className="text-accent">Err</span>
             <span className="text-muted"> / </span>
             404
           </span>
+          <span className="section-kicker-rule" aria-hidden="true" />
         </p>
-        <h1 className="max-w-[12ch] text-[length:var(--text-page)] font-medium tracking-[-0.04em]">
-          This sheet does not exist.
-        </h1>
-        <p className="mt-5 max-w-[32rem] text-secondary">
+        <h1 className="contact-title max-w-[10ch]">This sheet does not exist.</h1>
+        <p className="mt-6 max-w-[32rem] text-secondary">
           The page may have been moved, or the project is hidden from the public index.
         </p>
-        <div className="mt-8 flex flex-wrap gap-x-6">
+        <div className="mt-10 flex flex-wrap gap-x-6">
           <TextLink href="/" variant="action">
             Return home
           </TextLink>

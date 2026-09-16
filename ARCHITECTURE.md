@@ -34,7 +34,7 @@ Components should not contain names, bios, or project copy.
 
 `src/config/theme.ts` duplicates the palette only for `ImageResponse` assets (Open Graph, Apple icon).
 
-The visual motif is a drawing sheet: section indexes (`01 / PROJECTS`), monospace metadata, hairline rules, and corner ticks on large screens. Olive is reserved for indexes, links, focus, and small technical marks.
+The visual motif is a workstation drawing sheet: an olive measurement rail, section indexes (`01 / PROJECTS`), stacked display type against tiny monospace metadata, a systems board (`SYS-01`), and hairline rules. Olive is a signal — rail, indexes, active navigation, core diagram nodes, action links — not a wash.
 
 ## Project rendering
 
@@ -55,7 +55,7 @@ Each case study renders optional blocks (problem, solution, architecture, decisi
 ## Other decisions
 
 - **No UI kit.** Custom CSS keeps the identity specific and the dependency surface small.
-- **Almost no client JavaScript.** Header, navigation, and content are server-rendered. `error.tsx` is the client exception.
+- **Almost no client JavaScript.** `Header` is a client component so it can track the active section. Everything else on the happy path is a Server Component. `error.tsx` is the other client exception.
 - **Dark theme only.** Tokens are named so a second theme could be added later without rewriting components.
 - **Capability-based CSS.** Hover motion is gated by `(hover: hover) and (pointer: fine)`. `prefers-reduced-motion` disables transitions. Touch targets stay at least 44px.
 - **Validation without Zod.** A small assert in `lib` is enough: malformed data should fail loudly for the developer, not silently in the UI.

@@ -26,11 +26,11 @@ export function CaseStudy({
   return (
     <article className="pb-[var(--space-section)]">
       <header className="border-b border-border">
-        <div className="container-main grid gap-10 py-12 lg:grid-cols-[minmax(0,1.15fr)_minmax(0,0.85fr)] lg:items-end lg:py-16">
+        <div className="container-wide grid gap-10 py-12 lg:grid-cols-[minmax(0,1.25fr)_minmax(16rem,0.75fr)] lg:items-end lg:gap-16 lg:py-16">
           <div className="min-w-0">
-            <p className="section-kicker mb-6 after:hidden">
+            <p className="section-kicker mb-8">
               <span>
-                {sequenceLabel}
+                <span className="text-accent">{sequenceLabel}</span>
                 <span className="text-muted"> / </span>
                 Case study
                 {project.code ? (
@@ -40,11 +40,13 @@ export function CaseStudy({
                   </>
                 ) : null}
               </span>
+              <span className="section-kicker-rule" aria-hidden="true" />
             </p>
-            <h1 className="max-w-[16ch] text-[length:var(--text-page)] font-medium tracking-[-0.04em] text-foreground md:text-[length:var(--text-hero)]">
+            <h1 className="max-w-[14ch] text-[length:var(--text-display)] uppercase text-foreground">
               {project.title}
             </h1>
-            <p className="mt-5 max-w-[38rem] text-[1.02rem] leading-8 text-secondary">
+            <hr className="olive-rule mt-6 mb-6" />
+            <p className="mt-5 max-w-[38rem] text-[length:var(--text-lead)] leading-8 text-secondary">
               {project.longDescription ?? project.description}
             </p>
             <div className="mt-6 flex flex-wrap gap-x-5">
@@ -81,22 +83,23 @@ export function CaseStudy({
           <ProjectCover
             project={project}
             priority
-            sizes="(min-width: 1280px) 88rem, 100vw"
+            size="lead"
+            sizes="(min-width: 1280px) 90rem, 100vw"
           />
         </div>
       </header>
 
       {blocks.length > 0 ? (
-        <div className="container-main divide-y divide-border">
+        <div className="container-wide divide-y divide-border">
           {blocks.map((block) => (
             <section
               key={block.id}
               aria-labelledby={block.id}
               className="grid gap-6 py-12 md:grid-cols-[11rem_minmax(0,1fr)] md:gap-12 lg:py-16"
             >
-              <h2 id={block.id} className="section-kicker after:hidden mb-0">
+              <h2 id={block.id} className="section-kicker mb-0">
                 <span>
-                  {block.index}
+                  <span className="text-accent">{block.index}</span>
                   <span className="text-muted"> / </span>
                   {block.title}
                 </span>
@@ -109,12 +112,16 @@ export function CaseStudy({
 
       <nav
         aria-label="Adjacent projects"
-        className="container-main mt-4 grid gap-6 border-t border-border py-10 sm:grid-cols-2"
+        className="container-wide mt-4 grid gap-8 border-t border-border py-12 sm:grid-cols-2"
       >
         {previous ? (
-          <TextLink href={getProjectHref(previous)} variant="plain" className="title-link min-w-0">
-            <span className="meta block">Previous</span>
-            <span className="mt-2 block text-[1.05rem] tracking-[-0.02em] text-foreground">
+          <TextLink
+            href={getProjectHref(previous)}
+            variant="plain"
+            className="title-link min-w-0"
+          >
+            <span className="meta block text-accent">Previous</span>
+            <span className="mt-3 block max-w-[16ch] text-[length:var(--text-page)] font-medium uppercase leading-[0.94] tracking-[-0.04em] text-foreground">
               {previous.title}
             </span>
           </TextLink>
@@ -127,8 +134,8 @@ export function CaseStudy({
             variant="plain"
             className="title-link min-w-0 sm:text-right"
           >
-            <span className="meta block">Next</span>
-            <span className="mt-2 block text-[1.05rem] tracking-[-0.02em] text-foreground">
+            <span className="meta block text-accent">Next</span>
+            <span className="mt-3 ml-auto block max-w-[16ch] text-[length:var(--text-page)] font-medium uppercase leading-[0.94] tracking-[-0.04em] text-foreground sm:ml-auto">
               {next.title}
             </span>
           </TextLink>
@@ -191,8 +198,8 @@ function getCaseBlocks(project: Project): CaseBlock[] {
     "technologies",
     "Technologies",
     project.technologies && project.technologies.length > 0 ? (
-      <p className="max-w-[40rem] text-[1.02rem] leading-8 text-secondary">
-        {project.technologies.join("  ·  ")}
+      <p className="max-w-[40rem] font-mono text-[0.78rem] uppercase tracking-[0.12em] leading-7 text-secondary">
+        {project.technologies.join("  /  ")}
       </p>
     ) : null,
   );

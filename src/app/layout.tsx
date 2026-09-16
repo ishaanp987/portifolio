@@ -1,11 +1,11 @@
 import type { Metadata } from "next";
-import { IBM_Plex_Mono, Instrument_Sans } from "next/font/google";
+import { Geist, IBM_Plex_Mono } from "next/font/google";
 import { SiteFrame } from "@/components/layout/SiteFrame";
 import { site } from "@/config/site";
 import { getSiteUrl } from "@/lib/site";
 import "./globals.css";
 
-const sans = Instrument_Sans({
+const sans = Geist({
   subsets: ["latin"],
   variable: "--font-sans-family",
   display: "swap",

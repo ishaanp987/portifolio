@@ -11,17 +11,14 @@ export default function AppleIcon() {
         width: "100%",
         height: "100%",
         display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
         background: theme.background,
       }}
     >
       <div
         style={{
-          width: 118,
-          height: 118,
-          display: "flex",
-          border: `3px solid ${theme.accent}`,
+          width: 16,
+          height: "100%",
+          background: theme.accent,
         }}
       />
     </div>,

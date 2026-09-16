@@ -16,7 +16,7 @@ export function MetaList({ items }: MetaListProps) {
         <div key={item.label} className="meta-pair">
           <dt className="meta-key">{item.label}</dt>
           <dd className="meta-val">
-            {Array.isArray(item.value) ? item.value.join("  ·  ") : item.value}
+            {Array.isArray(item.value) ? item.value.join(" / ") : item.value}
           </dd>
         </div>
       ))}

@@ -18,12 +18,9 @@ export function ExperienceSection() {
       aria-labelledby="experience-heading"
       className="section-anchor border-t border-border"
     >
-      <Container className="section-space">
+      <Container width="wide" className="section-space">
         <SectionHeading index={getSectionIndex("experience")} label="Experience" />
-        <h2
-          id="experience-heading"
-          className="mb-10 max-w-[16ch] text-[length:var(--text-page)] font-medium tracking-[-0.038em]"
-        >
+        <h2 id="experience-heading" className="sr-only">
           Selected work
         </h2>
 
@@ -40,17 +37,15 @@ export function ExperienceSection() {
             {items.map((item) => (
               <li
                 key={item.id}
-                className="grid gap-3 border-t border-border py-8 md:grid-cols-[6.5rem_minmax(0,1fr)] md:gap-10"
+                className="grid gap-3 border-t border-border py-9 md:grid-cols-[7.5rem_minmax(0,1fr)] md:gap-12 lg:grid-cols-[8.5rem_minmax(0,1fr)]"
               >
-                <p className="meta pt-1 text-accent">{experienceYear(item)}</p>
+                <p className="m-0 pt-1 font-medium tracking-[-0.04em] text-accent md:text-[1.35rem]">
+                  {experienceYear(item)}
+                </p>
                 <div className="min-w-0">
-                  <h3 className="text-[1.2rem] font-medium tracking-[-0.03em] text-foreground">
+                  <h3 className="text-[1.45rem] font-medium tracking-[-0.04em] text-foreground md:text-[1.7rem]">
                     {hasContent(item.link) ? (
-                      <TextLink
-                        href={item.link}
-                        variant="plain"
-                        className="title-link"
-                      >
+                      <TextLink href={item.link} variant="plain" className="title-link">
                         {item.organization}
                       </TextLink>
                     ) : (
@@ -82,7 +77,7 @@ export function ExperienceSection() {
                   ) : null}
                   {item.technologies && item.technologies.length > 0 ? (
                     <p className="meta mt-5 text-muted">
-                      {item.technologies.join("  ·  ")}
+                      {item.technologies.join("  /  ")}
                     </p>
                   ) : null}
                 </div>

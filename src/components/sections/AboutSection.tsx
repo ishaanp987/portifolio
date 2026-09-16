@@ -12,17 +12,20 @@ export function AboutSection() {
       aria-labelledby="about-heading"
       className="section-anchor border-t border-border"
     >
-      <Container className="section-space grid gap-10 lg:grid-cols-[minmax(0,0.8fr)_minmax(18rem,1.2fr)] lg:gap-20">
+      <Container
+        width="wide"
+        className="section-space grid gap-10 lg:grid-cols-[minmax(12rem,0.7fr)_minmax(0,1.3fr)] lg:gap-24"
+      >
         <div>
           <SectionHeading index={getSectionIndex("about")} label="About" />
           <h2
             id="about-heading"
-            className="max-w-[12ch] text-[length:var(--text-page)] font-medium tracking-[-0.038em]"
+            className="max-w-[8ch] text-[length:var(--text-page)] uppercase"
           >
             Notes
           </h2>
         </div>
-        <div className="prose-block pt-2 lg:pt-16">
+        <div className="about-rail prose-block lg:mt-16">
           {paragraphs.map((paragraph) => (
             <p key={paragraph}>{paragraph}</p>
           ))}

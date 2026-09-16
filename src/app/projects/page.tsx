@@ -18,16 +18,17 @@ export default function ProjectsPage() {
 
   return (
     <div className="section-space">
-      <Container>
+      <Container width="wide">
         <SectionHeading index="01" label="Index" />
-        <h1 className="max-w-[12ch] text-[length:var(--text-page)] font-medium tracking-[-0.04em]">
-          All projects
+        <h1 className="contact-title max-w-[10ch] text-foreground">
+          <span className="block">Project</span>
+          <span className="block">register</span>
         </h1>
-        <p className="mt-4 max-w-[36rem] text-secondary">
+        <p className="mt-6 max-w-[36rem] text-secondary">
           A register of visible work. Hidden drafts stay in the data file and never appear
           here.
         </p>
-        <div className="mt-10">
+        <div className="mt-12">
           {projects.length === 0 ? (
             <p className="text-secondary">
               No projects to show. Add objects in{" "}

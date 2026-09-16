@@ -5,13 +5,13 @@
  * cannot see stylesheet variables.
  */
 export const theme = {
-  background: "#0c0c0b",
+  background: "#0b0b0a",
   backgroundSecondary: "#121211",
-  surface: "#171714",
-  foreground: "#eceae2",
-  secondary: "#b3b0a4",
-  muted: "#7d7b71",
-  border: "#2b2b26",
-  accent: "#8a9364",
-  accentMuted: "#5c6348",
+  surface: "#161613",
+  foreground: "#f0eee6",
+  secondary: "#b4b1a5",
+  muted: "#7c7a70",
+  border: "#2a2a25",
+  accent: "#8e9763",
+  accentMuted: "#5d6448",
 } as const;

@@ -45,6 +45,7 @@ type TextLinkProps = {
   className?: string;
   variant?: "underline" | "action" | "ghost" | "nav" | "plain";
   ariaLabel?: string;
+  active?: boolean;
 };
 
 export function TextLink({
@@ -53,6 +54,7 @@ export function TextLink({
   className,
   variant = "underline",
   ariaLabel,
+  active = false,
 }: TextLinkProps) {
   const httpExternal = isExternalHref(href);
   const mail = href.startsWith("mailto:");
@@ -70,11 +72,17 @@ export function TextLink({
   const classes = [variantClass, className].filter(Boolean).join(" ");
   const extra = {
     ...(ariaLabel ? { "aria-label": ariaLabel } : {}),
+    ...(active ? { "data-active": "true" } : {}),
   };
 
-  const mark =
-    httpExternal || variant === "action" ? (
-      <LinkMark external={httpExternal} />
+  const actionBits =
+    variant === "action" ? (
+      <>
+        <span className="action-rule" aria-hidden="true" />
+        <LinkMark external={httpExternal} />
+      </>
+    ) : httpExternal ? (
+      <LinkMark external />
     ) : null;
 
   if (httpExternal || mail) {
@@ -83,7 +91,7 @@ export function TextLink({
     return (
       <a href={href} className={classes} target={target} rel={rel} {...extra}>
         {children}
-        {httpExternal ? mark : null}
+        {actionBits}
       </a>
     );
   }
@@ -91,7 +99,7 @@ export function TextLink({
   return (
     <Link href={href} className={classes} {...extra}>
       {children}
-      {variant === "action" ? mark : null}
+      {variant === "action" ? actionBits : null}
     </Link>
   );
 }

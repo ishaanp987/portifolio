@@ -1,6 +1,6 @@
 # Portfolio
 
-Personal portfolio for **Ishaan Patel** — a dark, documentation-inspired site for software, engineering, robotics, AI, and product work.
+Personal portfolio for **Ishaan Patel** — an engineering workstation turned into a dark, documentation-inspired site for software, robotics, AI, and product work.
 
 The public copy currently includes **placeholder content** on purpose. Edit the files below; you should not need to hunt through React components to change personal information.
 
@@ -42,17 +42,21 @@ All of this lives in [`src/config/site.ts`](src/config/site.ts).
 
 | You want to change                          | Field                                                        |
 | ------------------------------------------- | ------------------------------------------------------------ |
-| Name                                        | `name`                                                       |
+| Name                                        | `name`, plus `firstName` / `lastName` for the stacked hero   |
+| Initials / brand mark                       | `initials` (renders as `IP / 26`)                            |
 | Headline                                    | `headline`                                                   |
 | Short supporting sentence / SEO description | `description`                                                |
+| Discipline stack in the hero                | `disciplines`                                                |
+| Systems board node labels                   | `focusAreas`                                                 |
 | Bio / about paragraphs                      | `bio` and `about`                                            |
+| Contact headline and CTA                    | `contactHeading`, `contactCta`                               |
 | Email                                       | `email`                                                      |
 | Location                                    | `location`                                                   |
 | GitHub                                      | `github`                                                     |
 | LinkedIn                                    | `linkedin`                                                   |
 | Résumé                                      | `resume` (leave empty until you have a URL or `/resume.pdf`) |
 | Availability                                | `availability`                                               |
-| Focus line in the hero title block          | `focus`                                                      |
+| Focus line used in generated assets         | `focus`                                                      |
 | Canonical site URL                          | `url` (or `NEXT_PUBLIC_SITE_URL`)                            |
 
 Empty strings hide the related action. Example: an empty `resume` removes the Résumé link from navigation. Social links are derived from this file in [`src/data/social.ts`](src/data/social.ts).
@@ -102,9 +106,9 @@ Navigation labels and hashes live in [`src/config/navigation.ts`](src/config/nav
 
 Live site tokens are in [`src/app/globals.css`](src/app/globals.css) under `:root`.
 
-- **Olive accent:** change `--accent`, then `--accent-muted`, `--accent-hover`, `--accent-border` if contrast needs a tweak.
+- **Olive accent:** change `--accent`, then `--accent-muted`, `--accent-hover`, `--accent-border` if contrast needs a tweak. Olive is a signal (rail, indexes, active nav, rules), not a wash.
 - **Other colors:** `--background`, `--text-primary`, `--text-secondary`, `--text-muted`, `--border`, and the surface tokens.
-- **Typography:** `--text-hero`, `--text-page`, `--text-project`, `--text-body`, `--text-meta`, plus the font loaders in [`src/app/layout.tsx`](src/app/layout.tsx).
+- **Typography:** `--text-hero`, `--text-display`, `--text-project`, `--text-page`, `--text-body`, `--text-meta`, plus Geist and IBM Plex Mono in [`src/app/layout.tsx`](src/app/layout.tsx).
 - **Spacing / layout:** `--space-gutter`, `--space-section`, `--container-main`, `--container-wide`.
 
 Open Graph images and the Apple icon cannot read CSS variables. After changing the palette, update the matching values in [`src/config/theme.ts`](src/config/theme.ts).

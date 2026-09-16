@@ -14,12 +14,13 @@ export function ProjectsSection() {
 
   return (
     <section id="projects" aria-labelledby="projects-heading" className="section-anchor">
-      <Container width="wide" className="section-space">
+      <Container width="wide" className="pt-[var(--space-section)] pb-4">
         <SectionHeading index={index} label="Projects" />
         <h2 id="projects-heading" className="sr-only">
           Projects
         </h2>
-
+      </Container>
+      <Container width="wide" className="pb-[var(--space-section)]">
         {featured.length === 0 ? (
           <p className="max-w-xl text-secondary">
             No featured projects yet. Add a project in{" "}
@@ -31,29 +32,27 @@ export function ProjectsSection() {
           </p>
         ) : (
           <div>
-            {featured.map((project, index) => (
-              <FeaturedProject key={project.slug} project={project} index={index} />
+            {featured.map((project, projectIndex) => (
+              <FeaturedProject
+                key={project.slug}
+                project={project}
+                index={projectIndex}
+              />
             ))}
           </div>
         )}
 
         {archivePreview.length > 0 ? (
-          <div className="mt-16 border-t border-border pt-12 md:mt-20">
-            <div className="mb-6 flex flex-wrap items-end justify-between gap-4">
+          <div className="mt-6 border-t border-border pt-12 md:mt-10 md:pt-16">
+            <div className="mb-8 flex flex-wrap items-end justify-between gap-4">
               <SectionHeading
                 index={`${index}.1`}
                 label="Archive"
                 className="mb-0 min-w-[12rem] flex-1"
               />
-              {archive.length > archivePreview.length ? (
-                <TextLink href="/projects" variant="action">
-                  Full index
-                </TextLink>
-              ) : (
-                <TextLink href="/projects" variant="ghost">
-                  Open index
-                </TextLink>
-              )}
+              <TextLink href="/projects" variant="action">
+                Full index
+              </TextLink>
             </div>
             <ProjectIndex projects={archivePreview} startIndex={featured.length} />
           </div>

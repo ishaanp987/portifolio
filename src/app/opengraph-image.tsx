@@ -20,13 +20,21 @@ export default function OpenGraphImage() {
     >
       <div
         style={{
+          width: 8,
+          height: "100%",
+          background: theme.accent,
+          marginRight: 28,
+        }}
+      />
+      <div
+        style={{
           width: "100%",
           height: "100%",
           display: "flex",
           flexDirection: "column",
           justifyContent: "space-between",
           border: `1px solid ${theme.border}`,
-          padding: "56px 64px",
+          padding: "52px 60px",
         }}
       >
         <div
@@ -34,31 +42,43 @@ export default function OpenGraphImage() {
             display: "flex",
             justifyContent: "space-between",
             color: theme.accent,
-            fontSize: 22,
+            fontSize: 20,
             letterSpacing: 4,
             textTransform: "uppercase",
           }}
         >
-          <span>00 / INDEX</span>
-          <span>PORTFOLIO</span>
+          <span>00 / PORTFOLIO</span>
+          <span>DWG 00</span>
         </div>
         <div style={{ display: "flex", flexDirection: "column" }}>
           <div
             style={{
-              fontSize: 72,
-              letterSpacing: -2,
-              lineHeight: 1.05,
+              display: "flex",
+              flexDirection: "column",
+              fontSize: 92,
+              letterSpacing: -4,
+              lineHeight: 0.86,
+              textTransform: "uppercase",
             }}
           >
-            {site.name}
+            <span>{site.firstName}</span>
+            <span>{site.lastName}</span>
           </div>
           <div
             style={{
-              marginTop: 24,
-              fontSize: 28,
+              width: 56,
+              height: 3,
+              background: theme.accent,
+              marginTop: 28,
+              marginBottom: 22,
+            }}
+          />
+          <div
+            style={{
+              fontSize: 26,
               color: theme.secondary,
               lineHeight: 1.35,
-              maxWidth: 820,
+              maxWidth: 780,
             }}
           >
             {site.headline}
@@ -69,13 +89,13 @@ export default function OpenGraphImage() {
             display: "flex",
             justifyContent: "space-between",
             color: theme.muted,
-            fontSize: 20,
-            letterSpacing: 2,
+            fontSize: 18,
+            letterSpacing: 2.4,
             textTransform: "uppercase",
           }}
         >
-          <span>{site.focus}</span>
-          <span>DWG 00</span>
+          <span>{site.disciplines.join(" / ")}</span>
+          <span>{site.initials} / LAB</span>
         </div>
       </div>
     </div>,
