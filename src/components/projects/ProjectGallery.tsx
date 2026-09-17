@@ -23,16 +23,14 @@ function ProjectFigure({ image, index }: { image: ProjectImage; index: number })
   const compact = image.kind === "mobile";
 
   return (
-    <figure className={compact ? "max-w-[22rem]" : "w-full"}>
+    <figure className={compact ? "max-w-[22rem]" : "w-full min-w-0"}>
       <p className="meta mb-2">
         Fig. {formatIndex(index)}
         <span className="text-border-strong"> / </span>
         {image.kind ?? "Still"}
       </p>
       <div
-        className={["schematic-frame", compact ? "aspect-[9/19]" : "aspect-[16/10]"].join(
-          " ",
-        )}
+        className={["media-frame", compact ? "aspect-[9/19]" : "media-wide"].join(" ")}
       >
         {isSvg(image.src) ? (
           // SVGs are authored assets; next/image does not optimize them.
@@ -40,7 +38,7 @@ function ProjectFigure({ image, index }: { image: ProjectImage; index: number })
           <img
             src={image.src}
             alt={image.alt}
-            className="schematic-media absolute inset-0 h-full w-full object-cover"
+            className="media-zoom absolute inset-0 h-full w-full object-cover"
           />
         ) : (
           <Image
@@ -52,7 +50,7 @@ function ProjectFigure({ image, index }: { image: ProjectImage; index: number })
                 ? "(min-width: 768px) 22rem, 100vw"
                 : "(min-width: 1024px) 72rem, 100vw"
             }
-            className="schematic-media object-cover"
+            className="media-zoom object-cover"
           />
         )}
       </div>

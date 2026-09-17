@@ -27,12 +27,8 @@ export default function ProjectsPage() {
         </p>
         <div className="mt-12">
           {projects.length === 0 ? (
-            <p className="text-secondary">
-              No projects to show. Add objects in{" "}
-              <code className="font-mono text-[0.85em] text-muted">
-                src/data/projects.ts
-              </code>
-              .
+            <p className="source-hint">
+              No projects to show. Add objects in <code>src/data/projects.ts</code>.
             </p>
           ) : (
             <ProjectIndex projects={projects} caption="No." />

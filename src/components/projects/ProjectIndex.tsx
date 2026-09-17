@@ -14,18 +14,16 @@ export function ProjectIndex({
 }) {
   if (projects.length === 0) {
     return (
-      <p className="text-secondary">
-        No additional projects yet. Add entries in{" "}
-        <code className="font-mono text-[0.85em] text-muted">src/data/projects.ts</code>{" "}
-        and leave <code className="font-mono text-[0.85em] text-muted">featured</code>{" "}
-        unset.
+      <p className="source-hint">
+        No additional projects yet. Add entries in <code>src/data/projects.ts</code> and
+        leave <code>featured</code> unset or beyond the homepage limit.
       </p>
     );
   }
 
   return (
     <div className="min-w-0">
-      <div className="hidden border-b border-border pb-3 md:grid md:grid-cols-[3.2rem_minmax(0,1.6fr)_minmax(0,0.9fr)_4.5rem_6.5rem] md:gap-x-5">
+      <div className="hidden border-b border-border pb-3 md:grid md:grid-cols-[3rem_minmax(0,1.6fr)_minmax(0,0.85fr)_4.25rem_6.25rem] md:gap-x-5">
         <span className="meta">{caption === "Archive" ? "No." : caption}</span>
         <span className="meta">Project</span>
         <span className="meta">Type</span>
@@ -46,7 +44,7 @@ export function ProjectIndex({
               >
                 <span className="meta text-accent">{number}</span>
                 <span className="min-w-0">
-                  <span className="block text-[1.02rem] tracking-[-0.02em] text-foreground">
+                  <span className="index-title block text-[1.02rem] tracking-[-0.02em] text-foreground">
                     {project.title}
                   </span>
                   <span className="mt-1 block text-sm leading-6 text-muted md:hidden">
@@ -59,7 +57,7 @@ export function ProjectIndex({
                       .join("  ·  ")}
                   </span>
                 </span>
-                <span className="hidden min-w-0 truncate text-sm text-secondary md:block">
+                <span className="hidden min-w-0 text-sm text-secondary md:block">
                   {project.category ?? "—"}
                 </span>
                 <span className="meta hidden md:block">{project.year ?? "—"}</span>

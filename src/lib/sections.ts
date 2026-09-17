@@ -19,4 +19,3 @@ export function getSectionIndex(id: HomepageSectionId): string {
   if (index === -1) return "00";
   return formatIndex(index);
 }
-

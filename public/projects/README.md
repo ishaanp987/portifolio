@@ -17,4 +17,4 @@ Recommended:
 - SVG for diagrams
 - Descriptive `alt` text on every image
 
-Projects with no media still render a generated schematic cover, so missing screenshots will not break the layout.
+Projects with no `coverImage` render a labeled media slot that names this path, so missing screenshots never look like finished artwork.

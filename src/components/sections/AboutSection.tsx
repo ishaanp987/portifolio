@@ -1,8 +1,7 @@
-import { IdentityPlate } from "@/components/identity/IdentityPlate";
 import { Container } from "@/components/layout/Container";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { site } from "@/config/site";
-import { hasContent } from "@/lib/links";
+import { isRealValue } from "@/lib/content";
 import { getSectionIndex } from "@/lib/sections";
 
 export function AboutSection() {
@@ -12,45 +11,53 @@ export function AboutSection() {
     <section
       id="about"
       aria-labelledby="about-heading"
-      className="section-anchor border-t border-border"
+      className="paper-band section-anchor"
     >
       <Container width="wide" className="section-space">
         <SectionHeading index={getSectionIndex("about")} label="About" />
         <div className="about-layout">
-          <div className="about-copy">
+          <div className="min-w-0">
             <h2
               id="about-heading"
-              className="max-w-[11ch] text-[length:var(--text-page)] tracking-[-0.04em]"
+              className="max-w-[12ch] text-[length:var(--text-page)] tracking-[-0.045em]"
             >
-              Builder, engineer, and software developer.
+              A short note on {site.firstName}.
             </h2>
-            <div className="about-panel prose-block">
+            <div className="prose-block mt-8">
               {paragraphs.map((paragraph) => (
                 <p key={paragraph}>{paragraph}</p>
               ))}
-              <dl className="mt-8 grid gap-3">
-                {hasContent(site.role) ? (
-                  <div className="meta-pair">
-                    <dt className="meta-key">Role</dt>
-                    <dd className="meta-val">{site.role}</dd>
-                  </div>
-                ) : null}
-                {hasContent(site.location) ? (
-                  <div className="meta-pair">
-                    <dt className="meta-key">Loc</dt>
-                    <dd className="meta-val">{site.location}</dd>
-                  </div>
-                ) : null}
-                {hasContent(site.focus) ? (
-                  <div className="meta-pair">
-                    <dt className="meta-key">Focus</dt>
-                    <dd className="meta-val">{site.focus}</dd>
-                  </div>
-                ) : null}
-              </dl>
             </div>
+            <p className="source-hint mt-8">
+              Replace the copy in <code>src/config/site.ts</code> (<code>about</code> /{" "}
+              <code>bio</code>).
+            </p>
           </div>
-          <IdentityPlate />
+          <aside className="min-w-0">
+            <p className="about-mark" aria-hidden="true">
+              {site.initials}
+            </p>
+            <dl className="mt-8 grid gap-3">
+              {isRealValue(site.role) ? (
+                <div className="meta-pair">
+                  <dt className="meta-key">Role</dt>
+                  <dd className="meta-val">{site.role}</dd>
+                </div>
+              ) : null}
+              {isRealValue(site.focus) ? (
+                <div className="meta-pair">
+                  <dt className="meta-key">Focus</dt>
+                  <dd className="meta-val">{site.focus}</dd>
+                </div>
+              ) : null}
+              {site.disciplines.length > 0 ? (
+                <div className="meta-pair">
+                  <dt className="meta-key">Field</dt>
+                  <dd className="meta-val">{site.disciplines.join(" / ")}</dd>
+                </div>
+              ) : null}
+            </dl>
+          </aside>
         </div>
       </Container>
     </section>

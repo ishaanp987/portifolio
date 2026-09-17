@@ -28,6 +28,8 @@ export const site = {
   resume: "",
   availability: "Replace with availability — e.g. Open to internships",
   avatar: "",
+  heroImage: "",
+  heroImageAlt: "",
   url: "https://your-domain.example",
   locale: "en_US",
 } as const;

@@ -3,12 +3,12 @@ import { FeaturedProject } from "@/components/projects/FeaturedProject";
 import { ProjectIndex } from "@/components/projects/ProjectIndex";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { TextLink } from "@/components/ui/TextLink";
-import { getArchiveProjects, getFeaturedProjects } from "@/lib/projects";
+import { getHomepageArchive, getHomepageFeatured } from "@/lib/projects";
 import { getSectionIndex } from "@/lib/sections";
 
 export function ProjectsSection() {
-  const featured = getFeaturedProjects();
-  const archive = getArchiveProjects();
+  const featured = getHomepageFeatured();
+  const archive = getHomepageArchive();
   const archivePreview = archive.slice(0, 4);
   const index = getSectionIndex("projects");
 
@@ -20,19 +20,18 @@ export function ProjectsSection() {
     >
       <Container width="wide" className="pt-[var(--space-section)] pb-4">
         <SectionHeading index={index} label="Selected work" />
-        <h2 id="projects-heading" className="sr-only">
-          Projects
+        <h2
+          id="projects-heading"
+          className="max-w-[16ch] text-[length:var(--text-page)] tracking-[-0.04em]"
+        >
+          Featured work.
         </h2>
       </Container>
       <Container width="wide" className="pb-[var(--space-section)]">
         {featured.length === 0 ? (
-          <p className="max-w-xl text-secondary">
-            No featured projects yet. Add a project in{" "}
-            <code className="font-mono text-[0.85em] text-muted">
-              src/data/projects.ts
-            </code>{" "}
-            and set{" "}
-            <code className="font-mono text-[0.85em] text-muted">featured: true</code>.
+          <p className="source-hint">
+            No featured projects yet. Add a project in <code>src/data/projects.ts</code>{" "}
+            and set <code>featured: true</code>.
           </p>
         ) : (
           <div>

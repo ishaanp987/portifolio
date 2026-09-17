@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { SchematicCover } from "@/components/projects/SchematicCover";
+import { MediaSlot } from "@/components/media/MediaSlot";
 import { getProjectCoverAlt } from "@/lib/projects";
 import type { Project } from "@/types";
 
@@ -16,21 +16,21 @@ export function ProjectCover({
   sizes = "(min-width: 1024px) 48vw, 100vw",
   size = "default",
 }: ProjectCoverProps) {
-  const frameClass = [
-    "schematic-frame group/cover aspect-[16/10]",
-    size === "lead"
-      ? "min-h-[22rem] md:min-h-[28rem] lg:min-h-[36rem] xl:min-h-[40rem]"
-      : "min-h-[16rem] lg:min-h-[24rem]",
-  ].join(" ");
+  const lead = size === "lead";
+  const frameClass = ["media-frame group/cover media-wide", lead ? "media-lead" : ""]
+    .filter(Boolean)
+    .join(" ");
+
   if (!project.coverImage) {
     return (
-      <div className={frameClass}>
-        <SchematicCover
-          seed={project.slug}
-          title={getProjectCoverAlt(project)}
-          code={project.code}
-        />
-      </div>
+      <MediaSlot
+        title={`${project.title} cover`}
+        hint="Add a screenshot, photograph, CAD still, or prototype image of the work."
+        path={`public/projects/${project.slug}/cover.webp · then set coverImage in src/data/projects.ts`}
+        code={project.code}
+        aspect="wide"
+        lead={lead}
+      />
     );
   }
 
@@ -42,7 +42,7 @@ export function ProjectCover({
         fill
         sizes={sizes}
         priority={priority}
-        className="schematic-media object-cover"
+        className="media-zoom object-cover"
       />
     </div>
   );

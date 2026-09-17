@@ -1,8 +1,9 @@
 import { ProjectCover } from "@/components/projects/ProjectCover";
 import { TextLink } from "@/components/ui/TextLink";
+import { isUsableHref } from "@/lib/content";
 import { formatStatus } from "@/lib/format";
-import { formatProjectIndex, getProjectHref } from "@/lib/projects";
 import { hasContent } from "@/lib/links";
+import { formatProjectIndex, getProjectHref } from "@/lib/projects";
 import type { Project } from "@/types";
 
 type FeaturedProjectProps = {
@@ -10,12 +11,12 @@ type FeaturedProjectProps = {
   index: number;
 };
 
-type Layout = "copy" | "visual" | "stack";
+type Layout = "media-end" | "media-start" | "media-top";
 
 function layoutFor(index: number): Layout {
-  if (index % 3 === 2) return "stack";
-  if (index % 2 === 0) return "copy";
-  return "visual";
+  if (index % 3 === 2) return "media-top";
+  if (index % 2 === 1) return "media-start";
+  return "media-end";
 }
 
 export function FeaturedProject({ project, index }: FeaturedProjectProps) {
@@ -26,27 +27,30 @@ export function FeaturedProject({ project, index }: FeaturedProjectProps) {
 
   return (
     <article className="border-t border-border py-12 md:py-16 lg:py-20">
-      <div className="mb-5 lg:hidden">
-        <span className="display-index">P/{displayIndex}</span>
-      </div>
       <div className={`project-band is-${layout}`}>
-        <div className="p-idx">
-          <div className="project-sig sticky top-8">
-            <span className="project-sig-kicker">P/</span>
-            <span className="display-index">{displayIndex}</span>
-          </div>
-        </div>
         <div className="p-head">
-          <p className="meta m-0 text-accent">
-            Featured / {displayIndex}
+          <p className="meta m-0">
+            <span className="text-accent">P/{displayIndex}</span>
             {project.code ? (
               <>
                 <span className="text-border-strong"> / </span>
-                {project.code}
+                <span className="text-signal">{project.code}</span>
+              </>
+            ) : null}
+            {project.year ? (
+              <>
+                <span className="text-border-strong"> / </span>
+                {project.year}
+              </>
+            ) : null}
+            {project.status ? (
+              <>
+                <span className="text-border-strong"> / </span>
+                {formatStatus(project.status)}
               </>
             ) : null}
           </p>
-          <h3 className="mt-4 max-w-[14ch] text-[length:var(--text-project)] font-medium tracking-[-0.045em] text-foreground">
+          <h3 className="mt-4 max-w-none text-[length:var(--text-project)] font-medium tracking-[-0.045em] text-foreground sm:max-w-[18ch]">
             <TextLink href={href} variant="plain" className="title-link">
               {project.title}
             </TextLink>
@@ -57,13 +61,29 @@ export function FeaturedProject({ project, index }: FeaturedProjectProps) {
           <ProjectCover
             project={project}
             priority={lead}
-            size={lead ? "lead" : "default"}
+            size={lead || layout === "media-top" ? "lead" : "default"}
           />
         </div>
-        <div className="p-copy">
-          <p className="max-w-[34rem] text-[0.98rem] leading-7 text-secondary">
+        <div className="p-copy grid gap-5">
+          <p className="max-w-[36rem] text-[0.98rem] leading-7 text-secondary">
             {project.description}
           </p>
+          {hasContent(project.problem) ? (
+            <div>
+              <p className="meta m-0 text-signal">Problem</p>
+              <p className="mt-2 max-w-[36rem] text-[0.95rem] leading-7 text-secondary">
+                {project.problem}
+              </p>
+            </div>
+          ) : null}
+          {hasContent(project.role) ? (
+            <div>
+              <p className="meta m-0 text-signal">Contribution</p>
+              <p className="mt-2 max-w-[36rem] text-[0.95rem] leading-7 text-secondary">
+                {project.role}
+              </p>
+            </div>
+          ) : null}
         </div>
         <dl className="p-spec grid max-w-[36rem] gap-3">
           {project.category ? (
@@ -78,18 +98,6 @@ export function FeaturedProject({ project, index }: FeaturedProjectProps) {
               <dd className="meta-val">{project.technologies.join(" / ")}</dd>
             </div>
           ) : null}
-          {project.year ? (
-            <div className="meta-pair">
-              <dt className="meta-key">Year</dt>
-              <dd className="meta-val">{project.year}</dd>
-            </div>
-          ) : null}
-          {project.status ? (
-            <div className="meta-pair">
-              <dt className="meta-key">Status</dt>
-              <dd className="meta-val">{formatStatus(project.status)}</dd>
-            </div>
-          ) : null}
         </dl>
         <div className="p-action flex flex-wrap items-center gap-x-5">
           <TextLink
@@ -97,18 +105,18 @@ export function FeaturedProject({ project, index }: FeaturedProjectProps) {
             variant="action"
             ariaLabel={`View case study: ${project.title}`}
           >
-            View case study
+            Case study
           </TextLink>
-          {hasContent(project.github) ? (
+          {isUsableHref(project.github) ? (
             <TextLink
               href={project.github}
               variant="ghost"
               ariaLabel={`${project.title} source on GitHub`}
             >
-              GitHub
+              Source
             </TextLink>
           ) : null}
-          {hasContent(project.demo) ? (
+          {isUsableHref(project.demo) ? (
             <TextLink
               href={project.demo}
               variant="ghost"

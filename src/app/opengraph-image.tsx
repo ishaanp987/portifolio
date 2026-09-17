@@ -15,7 +15,7 @@ export default function OpenGraphImage() {
         display: "flex",
         background: theme.background,
         color: theme.foreground,
-        padding: 40,
+        padding: 44,
       }}
     >
       <div
@@ -26,8 +26,7 @@ export default function OpenGraphImage() {
           flexDirection: "column",
           justifyContent: "space-between",
           border: `1px solid ${theme.border}`,
-          borderRadius: 28,
-          padding: "52px 60px",
+          padding: "52px 58px",
           background: theme.backgroundSecondary,
         }}
       >
@@ -36,34 +35,23 @@ export default function OpenGraphImage() {
             display: "flex",
             justifyContent: "space-between",
             color: theme.accent,
-            fontSize: 20,
-            letterSpacing: 4,
+            fontSize: 18,
+            letterSpacing: 3.2,
             textTransform: "uppercase",
           }}
         >
-          <span>{`${site.initials} / LAB`}</span>
           <span>{site.role}</span>
+          <span>{site.initials}</span>
         </div>
         <div style={{ display: "flex", flexDirection: "column" }}>
           <div
             style={{
-              fontSize: 28,
-              color: theme.accent,
-              letterSpacing: 3,
-              textTransform: "uppercase",
-              marginBottom: 16,
+              fontSize: 76,
+              letterSpacing: -3.4,
+              lineHeight: 0.92,
             }}
           >
-            {site.greeting}
-          </div>
-          <div
-            style={{
-              fontSize: 72,
-              letterSpacing: -3,
-              lineHeight: 0.95,
-            }}
-          >
-            {`I’m ${site.firstName}.`}
+            {site.name}
           </div>
           <div
             style={{
@@ -71,7 +59,7 @@ export default function OpenGraphImage() {
               fontSize: 28,
               color: theme.secondary,
               lineHeight: 1.3,
-              maxWidth: 780,
+              maxWidth: 820,
             }}
           >
             {site.statement.join(" ")}
@@ -87,8 +75,8 @@ export default function OpenGraphImage() {
             textTransform: "uppercase",
           }}
         >
-          <span>{site.focusAreas.join(" / ")}</span>
-          <span>{site.name}</span>
+          <span>{site.focusAreas.join("  /  ")}</span>
+          <span>{site.focus}</span>
         </div>
       </div>
     </div>,

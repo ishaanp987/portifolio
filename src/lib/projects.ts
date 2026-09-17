@@ -46,12 +46,23 @@ export function getVisibleProjects(): Project[] {
   return projects.filter((project) => !project.hidden).sort(byOrder);
 }
 
+export const HOMEPAGE_FEATURED_LIMIT = 3;
+
 export function getFeaturedProjects(): Project[] {
   return getVisibleProjects().filter((project) => project.featured);
 }
 
+export function getHomepageFeatured(): Project[] {
+  return getFeaturedProjects().slice(0, HOMEPAGE_FEATURED_LIMIT);
+}
+
 export function getArchiveProjects(): Project[] {
   return getVisibleProjects().filter((project) => !project.featured);
+}
+
+export function getHomepageArchive(): Project[] {
+  const featuredSlugs = new Set(getHomepageFeatured().map((project) => project.slug));
+  return getVisibleProjects().filter((project) => !featuredSlugs.has(project.slug));
 }
 
 export function getProjectBySlug(slug: string): Project | undefined {

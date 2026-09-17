@@ -18,10 +18,10 @@ export default function NotFound() {
           The page may have been moved, or the project is hidden from the public index.
         </p>
         <div className="mt-10 flex flex-wrap gap-x-6">
-          <TextLink href="/" variant="action">
+          <TextLink href="/" variant="primary">
             Return home
           </TextLink>
-          <TextLink href="/projects" variant="ghost">
+          <TextLink href="/projects" variant="secondary">
             Project index
           </TextLink>
         </div>

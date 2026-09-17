@@ -1,12 +1,10 @@
 import { Footer } from "@/components/layout/Footer";
-import { FieldBackground } from "@/components/layout/FieldBackground";
 import { Header } from "@/components/layout/Header";
 import { SkipLink } from "@/components/layout/SkipLink";
 
 export function SiteFrame({ children }: { children: React.ReactNode }) {
   return (
     <div className="site-shell">
-      <FieldBackground />
       <SkipLink />
       <Header />
       <div className="site-frame">

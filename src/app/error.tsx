@@ -24,13 +24,8 @@ export default function ErrorPage({
           Try again. If this keeps happening, check the project data files for a malformed
           entry.
         </p>
-        <button
-          type="button"
-          onClick={reset}
-          className="action-link mt-10 cursor-pointer border-0 bg-transparent p-0"
-        >
+        <button type="button" onClick={reset} className="btn btn-primary mt-10">
           Retry
-          <span className="action-rule" aria-hidden="true" />
         </button>
       </Container>
     </div>

@@ -42,6 +42,7 @@ export default async function ProjectOpenGraphImage({
           justifyContent: "space-between",
           border: `1px solid ${theme.border}`,
           padding: "56px 64px",
+          background: theme.backgroundSecondary,
         }}
       >
         <div
@@ -49,7 +50,7 @@ export default async function ProjectOpenGraphImage({
             display: "flex",
             justifyContent: "space-between",
             color: theme.accent,
-            fontSize: 22,
+            fontSize: 20,
             letterSpacing: 4,
             textTransform: "uppercase",
           }}
@@ -60,9 +61,9 @@ export default async function ProjectOpenGraphImage({
         <div style={{ display: "flex", flexDirection: "column" }}>
           <div
             style={{
-              fontSize: title.length > 28 ? 56 : 68,
+              fontSize: title.length > 28 ? 54 : 68,
               letterSpacing: -2,
-              lineHeight: 1.08,
+              lineHeight: 1.06,
               maxWidth: 980,
             }}
           >

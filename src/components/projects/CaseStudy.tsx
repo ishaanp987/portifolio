@@ -2,6 +2,7 @@ import { ProjectCover } from "@/components/projects/ProjectCover";
 import { ProjectGallery } from "@/components/projects/ProjectGallery";
 import { ProjectMeta } from "@/components/projects/ProjectMeta";
 import { TextLink } from "@/components/ui/TextLink";
+import { isUsableHref } from "@/lib/content";
 import { hasContent } from "@/lib/links";
 import { getAdjacentProjects, getProjectHref } from "@/lib/projects";
 import type { Project } from "@/types";
@@ -26,7 +27,7 @@ export function CaseStudy({
   return (
     <article className="pb-[var(--space-section)]">
       <header className="border-b border-border">
-        <div className="container-wide grid gap-10 py-12 lg:grid-cols-[minmax(0,1.25fr)_minmax(16rem,0.75fr)] lg:items-end lg:gap-16 lg:py-16">
+        <div className="container-wide grid gap-10 py-12 lg:grid-cols-[minmax(0,1.3fr)_minmax(15rem,0.7fr)] lg:items-end lg:gap-16 lg:py-16">
           <div className="min-w-0">
             <p className="section-kicker mb-8">
               <span>
@@ -42,24 +43,24 @@ export function CaseStudy({
               </span>
               <span className="section-kicker-rule" aria-hidden="true" />
             </p>
-            <h1 className="max-w-[14ch] text-[length:var(--text-display)] tracking-[-0.045em] text-foreground">
+            <h1 className="max-w-[16ch] text-[length:var(--text-display)] tracking-[-0.045em] text-foreground">
               {project.title}
             </h1>
             <hr className="accent-rule mt-6 mb-6" />
             <p className="mt-5 max-w-[38rem] text-[length:var(--text-lead)] leading-8 text-secondary">
               {project.longDescription ?? project.description}
             </p>
-            <div className="mt-6 flex flex-wrap gap-x-5">
-              {hasContent(project.github) ? (
+            <div className="mt-8 flex flex-wrap gap-x-5 gap-y-2">
+              {isUsableHref(project.github) ? (
                 <TextLink
                   href={project.github}
                   variant="action"
                   ariaLabel={`${project.title} source on GitHub`}
                 >
-                  GitHub
+                  Source
                 </TextLink>
               ) : null}
-              {hasContent(project.demo) ? (
+              {isUsableHref(project.demo) ? (
                 <TextLink
                   href={project.demo}
                   variant="action"
@@ -70,7 +71,7 @@ export function CaseStudy({
               ) : null}
             </div>
           </div>
-          <aside className="min-w-0 rounded-[var(--radius-lg)] border border-border bg-surface p-5 shadow-[var(--shadow-panel)]">
+          <aside className="min-w-0 border-t border-border pt-6 lg:border-t-0 lg:border-l lg:pt-0 lg:pl-8">
             <ProjectMeta project={project} />
           </aside>
         </div>
@@ -130,7 +131,7 @@ export function CaseStudy({
             className="title-link min-w-0 sm:text-right"
           >
             <span className="meta block text-accent">Next</span>
-            <span className="mt-3 ml-auto block max-w-[16ch] text-[length:var(--text-page)] font-medium leading-[0.98] tracking-[-0.04em] text-foreground sm:ml-auto">
+            <span className="mt-3 ml-auto block max-w-[16ch] text-[length:var(--text-page)] font-medium leading-[0.98] tracking-[-0.04em] text-foreground">
               {next.title}
             </span>
           </TextLink>
@@ -188,6 +189,16 @@ function getCaseBlocks(project: Project): CaseBlock[] {
   push("decisions", "Technical decisions", listBlock(project.technicalDecisions));
 
   push("challenges", "Challenges", listBlock(project.challenges));
+
+  if (hasContent(project.role)) {
+    push(
+      "contribution",
+      "Contribution",
+      <div className="prose-block">
+        <p>{project.role}</p>
+      </div>,
+    );
+  }
 
   push(
     "technologies",

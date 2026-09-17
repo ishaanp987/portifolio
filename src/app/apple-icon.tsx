@@ -1,4 +1,5 @@
 import { ImageResponse } from "next/og";
+import { site } from "@/config/site";
 import { theme } from "@/config/theme";
 
 export const size = { width: 180, height: 180 };
@@ -14,17 +15,13 @@ export default function AppleIcon() {
         alignItems: "center",
         justifyContent: "center",
         background: theme.background,
+        color: theme.foreground,
+        fontSize: 54,
+        letterSpacing: -2,
+        fontWeight: 500,
       }}
     >
-      <div
-        style={{
-          width: 92,
-          height: 92,
-          display: "flex",
-          borderRadius: 22,
-          border: `3px solid ${theme.accent}`,
-        }}
-      />
+      {site.initials}
     </div>,
     { ...size },
   );

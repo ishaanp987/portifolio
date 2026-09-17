@@ -1,49 +1,25 @@
 import Link from "next/link";
+import { ArrowRight, ArrowUpRight } from "lucide-react";
 import { isExternalHref } from "@/lib/links";
 
 function LinkMark({ external }: { external: boolean }) {
-  if (external) {
-    return (
-      <svg
-        className="link-mark"
-        width="10"
-        height="10"
-        viewBox="0 0 10 10"
-        aria-hidden="true"
-      >
-        <path
-          d="M2 1.5h6.5V8M8.5 1.5 1.5 8.5"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth="1.2"
-        />
-      </svg>
-    );
-  }
-
-  return (
-    <svg
-      className="link-mark"
-      width="12"
-      height="10"
-      viewBox="0 0 12 10"
-      aria-hidden="true"
-    >
-      <path
-        d="M1 5h9.5M7.5 1.75 11 5 7.5 8.25"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="1.2"
-      />
-    </svg>
-  );
+  const Icon = external ? ArrowUpRight : ArrowRight;
+  return <Icon className="link-mark" size={16} strokeWidth={1.75} aria-hidden="true" />;
 }
 
 type TextLinkProps = {
   href: string;
   children: React.ReactNode;
   className?: string;
-  variant?: "underline" | "action" | "ghost" | "nav" | "plain";
+  variant?:
+    | "underline"
+    | "action"
+    | "ghost"
+    | "nav"
+    | "plain"
+    | "primary"
+    | "secondary"
+    | "mobile";
   ariaLabel?: string;
   active?: boolean;
 };
@@ -67,7 +43,13 @@ export function TextLink({
           ? "nav-link"
           : variant === "plain"
             ? "text-inherit no-underline"
-            : "text-link";
+            : variant === "primary"
+              ? "btn btn-primary"
+              : variant === "secondary"
+                ? "btn btn-secondary"
+                : variant === "mobile"
+                  ? "mobile-link"
+                  : "text-link";
 
   const classes = [variantClass, className].filter(Boolean).join(" ");
   const extra = {
@@ -75,12 +57,14 @@ export function TextLink({
     ...(active ? { "data-active": "true", "aria-current": "true" as const } : {}),
   };
 
-  const actionBits =
+  const mark =
     variant === "action" ? (
       <>
         <span className="action-rule" aria-hidden="true" />
         <LinkMark external={httpExternal} />
       </>
+    ) : variant === "primary" || variant === "secondary" || variant === "mobile" ? (
+      <LinkMark external={httpExternal} />
     ) : httpExternal ? (
       <LinkMark external />
     ) : null;
@@ -91,7 +75,7 @@ export function TextLink({
     return (
       <a href={href} className={classes} target={target} rel={rel} {...extra}>
         {children}
-        {actionBits}
+        {mark}
       </a>
     );
   }
@@ -99,7 +83,7 @@ export function TextLink({
   return (
     <Link href={href} className={classes} {...extra}>
       {children}
-      {variant === "action" ? actionBits : null}
+      {variant === "underline" || variant === "plain" || variant === "nav" ? null : mark}
     </Link>
   );
 }

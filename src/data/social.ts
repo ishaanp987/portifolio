@@ -1,8 +1,9 @@
 import { site } from "@/config/site";
+import { isUsableEmail, isUsableHref, mailtoHref } from "@/lib/content";
 import type { SocialLink } from "@/types";
 
 const allSocial: Array<SocialLink | null> = [
-  site.github
+  isUsableHref(site.github)
     ? {
         id: "github",
         label: "GitHub",
@@ -10,7 +11,7 @@ const allSocial: Array<SocialLink | null> = [
         external: true,
       }
     : null,
-  site.linkedin
+  isUsableHref(site.linkedin)
     ? {
         id: "linkedin",
         label: "LinkedIn",
@@ -18,11 +19,11 @@ const allSocial: Array<SocialLink | null> = [
         external: true,
       }
     : null,
-  site.email
+  isUsableEmail(site.email)
     ? {
         id: "email",
         label: "Email",
-        href: `mailto:${site.email}`,
+        href: mailtoHref(site.email),
         external: false,
       }
     : null,
