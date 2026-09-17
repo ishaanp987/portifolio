@@ -41,7 +41,7 @@ export default function OpenGraphImage() {
             textTransform: "uppercase",
           }}
         >
-          <span>{site.initials} / LAB</span>
+          <span>{`${site.initials} / LAB`}</span>
           <span>{site.role}</span>
         </div>
         <div style={{ display: "flex", flexDirection: "column" }}>
@@ -63,7 +63,7 @@ export default function OpenGraphImage() {
               lineHeight: 0.95,
             }}
           >
-            I’m {site.firstName}.
+            {`I’m ${site.firstName}.`}
           </div>
           <div
             style={{

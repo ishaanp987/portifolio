@@ -54,7 +54,7 @@ export default async function ProjectOpenGraphImage({
             textTransform: "uppercase",
           }}
         >
-          <span>CASE STUDY / {code}</span>
+          <span>{`CASE STUDY / ${code}`}</span>
           <span>{site.name}</span>
         </div>
         <div style={{ display: "flex", flexDirection: "column" }}>
