@@ -12,39 +12,32 @@ const sectionIds = navigation
   .filter((id): id is string => Boolean(id));
 
 export function Header() {
-  const pathname = usePathname();
-  const onProjects = Boolean(pathname?.startsWith("/projects"));
-  const [sectionActive, setSectionActive] = useState(pathname === "/" ? "index" : "");
-  const [observedPath, setObservedPath] = useState(pathname);
-
-  if (pathname !== observedPath) {
-    setObservedPath(pathname);
-    setSectionActive(pathname === "/" ? "index" : "");
-  }
-
+  const pathname = usePathname() ?? "/";
+  const onProjects = pathname.startsWith("/projects");
+  const [sectionActive, setSectionActive] = useState("index");
   const active = onProjects ? "projects" : sectionActive;
 
   useEffect(() => {
     if (onProjects) return;
 
-    const elements = sectionIds
-      .map((id) => document.getElementById(id))
-      .filter((el): el is HTMLElement => Boolean(el));
+    const update = () => {
+      const marker = Math.round(window.innerHeight * 0.22);
+      let current = "index";
+      for (const id of sectionIds) {
+        const element = document.getElementById(id);
+        if (!element) continue;
+        if (element.getBoundingClientRect().top <= marker) current = id;
+      }
+      setSectionActive(current);
+    };
 
-    if (elements.length === 0) return;
-
-    const observer = new IntersectionObserver(
-      (entries) => {
-        const visible = entries
-          .filter((entry) => entry.isIntersecting)
-          .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
-        if (visible?.target.id) setSectionActive(visible.target.id);
-      },
-      { rootMargin: "-28% 0px -55% 0px", threshold: [0, 0.18, 0.4, 0.7] },
-    );
-
-    for (const element of elements) observer.observe(element);
-    return () => observer.disconnect();
+    update();
+    window.addEventListener("scroll", update, { passive: true });
+    window.addEventListener("resize", update);
+    return () => {
+      window.removeEventListener("scroll", update);
+      window.removeEventListener("resize", update);
+    };
   }, [pathname, onProjects]);
 
   return (

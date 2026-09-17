@@ -63,9 +63,9 @@ export function SchematicCover({ seed, title, code, className }: SchematicCoverP
           key={`line-${i}`}
           d={d}
           fill="none"
-          stroke={i === accentIndex ? "var(--accent)" : "var(--border-strong)"}
-          strokeWidth={i === accentIndex ? 1.35 : 1.1}
-          opacity={i === accentIndex ? 0.55 : 0.55 + (i % 3) * 0.08}
+          stroke={i === accentIndex ? "var(--accent)" : "#3d4a43"}
+          strokeWidth={i === accentIndex ? 1.4 : 1.15}
+          opacity={i === accentIndex ? 0.62 : 0.78}
         />
       ))}
       {loops.map((d, i) => (
@@ -73,7 +73,7 @@ export function SchematicCover({ seed, title, code, className }: SchematicCoverP
           key={`loop-${i}`}
           d={d}
           fill="none"
-          stroke={i === 0 ? "var(--accent)" : "var(--border-strong)"}
+          stroke={i === 0 ? "var(--accent)" : "#3d4a43"}
           strokeWidth="1.2"
           opacity={i === 0 ? 0.45 : 0.7}
         />

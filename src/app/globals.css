@@ -52,7 +52,7 @@
   --text-small: 0.9rem;
   --text-meta: 0.6875rem;
   --text-nav: 0.72rem;
-  --text-index: clamp(2.4rem, 5vw, 4.4rem);
+  --text-index: clamp(2.15rem, 4.4vw, 3.1rem);
 
   --leading-hero: 0.94;
   --leading-title: 0.98;
@@ -457,6 +457,24 @@
     color: var(--accent);
     font-weight: 400;
     font-variant-numeric: tabular-nums;
+  }
+
+  .project-sig {
+    display: grid;
+    justify-items: start;
+    gap: 0.35rem;
+  }
+
+  .project-sig-kicker {
+    font-family: var(--font-mono);
+    font-size: var(--text-meta);
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--accent);
+  }
+
+  .p-idx .display-index {
+    font-size: clamp(1.85rem, 2.6vw, 2.55rem);
   }
 
   .hero-shell {
@@ -917,9 +935,15 @@
     gap: 2.4rem 3rem;
     align-items: start;
   }
+}
+
+@media (min-width: 64rem) {
+  :root {
+    --header-height: 4.25rem;
+  }
 
   .contact-layout {
-    grid-template-columns: minmax(0, 1.4fr) minmax(15rem, 0.6fr);
+    grid-template-columns: minmax(0, 1.4fr) minmax(18rem, 0.62fr);
     gap: 3rem 4rem;
     align-items: end;
   }
@@ -930,15 +954,9 @@
     padding-top: 0.15rem;
     padding-left: 1.4rem;
   }
-}
-
-@media (min-width: 64rem) {
-  :root {
-    --header-height: 4.25rem;
-  }
 
   .project-band.is-copy {
-    grid-template-columns: 5.5rem minmax(16rem, 0.7fr) minmax(0, 1.5fr);
+    grid-template-columns: 4.75rem minmax(16rem, 0.7fr) minmax(0, 1.5fr);
     grid-template-areas:
       "idx head fig"
       "idx copy fig"
@@ -948,7 +966,7 @@
   }
 
   .project-band.is-visual {
-    grid-template-columns: 5.5rem minmax(0, 1.5fr) minmax(16rem, 0.7fr);
+    grid-template-columns: 4.75rem minmax(0, 1.5fr) minmax(16rem, 0.7fr);
     grid-template-areas:
       "idx fig head"
       "idx fig copy"
@@ -958,7 +976,7 @@
   }
 
   .project-band.is-stack {
-    grid-template-columns: 5.5rem minmax(0, 1.15fr) minmax(14rem, 0.85fr);
+    grid-template-columns: 4.75rem minmax(0, 1.15fr) minmax(14rem, 0.85fr);
     grid-template-areas:
       "idx fig fig"
       "idx head spec"

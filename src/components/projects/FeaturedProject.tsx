@@ -31,7 +31,10 @@ export function FeaturedProject({ project, index }: FeaturedProjectProps) {
       </div>
       <div className={`project-band is-${layout}`}>
         <div className="p-idx">
-          <span className="display-index sticky top-24">P/{displayIndex}</span>
+          <div className="project-sig sticky top-8">
+            <span className="project-sig-kicker">P/</span>
+            <span className="display-index">{displayIndex}</span>
+          </div>
         </div>
         <div className="p-head">
           <p className="meta m-0 text-accent">
