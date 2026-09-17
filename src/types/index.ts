@@ -39,6 +39,7 @@ export type Project = {
   year?: string;
   featured?: boolean;
   hidden?: boolean;
+  sample?: boolean;
   status?: ProjectStatus | string;
   priority?: number;
   order?: number;
@@ -71,6 +72,7 @@ export type Experience = {
   technologies?: string[];
   link?: string;
   hidden?: boolean;
+  sample?: boolean;
 };
 
 export type SkillCategory = {

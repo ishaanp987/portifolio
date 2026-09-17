@@ -3,16 +3,15 @@
  * Keep these in sync with the CSS tokens in `src/app/globals.css`.
  */
 export const theme = {
-  background: "#10110F",
-  backgroundSecondary: "#161614",
-  surface: "#1C1B18",
-  foreground: "#F3F0E8",
-  secondary: "#C6C1B6",
-  muted: "#A39E94",
-  border: "#2A2924",
-  accent: "#4BD183",
+  background: "#0B0D0C",
+  backgroundSecondary: "#101412",
+  surface: "#131713",
+  foreground: "#F2F3EE",
+  secondary: "#B8BDB8",
+  muted: "#A2A8A2",
+  border: "#242A26",
+  accent: "#58D68D",
   accentMuted: "#2FA866",
-  signal: "#C4A574",
-  paper: "#EDE8DC",
-  ink: "#171614",
+  paper: "#F1F2ED",
+  ink: "#151815",
 } as const;

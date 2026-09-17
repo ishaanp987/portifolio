@@ -1,24 +1,32 @@
 "use client";
 
-import { useEffect, useId, useState } from "react";
+import { useEffect, useId, useMemo, useState } from "react";
 import { usePathname } from "next/navigation";
 import { Menu, X } from "lucide-react";
 import { Container } from "@/components/layout/Container";
 import { TextLink } from "@/components/ui/TextLink";
-import { navigation, utilityLinks } from "@/config/navigation";
 import { site } from "@/config/site";
+import type { NavItem } from "@/types";
 
-const sectionIds = navigation
-  .map((item) => item.href.split("#")[1])
-  .filter((id): id is string => Boolean(id));
+type HeaderProps = {
+  navigation: NavItem[];
+  utilityLinks: NavItem[];
+};
 
-export function Header() {
+export function Header({ navigation, utilityLinks }: HeaderProps) {
   const pathname = usePathname() ?? "/";
   const onProjects = pathname.startsWith("/projects");
   const [sectionActive, setSectionActive] = useState("");
   const [open, setOpen] = useState(false);
   const menuId = useId();
   const active = onProjects ? "projects" : sectionActive;
+  const sectionIds = useMemo(
+    () =>
+      navigation
+        .map((item) => item.href.split("#")[1])
+        .filter((id): id is string => Boolean(id)),
+    [navigation],
+  );
 
   useEffect(() => {
     if (!open) return;
@@ -55,7 +63,7 @@ export function Header() {
       window.removeEventListener("scroll", update);
       window.removeEventListener("resize", update);
     };
-  }, [pathname, onProjects]);
+  }, [pathname, onProjects, sectionIds]);
 
   return (
     <header className="site-header">

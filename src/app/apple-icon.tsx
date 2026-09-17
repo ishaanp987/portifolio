@@ -17,7 +17,7 @@ export default function AppleIcon() {
         background: theme.background,
         color: theme.foreground,
         fontSize: 54,
-        letterSpacing: -2,
+        letterSpacing: 0,
         fontWeight: 500,
       }}
     >

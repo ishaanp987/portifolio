@@ -21,18 +21,9 @@ export default function ProjectsPage() {
       <Container width="wide">
         <SectionHeading index="01" label="Index" />
         <h1 className="contact-title max-w-[12ch] text-foreground">All projects</h1>
-        <p className="mt-6 max-w-[36rem] text-secondary">
-          A register of visible work. Hidden drafts stay in the data file and never appear
-          here.
-        </p>
+        <p className="mt-6 max-w-[36rem] text-secondary">A register of published work.</p>
         <div className="mt-12">
-          {projects.length === 0 ? (
-            <p className="source-hint">
-              No projects to show. Add objects in <code>src/data/projects.ts</code>.
-            </p>
-          ) : (
-            <ProjectIndex projects={projects} caption="No." />
-          )}
+          <ProjectIndex projects={projects} />
         </div>
       </Container>
     </div>

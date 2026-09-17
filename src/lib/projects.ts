@@ -1,4 +1,5 @@
 import { projects } from "@/data/projects";
+import { isDevelopment, isSampleProject } from "@/lib/content";
 import type { Project } from "@/types";
 
 const SLUG_PATTERN = /^[a-z0-9]+(?:-[a-z0-9]+)*$/;
@@ -43,7 +44,10 @@ function byOrder(a: Project, b: Project): number {
 }
 
 export function getVisibleProjects(): Project[] {
-  return projects.filter((project) => !project.hidden).sort(byOrder);
+  return projects
+    .filter((project) => !project.hidden)
+    .filter((project) => isDevelopment() || !isSampleProject(project))
+    .sort(byOrder);
 }
 
 export const HOMEPAGE_FEATURED_LIMIT = 3;

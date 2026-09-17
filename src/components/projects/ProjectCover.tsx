@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { MediaSlot } from "@/components/media/MediaSlot";
+import { QuietFrame } from "@/components/media/QuietFrame";
 import { getProjectCoverAlt } from "@/lib/projects";
 import type { Project } from "@/types";
 
@@ -22,16 +22,7 @@ export function ProjectCover({
     .join(" ");
 
   if (!project.coverImage) {
-    return (
-      <MediaSlot
-        title={`${project.title} cover`}
-        hint="Add a screenshot, photograph, CAD still, or prototype image of the work."
-        path={`public/projects/${project.slug}/cover.webp · then set coverImage in src/data/projects.ts`}
-        code={project.code}
-        aspect="wide"
-        lead={lead}
-      />
-    );
+    return <QuietFrame aspect="wide" lead={lead} />;
   }
 
   return (

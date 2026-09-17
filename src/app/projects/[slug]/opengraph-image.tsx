@@ -1,6 +1,7 @@
 import { ImageResponse } from "next/og";
 import { site } from "@/config/site";
 import { theme } from "@/config/theme";
+import { publicText } from "@/lib/content";
 import { getProjectBySlug, getVisibleProjects } from "@/lib/projects";
 
 export const alt = "Project case study";
@@ -19,8 +20,8 @@ export default async function ProjectOpenGraphImage({
   const { slug } = await params;
   const project = getProjectBySlug(slug);
   const title = project?.title ?? "Project";
-  const description = project?.description ?? site.description;
-  const code = project?.code ?? "PRJ";
+  const description = publicText(project?.description) ?? site.headline;
+  const code = publicText(project?.code) ?? "Project";
 
   return new ImageResponse(
     <div
@@ -51,18 +52,16 @@ export default async function ProjectOpenGraphImage({
             justifyContent: "space-between",
             color: theme.accent,
             fontSize: 20,
-            letterSpacing: 4,
-            textTransform: "uppercase",
           }}
         >
-          <span>{`CASE STUDY / ${code}`}</span>
+          <span>{code}</span>
           <span>{site.name}</span>
         </div>
         <div style={{ display: "flex", flexDirection: "column" }}>
           <div
             style={{
               fontSize: title.length > 28 ? 54 : 68,
-              letterSpacing: -2,
+              letterSpacing: 0,
               lineHeight: 1.06,
               maxWidth: 980,
             }}
@@ -87,15 +86,13 @@ export default async function ProjectOpenGraphImage({
             justifyContent: "space-between",
             color: theme.muted,
             fontSize: 20,
-            letterSpacing: 2,
-            textTransform: "uppercase",
           }}
         >
           <span>
             {[project?.category, project?.year].filter(Boolean).join("  /  ") ||
-              "Project"}
+              "Case study"}
           </span>
-          <span>{project?.slug ?? slug}</span>
+          <span>{project?.year ?? ""}</span>
         </div>
       </div>
     </div>,

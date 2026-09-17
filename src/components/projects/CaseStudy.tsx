@@ -2,8 +2,7 @@ import { ProjectCover } from "@/components/projects/ProjectCover";
 import { ProjectGallery } from "@/components/projects/ProjectGallery";
 import { ProjectMeta } from "@/components/projects/ProjectMeta";
 import { TextLink } from "@/components/ui/TextLink";
-import { isUsableHref } from "@/lib/content";
-import { hasContent } from "@/lib/links";
+import { isRealValue, isUsableHref, publicItems } from "@/lib/content";
 import { getAdjacentProjects, getProjectHref } from "@/lib/projects";
 import type { Project } from "@/types";
 
@@ -23,6 +22,11 @@ export function CaseStudy({
 }) {
   const { previous, next } = getAdjacentProjects(project.slug);
   const blocks = getCaseBlocks(project);
+  const summary = isRealValue(project.longDescription)
+    ? project.longDescription
+    : isRealValue(project.description)
+      ? project.description
+      : undefined;
 
   return (
     <article className="pb-[var(--space-section)]">
@@ -31,25 +35,21 @@ export function CaseStudy({
           <div className="min-w-0">
             <p className="section-kicker mb-8">
               <span>
-                <span className="text-accent">{sequenceLabel}</span>
-                <span className="text-muted"> / </span>
+                <span className="kicker-index">{sequenceLabel}</span>
+                <span className="text-muted"> · </span>
                 Case study
-                {project.code ? (
-                  <>
-                    <span className="text-muted"> / </span>
-                    {project.code}
-                  </>
-                ) : null}
               </span>
               <span className="section-kicker-rule" aria-hidden="true" />
             </p>
-            <h1 className="max-w-[16ch] text-[length:var(--text-display)] tracking-[-0.045em] text-foreground">
+            <h1 className="max-w-[16ch] text-[length:var(--text-display)] text-foreground">
               {project.title}
             </h1>
             <hr className="accent-rule mt-6 mb-6" />
-            <p className="mt-5 max-w-[38rem] text-[length:var(--text-lead)] leading-8 text-secondary">
-              {project.longDescription ?? project.description}
-            </p>
+            {summary ? (
+              <p className="mt-5 max-w-[38rem] text-[length:var(--text-lead)] leading-8 text-secondary">
+                {summary}
+              </p>
+            ) : null}
             <div className="mt-8 flex flex-wrap gap-x-5 gap-y-2">
               {isUsableHref(project.github) ? (
                 <TextLink
@@ -95,8 +95,8 @@ export function CaseStudy({
             >
               <h2 id={block.id} className="section-kicker mb-0">
                 <span>
-                  <span className="text-accent">{block.index}</span>
-                  <span className="text-muted"> / </span>
+                  <span className="kicker-index">{block.index}</span>
+                  <span className="text-muted"> · </span>
                   {block.title}
                 </span>
               </h2>
@@ -117,7 +117,7 @@ export function CaseStudy({
             className="title-link min-w-0"
           >
             <span className="meta block text-accent">Previous</span>
-            <span className="mt-3 block max-w-[16ch] text-[length:var(--text-page)] font-medium leading-[0.98] tracking-[-0.04em] text-foreground">
+            <span className="mt-3 block max-w-[16ch] text-[length:var(--text-page)] font-medium leading-[0.98] text-foreground">
               {previous.title}
             </span>
           </TextLink>
@@ -131,7 +131,7 @@ export function CaseStudy({
             className="title-link min-w-0 sm:text-right"
           >
             <span className="meta block text-accent">Next</span>
-            <span className="mt-3 ml-auto block max-w-[16ch] text-[length:var(--text-page)] font-medium leading-[0.98] tracking-[-0.04em] text-foreground">
+            <span className="mt-3 ml-auto block max-w-[16ch] text-[length:var(--text-page)] font-medium leading-[0.98] text-foreground">
               {next.title}
             </span>
           </TextLink>
@@ -159,7 +159,7 @@ function getCaseBlocks(project: Project): CaseBlock[] {
   push(
     "problem",
     "Problem",
-    hasContent(project.problem) ? (
+    isRealValue(project.problem) ? (
       <div className="prose-block">
         <p>{project.problem}</p>
       </div>
@@ -169,7 +169,7 @@ function getCaseBlocks(project: Project): CaseBlock[] {
   push(
     "solution",
     "Solution",
-    hasContent(project.solution) ? (
+    isRealValue(project.solution) ? (
       <div className="prose-block">
         <p>{project.solution}</p>
       </div>
@@ -179,18 +179,22 @@ function getCaseBlocks(project: Project): CaseBlock[] {
   push(
     "architecture",
     "Architecture",
-    hasContent(project.architecture) ? (
+    isRealValue(project.architecture) ? (
       <div className="prose-block">
         <p>{project.architecture}</p>
       </div>
     ) : null,
   );
 
-  push("decisions", "Technical decisions", listBlock(project.technicalDecisions));
+  push(
+    "decisions",
+    "Technical decisions",
+    listBlock(publicItems(project.technicalDecisions)),
+  );
 
-  push("challenges", "Challenges", listBlock(project.challenges));
+  push("challenges", "Challenges", listBlock(publicItems(project.challenges)));
 
-  if (hasContent(project.role)) {
+  if (isRealValue(project.role)) {
     push(
       "contribution",
       "Contribution",
@@ -200,31 +204,32 @@ function getCaseBlocks(project: Project): CaseBlock[] {
     );
   }
 
+  const technologies = publicItems(project.technologies);
   push(
     "technologies",
     "Technologies",
-    project.technologies && project.technologies.length > 0 ? (
-      <p className="max-w-[40rem] font-mono text-[0.78rem] uppercase tracking-[0.12em] leading-7 text-secondary">
-        {project.technologies.join("  /  ")}
+    technologies.length > 0 ? (
+      <p className="max-w-[40rem] font-mono text-[0.8125rem] leading-7 text-secondary">
+        {technologies.join("  /  ")}
       </p>
     ) : null,
   );
 
+  const figures =
+    project.images?.filter((image) => image.src && isRealValue(image.alt)) ?? [];
   push(
     "figures",
     "Figures",
-    project.images && project.images.length > 0 ? (
-      <ProjectGallery project={project} />
-    ) : null,
+    figures.length > 0 ? <ProjectGallery project={project} /> : null,
   );
 
-  push("learnings", "Lessons", listBlock(project.learnings));
+  push("learnings", "Lessons", listBlock(publicItems(project.learnings)));
 
   return blocks;
 }
 
-function listBlock(items: string[] | undefined) {
-  if (!items || items.length === 0) return null;
+function listBlock(items: string[]) {
+  if (items.length === 0) return null;
   return (
     <ul className="max-w-[40rem] list-disc space-y-3 pl-5 text-[1.02rem] leading-7 text-secondary">
       {items.map((item) => (

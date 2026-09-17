@@ -1,20 +1,24 @@
 import Image from "next/image";
+import { IdentityPanel } from "@/components/media/IdentityPanel";
 import { Container } from "@/components/layout/Container";
-import { MediaSlot } from "@/components/media/MediaSlot";
 import { TextLink } from "@/components/ui/TextLink";
 import { site } from "@/config/site";
-import { getHeroFacts, getHeroSecondaryAction, isRealValue } from "@/lib/content";
+import {
+  getHeroFacts,
+  getHeroSecondaryAction,
+  isRealValue,
+  isUsableHref,
+} from "@/lib/content";
 import { highlightPhrase } from "@/lib/highlight";
-import { hasContent } from "@/lib/links";
 import { isSectionEnabled } from "@/lib/sections";
 
 export function HeroSection() {
   const projectsHref = isSectionEnabled("projects") ? "/#projects" : "/projects";
   const secondary = getHeroSecondaryAction();
   const facts = getHeroFacts();
-  const visual = hasContent(site.heroImage)
-    ? { src: site.heroImage, alt: site.heroImageAlt || `${site.name}` }
-    : hasContent(site.avatar)
+  const visual = isUsableHref(site.heroImage)
+    ? { src: site.heroImage, alt: site.heroImageAlt || site.name }
+    : isUsableHref(site.avatar)
       ? { src: site.avatar, alt: site.name }
       : null;
 
@@ -40,8 +44,8 @@ export function HeroSection() {
               </p>
             ) : null}
             {site.focusAreas.length > 0 ? (
-              <p className="meta mt-5 max-w-[40rem] text-muted">
-                {site.focusAreas.join("  /  ")}
+              <p className="mt-5 max-w-[40rem] text-secondary">
+                {site.focusAreas.join(" · ")}
               </p>
             ) : null}
             <div className="hero-actions">
@@ -58,7 +62,7 @@ export function HeroSection() {
               <dl className="hero-facts">
                 {facts.map((fact) => (
                   <div key={fact.label} className="min-w-0">
-                    <dt className="meta m-0 text-signal">{fact.label}</dt>
+                    <dt className="meta m-0">{fact.label}</dt>
                     <dd className="m-0 mt-1 text-sm text-secondary">{fact.value}</dd>
                   </div>
                 ))}
@@ -78,14 +82,7 @@ export function HeroSection() {
                 />
               </div>
             ) : (
-              <MediaSlot
-                title="Hero still needed"
-                hint="Supply a portrait, prototype photograph, CAD render, or interface screenshot. Do not leave this slot as the first impression."
-                path="Set site.heroImage in src/config/site.ts"
-                code="FIG. 00"
-                aspect="portrait"
-                lead
-              />
+              <IdentityPanel />
             )}
           </div>
         </div>

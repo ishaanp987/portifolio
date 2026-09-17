@@ -1,11 +1,12 @@
 import { Container } from "@/components/layout/Container";
+import { DevNote } from "@/components/ui/DevNote";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { site } from "@/config/site";
-import { isRealValue } from "@/lib/content";
+import { getAboutParagraphs, isRealValue } from "@/lib/content";
 import { getSectionIndex } from "@/lib/sections";
 
 export function AboutSection() {
-  const paragraphs = site.about.length > 0 ? site.about : [site.bio];
+  const paragraphs = getAboutParagraphs();
 
   return (
     <section
@@ -19,23 +20,27 @@ export function AboutSection() {
           <div className="min-w-0">
             <h2
               id="about-heading"
-              className="max-w-[12ch] text-[length:var(--text-page)] tracking-[-0.045em]"
+              className="max-w-[14ch] text-[length:var(--text-page)]"
             >
               A short note on {site.firstName}.
             </h2>
-            <div className="prose-block mt-8">
-              {paragraphs.map((paragraph) => (
-                <p key={paragraph}>{paragraph}</p>
-              ))}
-            </div>
-            <p className="source-hint mt-8">
-              Replace the copy in <code>src/config/site.ts</code> (<code>about</code> /{" "}
-              <code>bio</code>).
-            </p>
+            {paragraphs.length > 0 ? (
+              <div className="prose-block mt-8">
+                {paragraphs.map((paragraph) => (
+                  <p key={paragraph}>{paragraph}</p>
+                ))}
+              </div>
+            ) : process.env.NODE_ENV === "development" ? (
+              <DevNote>
+                About copy is hidden until <code>about</code> or <code>bio</code> in{" "}
+                <code>src/config/site.ts</code> is replaced with real writing.
+              </DevNote>
+            ) : null}
           </div>
           <aside className="min-w-0">
             <p className="about-mark" aria-hidden="true">
-              {site.initials}
+              <span>{site.firstName}</span>
+              <span>{site.lastName}</span>
             </p>
             <dl className="mt-8 grid gap-3">
               {isRealValue(site.role) ? (

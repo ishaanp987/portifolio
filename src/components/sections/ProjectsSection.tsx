@@ -1,6 +1,7 @@
 import { Container } from "@/components/layout/Container";
 import { FeaturedProject } from "@/components/projects/FeaturedProject";
 import { ProjectIndex } from "@/components/projects/ProjectIndex";
+import { DevNote } from "@/components/ui/DevNote";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { TextLink } from "@/components/ui/TextLink";
 import { getHomepageArchive, getHomepageFeatured } from "@/lib/projects";
@@ -20,19 +21,19 @@ export function ProjectsSection() {
     >
       <Container width="wide" className="pt-[var(--space-section)] pb-4">
         <SectionHeading index={index} label="Selected work" />
-        <h2
-          id="projects-heading"
-          className="max-w-[16ch] text-[length:var(--text-page)] tracking-[-0.04em]"
-        >
+        <h2 id="projects-heading" className="max-w-[16ch] text-[length:var(--text-page)]">
           Featured work.
         </h2>
       </Container>
       <Container width="wide" className="pb-[var(--space-section)]">
         {featured.length === 0 ? (
-          <p className="source-hint">
-            No featured projects yet. Add a project in <code>src/data/projects.ts</code>{" "}
-            and set <code>featured: true</code>.
-          </p>
+          process.env.NODE_ENV === "development" ? (
+            <DevNote>
+              Featured projects appear here once real entries exist in{" "}
+              <code>src/data/projects.ts</code>. Example projects are hidden in
+              production.
+            </DevNote>
+          ) : null
         ) : (
           <div>
             {featured.map((project, projectIndex) => (
@@ -59,13 +60,13 @@ export function ProjectsSection() {
             </div>
             <ProjectIndex projects={archivePreview} startIndex={featured.length} />
           </div>
-        ) : (
+        ) : featured.length > 0 ? (
           <div className="mt-12">
             <TextLink href="/projects" variant="ghost">
               Open project index
             </TextLink>
           </div>
-        )}
+        ) : null}
       </Container>
     </section>
   );

@@ -5,7 +5,7 @@ export const site = {
   initials: "IP",
   role: "Software / Engineering",
   greeting: "Hey —",
-  statement: ["I build software", "and engineered systems."],
+  statement: ["I build software and", "engineered systems."],
   highlight: "engineered systems",
   headline:
     "Building systems at the intersection of software, engineering, and products.",

@@ -1,5 +1,5 @@
 import { formatStatus } from "@/lib/format";
-import { hasContent } from "@/lib/links";
+import { isRealValue, publicItems } from "@/lib/content";
 import type { Project } from "@/types";
 import { MetaList } from "@/components/ui/MetaList";
 
@@ -7,25 +7,18 @@ export function ProjectMeta({ project }: { project: Project }) {
   return (
     <MetaList
       items={[
-        { label: "Type", value: project.category },
-        { label: "Stack", value: project.technologies },
-        { label: "Year", value: project.year },
+        {
+          label: "Type",
+          value: isRealValue(project.category) ? project.category : undefined,
+        },
+        { label: "Stack", value: publicItems(project.technologies) },
+        { label: "Year", value: isRealValue(project.year) ? project.year : undefined },
         {
           label: "Status",
-          value: project.status ? formatStatus(project.status) : undefined,
+          value: isRealValue(project.status) ? formatStatus(project.status) : undefined,
         },
-        { label: "Role", value: project.role },
+        { label: "Role", value: isRealValue(project.role) ? project.role : undefined },
       ]}
     />
-  );
-}
-
-export function hasProjectMeta(project: Project): boolean {
-  return Boolean(
-    hasContent(project.category) ||
-    (project.technologies && project.technologies.length > 0) ||
-    hasContent(project.year) ||
-    hasContent(project.status) ||
-    hasContent(project.role),
   );
 }

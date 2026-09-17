@@ -9,6 +9,7 @@ export const experience: Experience[] = [
     id: "example-role-current",
     organization: "Organization Name",
     role: "Role Title",
+    sample: true,
     startDate: "2025-06",
     endDate: "present",
     location: "City, Country",
@@ -25,6 +26,7 @@ export const experience: Experience[] = [
     id: "example-role-past",
     organization: "Another Organization",
     role: "Previous Role",
+    sample: true,
     startDate: "2024-09",
     endDate: "2025-05",
     description:
@@ -36,6 +38,7 @@ export const experience: Experience[] = [
     id: "example-hidden",
     organization: "Hidden Draft Role",
     role: "Not shown on the site",
+    sample: true,
     startDate: "2023",
     hidden: true,
     description: "This entry exists to demonstrate the hidden flag.",

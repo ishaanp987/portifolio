@@ -36,8 +36,6 @@ export default function OpenGraphImage() {
             justifyContent: "space-between",
             color: theme.accent,
             fontSize: 18,
-            letterSpacing: 3.2,
-            textTransform: "uppercase",
           }}
         >
           <span>{site.role}</span>
@@ -47,8 +45,8 @@ export default function OpenGraphImage() {
           <div
             style={{
               fontSize: 76,
-              letterSpacing: -3.4,
-              lineHeight: 0.92,
+              letterSpacing: 0,
+              lineHeight: 0.96,
             }}
           >
             {site.name}
@@ -71,8 +69,6 @@ export default function OpenGraphImage() {
             justifyContent: "space-between",
             color: theme.muted,
             fontSize: 18,
-            letterSpacing: 2.2,
-            textTransform: "uppercase",
           }}
         >
           <span>{site.focusAreas.join("  /  ")}</span>

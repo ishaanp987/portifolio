@@ -1,4 +1,5 @@
 import { experience } from "@/data/experience";
+import { isDevelopment, isSampleExperience } from "@/lib/content";
 import type { Experience } from "@/types";
 
 function validateExperience(items: Experience[]): void {
@@ -30,6 +31,7 @@ function toSortableDate(value: string): number {
 export function getVisibleExperience(): Experience[] {
   return experience
     .filter((item) => !item.hidden)
+    .filter((item) => isDevelopment() || !isSampleExperience(item))
     .sort((a, b) => {
       const endDelta =
         toSortableDate(b.endDate ?? "present") - toSortableDate(a.endDate ?? "present");

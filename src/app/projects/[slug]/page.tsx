@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { CaseStudy } from "@/components/projects/CaseStudy";
 import { site } from "@/config/site";
+import { isRealValue } from "@/lib/content";
 import { formatProjectIndex, getProjectBySlug, getVisibleProjects } from "@/lib/projects";
 
 type ProjectPageProps = {
@@ -21,16 +22,20 @@ export async function generateMetadata({ params }: ProjectPageProps): Promise<Me
     return { title: "Project not found" };
   }
 
+  const description = isRealValue(project.description)
+    ? project.description
+    : `${project.title} — ${site.name}`;
+
   return {
     title: project.title,
-    description: project.description,
+    description,
     alternates: {
       canonical: `/projects/${project.slug}`,
     },
     openGraph: {
       type: "article",
       title: project.title,
-      description: project.description,
+      description,
       url: `/projects/${project.slug}`,
       siteName: site.name,
     },

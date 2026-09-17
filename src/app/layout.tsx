@@ -1,12 +1,13 @@
 import type { Metadata } from "next";
-import { Geist, IBM_Plex_Mono } from "next/font/google";
+import { IBM_Plex_Mono, IBM_Plex_Sans } from "next/font/google";
 import { SiteFrame } from "@/components/layout/SiteFrame";
 import { site } from "@/config/site";
-import { getSiteUrl } from "@/lib/site";
+import { getSiteDescription, getSiteUrl } from "@/lib/site";
 import "./globals.css";
 
-const sans = Geist({
+const sans = IBM_Plex_Sans({
   subsets: ["latin"],
+  weight: ["400", "500", "600"],
   variable: "--font-sans-family",
   display: "swap",
 });
@@ -18,13 +19,15 @@ const mono = IBM_Plex_Mono({
   display: "swap",
 });
 
+const description = getSiteDescription();
+
 export const metadata: Metadata = {
   metadataBase: new URL(getSiteUrl()),
   title: {
     default: `${site.name} — ${site.headline}`,
     template: `%s — ${site.name}`,
   },
-  description: site.description,
+  description,
   applicationName: site.name,
   authors: [{ name: site.name }],
   creator: site.name,
@@ -37,12 +40,12 @@ export const metadata: Metadata = {
     url: getSiteUrl(),
     siteName: site.name,
     title: site.name,
-    description: site.description,
+    description,
   },
   twitter: {
     card: "summary_large_image",
     title: site.name,
-    description: site.description,
+    description,
   },
   robots: {
     index: true,

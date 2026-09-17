@@ -17,4 +17,4 @@ Recommended:
 - SVG for diagrams
 - Descriptive `alt` text on every image
 
-Projects with no `coverImage` render a labeled media slot that names this path, so missing screenshots never look like finished artwork.
+Projects with no `coverImage` render a quiet neutral frame. Missing screenshots should never look like finished artwork or show file paths on the public site.
