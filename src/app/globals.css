@@ -527,6 +527,11 @@
 
   .hero-kicker {
     margin: 0 0 0.85rem;
+    font-family: var(--font-mono);
+    font-size: var(--text-meta);
+    line-height: 1.45;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
     color: var(--accent);
   }
 

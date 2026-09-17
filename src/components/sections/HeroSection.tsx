@@ -23,9 +23,7 @@ export function HeroSection() {
       <Container width="wide" className="hero-shell">
         <div className="hero-stage">
           <div className="hero-copy">
-            {isRealValue(site.role) ? (
-              <p className="hero-kicker meta">{site.role}</p>
-            ) : null}
+            {isRealValue(site.role) ? <p className="hero-kicker">{site.role}</p> : null}
             <h1 id="site-name" className="hero-name">
               {site.name}
             </h1>
