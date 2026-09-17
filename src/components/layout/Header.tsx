@@ -59,13 +59,6 @@ export function Header() {
         <span className="text-muted"> / </span>
         <span className="text-accent">{getShortYear()}</span>
       </TextLink>
-      <div className="header-utils">
-        {utilityLinks.map((item) => (
-          <TextLink key={item.id} href={item.href} variant="nav">
-            {item.label}
-          </TextLink>
-        ))}
-      </div>
       <nav aria-label="Primary" className="header-nav">
         <ul className="nav-list">
           {navigation.map((item) => {
@@ -81,6 +74,13 @@ export function Header() {
           })}
         </ul>
       </nav>
+      <div className="header-utils">
+        {utilityLinks.map((item) => (
+          <TextLink key={item.id} href={item.href} variant="nav">
+            {item.label}
+          </TextLink>
+        ))}
+      </div>
     </header>
   );
 }

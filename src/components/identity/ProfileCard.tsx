@@ -50,7 +50,10 @@ export function ProfileCard() {
         {hasContent(site.availability) ? (
           <div className="meta-pair">
             <dt className="meta-key">Status</dt>
-            <dd className="meta-val">{site.availability}</dd>
+            <dd className="meta-val">
+              <span className="status-pip" aria-hidden="true" />
+              {site.availability}
+            </dd>
           </div>
         ) : null}
       </dl>

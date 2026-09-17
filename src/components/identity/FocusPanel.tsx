@@ -3,7 +3,11 @@ import { site } from "@/config/site";
 export function FocusPanel() {
   return (
     <aside className="focus-panel">
-      <p className="meta m-0 text-accent">Focus</p>
+      <p className="meta m-0">
+        <span className="text-accent">01</span>
+        <span className="text-muted"> / </span>
+        Focus
+      </p>
       <ol className="focus-list">
         {site.focusAreas.map((area, index) => (
           <li key={area}>

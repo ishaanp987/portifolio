@@ -17,11 +17,11 @@ export function ContactSection() {
     >
       <Container width="wide" className="section-space">
         <SectionHeading index={getSectionIndex("contact")} label="Contact" />
-        <div className="grid gap-12 lg:grid-cols-[minmax(0,1.4fr)_minmax(16rem,0.6fr)] lg:items-end lg:gap-20">
+        <div className="contact-layout">
           <div className="min-w-0">
             <h2
               id="contact-heading"
-              className="contact-title max-w-[12ch] text-foreground"
+              className="contact-title max-w-[11ch] text-foreground"
             >
               {site.contactHeading.map((line) => (
                 <span key={line} className="block">
@@ -45,8 +45,8 @@ export function ContactSection() {
               </p>
             )}
           </div>
-          <aside className="min-w-0 rounded-[var(--radius-lg)] border border-accent-border bg-background-secondary p-5 shadow-[var(--shadow-panel)] lg:mb-1">
-            <dl className="grid gap-3">
+          <aside className="contact-meta">
+            <dl className="grid gap-4">
               {hasContent(site.email) ? (
                 <div className="meta-pair">
                   <dt className="meta-key">Email</dt>
@@ -70,12 +70,15 @@ export function ContactSection() {
               {hasContent(site.availability) ? (
                 <div className="meta-pair">
                   <dt className="meta-key">Status</dt>
-                  <dd className="meta-val">{site.availability}</dd>
+                  <dd className="meta-val">
+                    <span className="status-pip" aria-hidden="true" />
+                    {site.availability}
+                  </dd>
                 </div>
               ) : null}
             </dl>
             {otherSocial.length > 0 ? (
-              <ul className="-mx-2 mt-4 flex flex-wrap items-center">
+              <ul className="-mx-2 mt-5 flex flex-wrap items-center">
                 {otherSocial.map((item) => (
                   <li key={item.id}>
                     <TextLink href={item.href} variant="nav">

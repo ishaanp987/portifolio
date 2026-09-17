@@ -72,7 +72,7 @@ export function TextLink({
   const classes = [variantClass, className].filter(Boolean).join(" ");
   const extra = {
     ...(ariaLabel ? { "aria-label": ariaLabel } : {}),
-    ...(active ? { "data-active": "true" } : {}),
+    ...(active ? { "data-active": "true", "aria-current": "true" as const } : {}),
   };
 
   const actionBits =

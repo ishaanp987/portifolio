@@ -13,7 +13,11 @@ export function ProjectsSection() {
   const index = getSectionIndex("projects");
 
   return (
-    <section id="projects" aria-labelledby="projects-heading" className="section-anchor">
+    <section
+      id="projects"
+      aria-labelledby="projects-heading"
+      className="section-anchor border-t border-border bg-background-secondary"
+    >
       <Container width="wide" className="pt-[var(--space-section)] pb-4">
         <SectionHeading index={index} label="Selected work" />
         <h2 id="projects-heading" className="sr-only">

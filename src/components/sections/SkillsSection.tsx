@@ -1,5 +1,6 @@
 import { Container } from "@/components/layout/Container";
 import { SectionHeading } from "@/components/ui/SectionHeading";
+import { formatIndex } from "@/lib/format";
 import { getSectionIndex } from "@/lib/sections";
 import { getSkillCategories } from "@/lib/skills";
 
@@ -25,25 +26,23 @@ export function SkillsSection() {
             .
           </p>
         ) : (
-          <div className="grid gap-4 md:grid-cols-2">
-            {categories.map((category) => (
-              <div key={category.id} className="skill-panel">
-                <p className="meta m-0 text-accent">{category.label}</p>
-                <ul className="mt-4 m-0 list-none p-0">
+          <div className="skill-board">
+            {categories.map((category, index) => (
+              <article key={category.id} className="skill-group">
+                <p className="meta m-0">
+                  <span className="text-accent">{formatIndex(index)}</span>
+                  <span className="text-muted"> / </span>
+                  {category.label}
+                </p>
+                <ul className="skill-list">
                   {category.items.map((item) => (
-                    <li
-                      key={item}
-                      className="flex items-center gap-3 border-t border-border py-2.5 text-[0.95rem] text-secondary first:border-t-0"
-                    >
-                      <span
-                        className="h-1.5 w-1.5 shrink-0 rounded-full bg-accent"
-                        aria-hidden="true"
-                      />
+                    <li key={item}>
+                      <span className="skill-mark" aria-hidden="true" />
                       {item}
                     </li>
                   ))}
                 </ul>
-              </div>
+              </article>
             ))}
           </div>
         )}

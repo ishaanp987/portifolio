@@ -7,10 +7,7 @@ import { highlightPhrase } from "@/lib/highlight";
 export function HeroSection() {
   return (
     <section id="index" aria-labelledby="site-name" className="section-anchor">
-      <Container
-        width="wide"
-        className="py-8 md:py-12 lg:flex lg:min-h-[calc(100dvh-5rem)] lg:items-center lg:py-16 xl:min-h-[calc(100dvh-1.5rem)]"
-      >
+      <Container width="wide" className="hero-shell">
         <div className="hero-stage w-full">
           <ProfileCard />
           <div className="hero-intro">

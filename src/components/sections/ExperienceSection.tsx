@@ -33,17 +33,12 @@ export function ExperienceSection() {
             .
           </p>
         ) : (
-          <ol className="m-0 grid list-none gap-4 p-0">
+          <ol className="experience-list">
             {items.map((item) => (
-              <li
-                key={item.id}
-                className="experience-card grid gap-3 md:grid-cols-[7.5rem_minmax(0,1fr)] md:gap-10"
-              >
-                <p className="m-0 pt-1 font-mono text-[0.8rem] tracking-[0.12em] text-accent md:text-[0.9rem]">
-                  {experienceYear(item)}
-                </p>
+              <li key={item.id} className="experience-item">
+                <p className="experience-year">{experienceYear(item)}</p>
                 <div className="min-w-0">
-                  <h3 className="text-[1.35rem] font-medium tracking-[-0.035em] text-foreground md:text-[1.55rem]">
+                  <h3 className="text-[1.4rem] font-medium tracking-[-0.035em] text-foreground md:text-[1.7rem]">
                     {hasContent(item.link) ? (
                       <TextLink href={item.link} variant="plain" className="title-link">
                         {item.organization}
