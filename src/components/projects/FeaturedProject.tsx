@@ -25,23 +25,17 @@ export function FeaturedProject({ project, index }: FeaturedProjectProps) {
   const lead = index === 0;
 
   return (
-    <article
-      className={
-        lead
-          ? "border-t border-accent pt-14 pb-12 md:pt-20 md:pb-16 lg:pt-24 lg:pb-20"
-          : "border-t border-border py-12 md:py-16 lg:py-20"
-      }
-    >
+    <article className="border-t border-border py-12 md:py-16 lg:py-20">
       <div className="mb-5 lg:hidden">
-        <span className="display-index">{displayIndex}</span>
+        <span className="display-index">P/{displayIndex}</span>
       </div>
       <div className={`project-band is-${layout}`}>
         <div className="p-idx">
-          <span className="display-index sticky top-24">{displayIndex}</span>
+          <span className="display-index sticky top-24">P/{displayIndex}</span>
         </div>
         <div className="p-head">
           <p className="meta m-0 text-accent">
-            Project / {displayIndex}
+            Featured / {displayIndex}
             {project.code ? (
               <>
                 <span className="text-border-strong"> / </span>
@@ -49,19 +43,14 @@ export function FeaturedProject({ project, index }: FeaturedProjectProps) {
               </>
             ) : null}
           </p>
-          <h3 className="mt-4 max-w-[12ch] text-[length:var(--text-project)] font-medium uppercase leading-[0.92] tracking-[-0.05em] text-foreground">
+          <h3 className="mt-4 max-w-[14ch] text-[length:var(--text-project)] font-medium tracking-[-0.045em] text-foreground">
             <TextLink href={href} variant="plain" className="title-link">
               {project.title}
             </TextLink>
           </h3>
-          <hr className="olive-rule mt-5 mb-0" />
+          <hr className="accent-rule mt-5 mb-0" />
         </div>
         <div className="p-fig">
-          <p className="meta mb-2">
-            Fig. {displayIndex}
-            <span className="text-border-strong"> / </span>
-            Cover
-          </p>
           <ProjectCover
             project={project}
             priority={lead}
@@ -99,7 +88,7 @@ export function FeaturedProject({ project, index }: FeaturedProjectProps) {
             </div>
           ) : null}
         </dl>
-        <div className="p-action mt-1 flex flex-wrap items-center gap-x-5">
+        <div className="p-action flex flex-wrap items-center gap-x-5">
           <TextLink
             href={href}
             variant="action"
@@ -117,7 +106,11 @@ export function FeaturedProject({ project, index }: FeaturedProjectProps) {
             </TextLink>
           ) : null}
           {hasContent(project.demo) ? (
-            <TextLink href={project.demo} variant="ghost" ariaLabel={`${project.title} live demo`}>
+            <TextLink
+              href={project.demo}
+              variant="ghost"
+              ariaLabel={`${project.title} live demo`}
+            >
               Demo
             </TextLink>
           ) : null}

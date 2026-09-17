@@ -111,6 +111,7 @@ export function SchematicCover({ seed, title, code, className }: SchematicCoverP
             fill="var(--background)"
             stroke={i === 1 ? "var(--accent)" : "var(--border-strong)"}
             strokeWidth="1.25"
+            rx="10"
           />
           <text
             x={mod.x + 14}
@@ -142,6 +143,7 @@ export function SchematicCover({ seed, title, code, className }: SchematicCoverP
           y={center.y - 4}
           width="8"
           height="8"
+          rx="2"
           fill="var(--background)"
           stroke="var(--text-primary)"
           strokeWidth="1"

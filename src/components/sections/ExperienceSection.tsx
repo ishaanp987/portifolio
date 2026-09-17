@@ -21,7 +21,7 @@ export function ExperienceSection() {
       <Container width="wide" className="section-space">
         <SectionHeading index={getSectionIndex("experience")} label="Experience" />
         <h2 id="experience-heading" className="sr-only">
-          Selected work
+          Experience
         </h2>
 
         {items.length === 0 ? (
@@ -33,17 +33,17 @@ export function ExperienceSection() {
             .
           </p>
         ) : (
-          <ol className="m-0 list-none p-0">
+          <ol className="m-0 grid list-none gap-4 p-0">
             {items.map((item) => (
               <li
                 key={item.id}
-                className="grid gap-3 border-t border-border py-9 md:grid-cols-[7.5rem_minmax(0,1fr)] md:gap-12 lg:grid-cols-[8.5rem_minmax(0,1fr)]"
+                className="experience-card grid gap-3 md:grid-cols-[7.5rem_minmax(0,1fr)] md:gap-10"
               >
-                <p className="m-0 pt-1 font-medium tracking-[-0.04em] text-accent md:text-[1.35rem]">
+                <p className="m-0 pt-1 font-mono text-[0.8rem] tracking-[0.12em] text-accent md:text-[0.9rem]">
                   {experienceYear(item)}
                 </p>
                 <div className="min-w-0">
-                  <h3 className="text-[1.45rem] font-medium tracking-[-0.04em] text-foreground md:text-[1.7rem]">
+                  <h3 className="text-[1.35rem] font-medium tracking-[-0.035em] text-foreground md:text-[1.55rem]">
                     {hasContent(item.link) ? (
                       <TextLink href={item.link} variant="plain" className="title-link">
                         {item.organization}

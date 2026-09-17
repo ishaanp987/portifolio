@@ -10,12 +10,12 @@ export function SkillsSection() {
     <section
       id="skills"
       aria-labelledby="skills-heading"
-      className="section-anchor border-t border-border"
+      className="section-anchor border-t border-border bg-background-secondary"
     >
       <Container width="wide" className="section-space">
         <SectionHeading index={getSectionIndex("skills")} label="Capabilities" />
         <h2 id="skills-heading" className="sr-only">
-          Tools in use
+          Capabilities
         </h2>
 
         {categories.length === 0 ? (
@@ -25,19 +25,27 @@ export function SkillsSection() {
             .
           </p>
         ) : (
-          <dl>
+          <div className="grid gap-4 md:grid-cols-2">
             {categories.map((category) => (
-              <div
-                key={category.id}
-                className="grid gap-2 border-t border-border py-5 md:grid-cols-[13rem_minmax(0,1fr)] md:gap-10 md:py-6"
-              >
-                <dt className="meta pt-1 text-accent">{category.label}</dt>
-                <dd className="m-0 font-mono text-[0.78rem] uppercase tracking-[0.12em] leading-7 text-secondary">
-                  {category.items.join("  /  ")}
-                </dd>
+              <div key={category.id} className="skill-panel">
+                <p className="meta m-0 text-accent">{category.label}</p>
+                <ul className="mt-4 m-0 list-none p-0">
+                  {category.items.map((item) => (
+                    <li
+                      key={item}
+                      className="flex items-center gap-3 border-t border-border py-2.5 text-[0.95rem] text-secondary first:border-t-0"
+                    >
+                      <span
+                        className="h-1.5 w-1.5 shrink-0 rounded-full bg-accent"
+                        aria-hidden="true"
+                      />
+                      {item}
+                    </li>
+                  ))}
+                </ul>
               </div>
             ))}
-          </dl>
+          </div>
         )}
       </Container>
     </section>

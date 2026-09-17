@@ -1,6 +1,6 @@
 # Portfolio
 
-Personal portfolio for **Ishaan Patel** — an engineering workstation turned into a dark, documentation-inspired site for software, robotics, AI, and product work.
+Personal portfolio for **Ishaan Patel** — a dark technical workspace for software, robotics, AI, and product work, with `#4BD183` as the signature accent.
 
 The public copy currently includes **placeholder content** on purpose. Edit the files below; you should not need to hunt through React components to change personal information.
 
@@ -42,12 +42,16 @@ All of this lives in [`src/config/site.ts`](src/config/site.ts).
 
 | You want to change                          | Field                                                        |
 | ------------------------------------------- | ------------------------------------------------------------ |
-| Name                                        | `name`, plus `firstName` / `lastName` for the stacked hero   |
+| Name                                        | `name`, plus `firstName` / `lastName`                        |
 | Initials / brand mark                       | `initials` (renders as `IP / 26`)                            |
+| Role line in the identity badge             | `role`                                                       |
+| Hero greeting                               | `greeting`                                                   |
+| Hero statement lines                        | `statement`                                                  |
+| Accented phrase inside the statement        | `highlight`                                                  |
 | Headline                                    | `headline`                                                   |
 | Short supporting sentence / SEO description | `description`                                                |
-| Discipline stack in the hero                | `disciplines`                                                |
-| Systems board node labels                   | `focusAreas`                                                 |
+| Focus panel labels                          | `focusAreas`                                                 |
+| Optional avatar                             | `avatar` (path under `public/`, or leave empty for initials) |
 | Bio / about paragraphs                      | `bio` and `about`                                            |
 | Contact headline and CTA                    | `contactHeading`, `contactCta`                               |
 | Email                                       | `email`                                                      |
@@ -106,10 +110,10 @@ Navigation labels and hashes live in [`src/config/navigation.ts`](src/config/nav
 
 Live site tokens are in [`src/app/globals.css`](src/app/globals.css) under `:root`.
 
-- **Olive accent:** change `--accent`, then `--accent-muted`, `--accent-hover`, `--accent-border` if contrast needs a tweak. Olive is a signal (rail, indexes, active nav, rules), not a wash.
-- **Other colors:** `--background`, `--text-primary`, `--text-secondary`, `--text-muted`, `--border`, and the surface tokens.
-- **Typography:** `--text-hero`, `--text-display`, `--text-project`, `--text-page`, `--text-body`, `--text-meta`, plus Geist and IBM Plex Mono in [`src/app/layout.tsx`](src/app/layout.tsx).
-- **Spacing / layout:** `--space-gutter`, `--space-section`, `--container-main`, `--container-wide`.
+- **Green accent:** `--accent` is `#4BD183`. Derived tokens: `--accent-hover`, `--accent-dark`, `--accent-muted`, `--accent-border`, `--accent-background`, `--accent-faint`.
+- **Surfaces:** `--background`, `--background-secondary`, `--surface`, `--surface-elevated`, `--border`.
+- **Type:** `--text-hero`, `--text-display`, `--text-project`, `--text-page`, `--text-body`, `--text-meta`, plus Geist and IBM Plex Mono in [`src/app/layout.tsx`](src/app/layout.tsx).
+- **Shape / space:** `--radius-sm`, `--radius-md`, `--radius-lg`, `--space-gutter`, `--space-section`, `--container-wide`.
 
 Open Graph images and the Apple icon cannot read CSS variables. After changing the palette, update the matching values in [`src/config/theme.ts`](src/config/theme.ts).
 

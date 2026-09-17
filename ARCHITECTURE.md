@@ -9,7 +9,8 @@ src/
   app/                  Routes, metadata, sitemap, robots, Open Graph
   components/
     ui/                 Links, labels, meta lists
-    layout/             Frame, header, footer, container
+    identity/           Profile badge and focus panel
+    layout/             Frame, field background, header, footer, container
     sections/           Homepage sections
     projects/           Featured rows, archive index, case study
   config/               Site, navigation, sections, OG color mirror
@@ -34,7 +35,7 @@ Components should not contain names, bios, or project copy.
 
 `src/config/theme.ts` duplicates the palette only for `ImageResponse` assets (Open Graph, Apple icon).
 
-The visual motif is a workstation drawing sheet: an olive measurement rail, section indexes (`01 / PROJECTS`), stacked display type against tiny monospace metadata, a systems board (`SYS-01`), and hairline rules. Olive is a signal — rail, indexes, active navigation, core diagram nodes, action links — not a wash.
+The visual identity is a dark technical workspace: a field-line atmosphere, a compact identity badge, conversational hero type, and `#4BD183` as a 15% signal (indexes, active nav, links, outlines). Surfaces sit in three layers — page, panel, elevated — with a small radius scale.
 
 ## Project rendering
 

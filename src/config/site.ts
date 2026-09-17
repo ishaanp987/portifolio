@@ -3,6 +3,10 @@ export const site = {
   firstName: "Ishaan",
   lastName: "Patel",
   initials: "IP",
+  role: "Software / Engineering",
+  greeting: "Hey —",
+  statement: ["I build software", "and engineered systems."],
+  highlight: "engineered systems",
   headline:
     "Building systems at the intersection of software, engineering, and products.",
   description:
@@ -23,6 +27,7 @@ export const site = {
   linkedin: "https://www.linkedin.com/in/your-username",
   resume: "",
   availability: "Replace with availability — e.g. Open to internships",
+  avatar: "",
   url: "https://your-domain.example",
   locale: "en_US",
 } as const;

@@ -15,7 +15,7 @@ export function ProjectsSection() {
   return (
     <section id="projects" aria-labelledby="projects-heading" className="section-anchor">
       <Container width="wide" className="pt-[var(--space-section)] pb-4">
-        <SectionHeading index={index} label="Projects" />
+        <SectionHeading index={index} label="Selected work" />
         <h2 id="projects-heading" className="sr-only">
           Projects
         </h2>

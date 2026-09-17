@@ -15,17 +15,9 @@ export default function OpenGraphImage() {
         display: "flex",
         background: theme.background,
         color: theme.foreground,
-        padding: 36,
+        padding: 40,
       }}
     >
-      <div
-        style={{
-          width: 8,
-          height: "100%",
-          background: theme.accent,
-          marginRight: 28,
-        }}
-      />
       <div
         style={{
           width: "100%",
@@ -34,7 +26,9 @@ export default function OpenGraphImage() {
           flexDirection: "column",
           justifyContent: "space-between",
           border: `1px solid ${theme.border}`,
+          borderRadius: 28,
           padding: "52px 60px",
+          background: theme.backgroundSecondary,
         }}
       >
         <div
@@ -47,41 +41,40 @@ export default function OpenGraphImage() {
             textTransform: "uppercase",
           }}
         >
-          <span>00 / PORTFOLIO</span>
-          <span>DWG 00</span>
+          <span>{site.initials} / LAB</span>
+          <span>{site.role}</span>
         </div>
         <div style={{ display: "flex", flexDirection: "column" }}>
           <div
             style={{
-              display: "flex",
-              flexDirection: "column",
-              fontSize: 92,
-              letterSpacing: -4,
-              lineHeight: 0.86,
+              fontSize: 28,
+              color: theme.accent,
+              letterSpacing: 3,
               textTransform: "uppercase",
+              marginBottom: 16,
             }}
           >
-            <span>{site.firstName}</span>
-            <span>{site.lastName}</span>
+            {site.greeting}
           </div>
           <div
             style={{
-              width: 56,
-              height: 3,
-              background: theme.accent,
-              marginTop: 28,
-              marginBottom: 22,
+              fontSize: 72,
+              letterSpacing: -3,
+              lineHeight: 0.95,
             }}
-          />
+          >
+            I’m {site.firstName}.
+          </div>
           <div
             style={{
-              fontSize: 26,
+              marginTop: 22,
+              fontSize: 28,
               color: theme.secondary,
-              lineHeight: 1.35,
+              lineHeight: 1.3,
               maxWidth: 780,
             }}
           >
-            {site.headline}
+            {site.statement.join(" ")}
           </div>
         </div>
         <div
@@ -90,12 +83,12 @@ export default function OpenGraphImage() {
             justifyContent: "space-between",
             color: theme.muted,
             fontSize: 18,
-            letterSpacing: 2.4,
+            letterSpacing: 2.2,
             textTransform: "uppercase",
           }}
         >
-          <span>{site.disciplines.join(" / ")}</span>
-          <span>{site.initials} / LAB</span>
+          <span>{site.focusAreas.join(" / ")}</span>
+          <span>{site.name}</span>
         </div>
       </div>
     </div>,

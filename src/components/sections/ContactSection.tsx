@@ -13,16 +13,15 @@ export function ContactSection() {
     <section
       id="contact"
       aria-labelledby="contact-heading"
-      className="section-anchor border-t border-border bg-background-secondary"
+      className="section-anchor border-t border-border bg-surface"
     >
       <Container width="wide" className="section-space">
         <SectionHeading index={getSectionIndex("contact")} label="Contact" />
-        <div className="grid gap-12 lg:grid-cols-[minmax(0,1.35fr)_minmax(16rem,0.65fr)] lg:items-end lg:gap-20">
+        <div className="grid gap-12 lg:grid-cols-[minmax(0,1.4fr)_minmax(16rem,0.6fr)] lg:items-end lg:gap-20">
           <div className="min-w-0">
-            <span className="contact-stamp" aria-hidden="true" />
             <h2
               id="contact-heading"
-              className="contact-title max-w-[11ch] text-foreground"
+              className="contact-title max-w-[12ch] text-foreground"
             >
               {site.contactHeading.map((line) => (
                 <span key={line} className="block">
@@ -46,7 +45,7 @@ export function ContactSection() {
               </p>
             )}
           </div>
-          <aside className="min-w-0 lg:pb-2">
+          <aside className="min-w-0 rounded-[var(--radius-lg)] border border-accent-border bg-background-secondary p-5 shadow-[var(--shadow-panel)] lg:mb-1">
             <dl className="grid gap-3">
               {hasContent(site.email) ? (
                 <div className="meta-pair">
@@ -76,7 +75,7 @@ export function ContactSection() {
               ) : null}
             </dl>
             {otherSocial.length > 0 ? (
-              <ul className="-mx-2 mt-6 flex flex-wrap items-center">
+              <ul className="-mx-2 mt-4 flex flex-wrap items-center">
                 {otherSocial.map((item) => (
                   <li key={item.id}>
                     <TextLink href={item.href} variant="nav">

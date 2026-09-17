@@ -1,69 +1,36 @@
+import { FocusPanel } from "@/components/identity/FocusPanel";
+import { ProfileCard } from "@/components/identity/ProfileCard";
 import { Container } from "@/components/layout/Container";
-import { SystemsBoard } from "@/components/sections/SystemsBoard";
-import { TextLink } from "@/components/ui/TextLink";
 import { site } from "@/config/site";
-import { hasContent } from "@/lib/links";
-import { getSectionIndex, isSectionEnabled } from "@/lib/sections";
+import { highlightPhrase } from "@/lib/highlight";
 
 export function HeroSection() {
-  const projectsEnabled = isSectionEnabled("projects");
-  const secondaryHref = hasContent(site.github)
-    ? site.github
-    : hasContent(site.email)
-      ? `mailto:${site.email}`
-      : "/#contact";
-  const secondaryLabel = hasContent(site.github)
-    ? "GitHub"
-    : hasContent(site.email)
-      ? "Email"
-      : "Contact";
-  const index = getSectionIndex("hero");
-
   return (
-    <section
-      id="index"
-      aria-labelledby="site-name"
-      className="section-anchor border-b border-border"
-    >
-      <Container width="wide" className="py-9 md:py-12 lg:py-16">
-        <p className="section-kicker mb-8 md:mb-10">
-          <span>
-            <span className="text-accent">{index}</span>
-            <span className="text-muted"> / </span>
-            Portfolio
-          </span>
-          <span className="section-kicker-rule" aria-hidden="true" />
-          <span className="text-muted">DWG {index}</span>
-        </p>
-        <div className="hero-stage">
-          <h1 id="site-name" className="hero-name name-stack text-foreground">
-            <span className="block">{site.firstName}</span>
-            <span className="block">{site.lastName}</span>
-          </h1>
-          <div className="hero-board">
-            <SystemsBoard />
-          </div>
-          <div className="hero-copy">
-            <hr className="olive-rule mt-1 mb-6" />
-            <ul className="discipline-stack m-0 list-none p-0">
-              {site.disciplines.map((item) => (
-                <li key={item}>{item}</li>
+    <section id="index" aria-labelledby="site-name" className="section-anchor">
+      <Container
+        width="wide"
+        className="py-8 md:py-12 lg:flex lg:min-h-[calc(100dvh-5rem)] lg:items-center lg:py-16 xl:min-h-[calc(100dvh-1.5rem)]"
+      >
+        <div className="hero-stage w-full">
+          <ProfileCard />
+          <div className="hero-intro">
+            <p className="hero-greeting">{site.greeting}</p>
+            <h1 id="site-name" className="hero-name">
+              I’m {site.firstName}.
+            </h1>
+            <p className="hero-statement">
+              {site.statement.map((line) => (
+                <span key={line} className="block">
+                  {highlightPhrase(line, site.highlight)}
+                </span>
               ))}
-            </ul>
-            <p className="mt-8 max-w-[24ch] text-[length:var(--text-lead)] leading-7 text-secondary">
+            </p>
+            <p className="mt-7 max-w-[34rem] text-[length:var(--text-lead)] leading-7 text-secondary">
               {site.headline}
             </p>
-            <div className="mt-8 flex flex-wrap items-center gap-x-6">
-              <TextLink
-                href={projectsEnabled ? "/#projects" : "/projects"}
-                variant="action"
-              >
-                View projects
-              </TextLink>
-              <TextLink href={secondaryHref} variant="ghost">
-                {secondaryLabel}
-              </TextLink>
-            </div>
+          </div>
+          <div className="hero-focus">
+            <FocusPanel />
           </div>
         </div>
       </Container>

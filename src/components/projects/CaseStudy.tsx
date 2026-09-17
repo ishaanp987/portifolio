@@ -42,10 +42,10 @@ export function CaseStudy({
               </span>
               <span className="section-kicker-rule" aria-hidden="true" />
             </p>
-            <h1 className="max-w-[14ch] text-[length:var(--text-display)] uppercase text-foreground">
+            <h1 className="max-w-[14ch] text-[length:var(--text-display)] tracking-[-0.045em] text-foreground">
               {project.title}
             </h1>
-            <hr className="olive-rule mt-6 mb-6" />
+            <hr className="accent-rule mt-6 mb-6" />
             <p className="mt-5 max-w-[38rem] text-[length:var(--text-lead)] leading-8 text-secondary">
               {project.longDescription ?? project.description}
             </p>
@@ -70,16 +70,11 @@ export function CaseStudy({
               ) : null}
             </div>
           </div>
-          <div>
+          <aside className="min-w-0 rounded-[var(--radius-lg)] border border-border bg-surface p-5 shadow-[var(--shadow-panel)]">
             <ProjectMeta project={project} />
-          </div>
+          </aside>
         </div>
         <div className="container-wide pb-12">
-          <p className="meta mb-2">
-            Fig. 00
-            <span className="text-border-strong"> / </span>
-            Cover
-          </p>
           <ProjectCover
             project={project}
             priority
@@ -121,7 +116,7 @@ export function CaseStudy({
             className="title-link min-w-0"
           >
             <span className="meta block text-accent">Previous</span>
-            <span className="mt-3 block max-w-[16ch] text-[length:var(--text-page)] font-medium uppercase leading-[0.94] tracking-[-0.04em] text-foreground">
+            <span className="mt-3 block max-w-[16ch] text-[length:var(--text-page)] font-medium leading-[0.98] tracking-[-0.04em] text-foreground">
               {previous.title}
             </span>
           </TextLink>
@@ -135,7 +130,7 @@ export function CaseStudy({
             className="title-link min-w-0 sm:text-right"
           >
             <span className="meta block text-accent">Next</span>
-            <span className="mt-3 ml-auto block max-w-[16ch] text-[length:var(--text-page)] font-medium uppercase leading-[0.94] tracking-[-0.04em] text-foreground sm:ml-auto">
+            <span className="mt-3 ml-auto block max-w-[16ch] text-[length:var(--text-page)] font-medium leading-[0.98] tracking-[-0.04em] text-foreground sm:ml-auto">
               {next.title}
             </span>
           </TextLink>

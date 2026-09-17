@@ -20,10 +20,7 @@ export default function ProjectsPage() {
     <div className="section-space">
       <Container width="wide">
         <SectionHeading index="01" label="Index" />
-        <h1 className="contact-title max-w-[10ch] text-foreground">
-          <span className="block">Project</span>
-          <span className="block">register</span>
-        </h1>
+        <h1 className="contact-title max-w-[12ch] text-foreground">All projects</h1>
         <p className="mt-6 max-w-[36rem] text-secondary">
           A register of visible work. Hidden drafts stay in the data file and never appear
           here.

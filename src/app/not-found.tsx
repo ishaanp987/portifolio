@@ -13,7 +13,7 @@ export default function NotFound() {
           </span>
           <span className="section-kicker-rule" aria-hidden="true" />
         </p>
-        <h1 className="contact-title max-w-[10ch]">This sheet does not exist.</h1>
+        <h1 className="contact-title max-w-[12ch]">This page does not exist.</h1>
         <p className="mt-6 max-w-[32rem] text-secondary">
           The page may have been moved, or the project is hidden from the public index.
         </p>

@@ -2,6 +2,7 @@ import { site } from "@/config/site";
 import type { NavItem } from "@/types";
 
 export const navigation: NavItem[] = [
+  { id: "home", label: "Home", href: "/#index" },
   { id: "projects", label: "Projects", href: "/#projects" },
   { id: "experience", label: "Experience", href: "/#experience" },
   { id: "about", label: "About", href: "/#about" },
