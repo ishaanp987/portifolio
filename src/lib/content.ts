@@ -100,7 +100,6 @@ export function getPendingSiteFields(): PendingField[] {
 
 export function getHeroFacts(): Array<{ label: string; value: string }> {
   const facts: Array<{ label: string; value: string }> = [];
-  if (isRealValue(site.role)) facts.push({ label: "Role", value: site.role });
   if (isRealValue(site.location)) facts.push({ label: "Location", value: site.location });
   if (isRealValue(site.availability)) {
     facts.push({ label: "Status", value: site.availability });
