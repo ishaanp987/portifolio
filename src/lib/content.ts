@@ -33,10 +33,8 @@ export function isPlaceholderCopy(value: string | undefined | null): boolean {
   const normalized = value.trim().toLowerCase();
   if (PLACEHOLDER_EXACT.has(normalized)) return true;
   if (
-    normalized.startsWith("replace with") ||
-    normalized.startsWith("replace this") ||
-    normalized.includes("replace this with") ||
-    normalized.includes("replace with a") ||
+    normalized.includes("replace this") ||
+    normalized.includes("replace with") ||
     normalized.includes("this is placeholder") ||
     normalized.includes("placeholder content") ||
     normalized.includes("placeholder text") ||

@@ -5,15 +5,15 @@ import { usePathname } from "next/navigation";
 import { Menu, X } from "lucide-react";
 import { Container } from "@/components/layout/Container";
 import { TextLink } from "@/components/ui/TextLink";
-import { site } from "@/config/site";
 import type { NavItem } from "@/types";
 
 type HeaderProps = {
   navigation: NavItem[];
   utilityLinks: NavItem[];
+  brandName: string;
 };
 
-export function Header({ navigation, utilityLinks }: HeaderProps) {
+export function Header({ navigation, utilityLinks, brandName }: HeaderProps) {
   const pathname = usePathname() ?? "/";
   const onProjects = pathname.startsWith("/projects");
   const [sectionActive, setSectionActive] = useState("");
@@ -73,10 +73,10 @@ export function Header({ navigation, utilityLinks }: HeaderProps) {
             href="/"
             variant="plain"
             className="brand-mark"
-            ariaLabel={`${site.name}, home`}
+            ariaLabel={`${brandName}, home`}
             onClick={() => setOpen(false)}
           >
-            {site.name}
+            {brandName}
           </TextLink>
 
           <nav aria-label="Primary" className="desktop-nav">
