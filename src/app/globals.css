@@ -544,7 +544,7 @@
 
   .hero-statement {
     margin: 1.1rem 0 0;
-    max-width: 16ch;
+    max-width: 22rem;
     font-size: 1.35rem;
     line-height: 1.22;
     letter-spacing: 0;
@@ -568,15 +568,16 @@
   }
 
   .hero-media {
-    min-height: 18rem;
+    min-height: 13.5rem;
   }
 
   .hero-media .media-frame,
   .hero-media .identity-panel,
   .hero-media .quiet-frame {
     height: 100%;
-    min-height: 18rem;
-    aspect-ratio: 4 / 5;
+    min-height: 13.5rem;
+    max-height: 18rem;
+    aspect-ratio: auto;
   }
 
   .media-frame,
@@ -607,16 +608,18 @@
   }
 
   .quiet-frame {
-    min-height: 11rem;
+    min-height: 7.5rem;
+    max-height: 11rem;
+    aspect-ratio: 16 / 10;
   }
 
   .identity-panel {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    gap: 1.5rem;
-    padding: 1.4rem 1.35rem 1.3rem;
-    min-height: 18rem;
+    gap: 1.15rem;
+    padding: 1.15rem 1.2rem 1.1rem;
+    min-height: 13.5rem;
   }
 
   .identity-mark {
@@ -630,7 +633,7 @@
   .identity-name {
     margin: 0;
     display: grid;
-    font-size: 2.35rem;
+    font-size: 1.85rem;
     line-height: 0.98;
     font-weight: 500;
     letter-spacing: 0;
@@ -864,23 +867,6 @@
     word-break: break-word;
   }
 
-  .dev-note {
-    margin: 1.25rem 0 0;
-    max-width: 36rem;
-    padding: 0.85rem 0.95rem;
-    border: 1px dashed var(--border-strong);
-    color: var(--text-muted);
-    font-size: 0.82rem;
-    line-height: 1.55;
-    font-family: var(--font-mono);
-  }
-
-  .dev-note code {
-    font-family: inherit;
-    color: var(--text-secondary);
-    overflow-wrap: anywhere;
-  }
-
   .empty-copy {
     margin: 0;
     max-width: 36rem;
@@ -1104,8 +1090,8 @@
   }
 
   .hero-statement {
-    font-size: 1.7rem;
-    max-width: 14ch;
+    font-size: 1.55rem;
+    max-width: 24rem;
   }
 
   .hero-media,
@@ -1166,7 +1152,7 @@
     align-items: start;
   }
 
-  .media-lead {
+  .media-lead:not(.quiet-frame) {
     min-height: 22rem;
   }
 }
@@ -1189,7 +1175,7 @@
     height: min(36rem, 66svh);
   }
 
-  .media-lead {
+  .media-lead:not(.quiet-frame) {
     min-height: 26rem;
   }
 }

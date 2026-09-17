@@ -22,7 +22,7 @@ export function ProjectCover({
     .join(" ");
 
   if (!project.coverImage) {
-    return <QuietFrame aspect="wide" lead={lead} />;
+    return <QuietFrame aspect="wide" />;
   }
 
   return (

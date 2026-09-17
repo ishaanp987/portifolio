@@ -1,7 +1,6 @@
 import { Container } from "@/components/layout/Container";
 import { FeaturedProject } from "@/components/projects/FeaturedProject";
 import { ProjectIndex } from "@/components/projects/ProjectIndex";
-import { DevNote } from "@/components/ui/DevNote";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { TextLink } from "@/components/ui/TextLink";
 import { getHomepageArchive, getHomepageFeatured } from "@/lib/projects";
@@ -26,15 +25,7 @@ export function ProjectsSection() {
         </h2>
       </Container>
       <Container width="wide" className="pb-[var(--space-section)]">
-        {featured.length === 0 ? (
-          process.env.NODE_ENV === "development" ? (
-            <DevNote>
-              Featured projects appear here once real entries exist in{" "}
-              <code>src/data/projects.ts</code>. Example projects are hidden in
-              production.
-            </DevNote>
-          ) : null
-        ) : (
+        {featured.length === 0 ? null : (
           <div>
             {featured.map((project, projectIndex) => (
               <FeaturedProject

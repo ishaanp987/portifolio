@@ -1,5 +1,4 @@
 import { Container } from "@/components/layout/Container";
-import { DevNote } from "@/components/ui/DevNote";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { site } from "@/config/site";
 import { getAboutParagraphs, isRealValue } from "@/lib/content";
@@ -30,11 +29,6 @@ export function AboutSection() {
                   <p key={paragraph}>{paragraph}</p>
                 ))}
               </div>
-            ) : process.env.NODE_ENV === "development" ? (
-              <DevNote>
-                About copy is hidden until <code>about</code> or <code>bio</code> in{" "}
-                <code>src/config/site.ts</code> is replaced with real writing.
-              </DevNote>
             ) : null}
           </div>
           <aside className="min-w-0">

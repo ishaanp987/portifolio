@@ -1,5 +1,4 @@
 import { Container } from "@/components/layout/Container";
-import { DevNote } from "@/components/ui/DevNote";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { getSectionIndex } from "@/lib/sections";
 import { getSkillCategories } from "@/lib/skills";
@@ -22,14 +21,7 @@ export function SkillsSection() {
           A working list, not a claim of mastery. The projects should do the convincing.
         </p>
 
-        {categories.length === 0 ? (
-          process.env.NODE_ENV === "development" ? (
-            <DevNote>
-              Skill categories are hidden until <code>src/data/skills.ts</code> has real
-              items.
-            </DevNote>
-          ) : null
-        ) : (
+        {categories.length === 0 ? null : (
           <ul className="skill-matrix mt-10">
             {categories.map((category) => (
               <li key={category.id} className="skill-row">

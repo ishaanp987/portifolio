@@ -33,11 +33,8 @@ export function Header({ navigation, utilityLinks, brandName }: HeaderProps) {
     const onKey = (event: KeyboardEvent) => {
       if (event.key === "Escape") setOpen(false);
     };
-    const previous = document.body.style.overflow;
-    document.body.style.overflow = "hidden";
     document.addEventListener("keydown", onKey);
     return () => {
-      document.body.style.overflow = previous;
       document.removeEventListener("keydown", onKey);
     };
   }, [open]);
@@ -52,6 +49,11 @@ export function Header({ navigation, utilityLinks, brandName }: HeaderProps) {
         const element = document.getElementById(id);
         if (!element) continue;
         if (element.getBoundingClientRect().top <= marker) current = id;
+      }
+      const doc = document.documentElement;
+      const atBottom = window.innerHeight + window.scrollY >= doc.scrollHeight - 4;
+      if (atBottom && sectionIds.length > 0) {
+        current = sectionIds[sectionIds.length - 1] ?? current;
       }
       setSectionActive(current);
     };

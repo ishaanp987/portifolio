@@ -1,19 +1,12 @@
 import { Container } from "@/components/layout/Container";
-import { DevNote } from "@/components/ui/DevNote";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { TextLink } from "@/components/ui/TextLink";
 import { site } from "@/config/site";
 import { social } from "@/data/social";
-import {
-  getPendingSiteFields,
-  isRealValue,
-  isUsableEmail,
-  mailtoHref,
-} from "@/lib/content";
+import { isRealValue, isUsableEmail, mailtoHref } from "@/lib/content";
 import { getSectionIndex } from "@/lib/sections";
 
 export function ContactSection() {
-  const pending = process.env.NODE_ENV === "development" ? getPendingSiteFields() : [];
   const emailReady = isUsableEmail(site.email);
   const otherSocial = social.filter((item) => item.id !== "email");
   const hasAside =
@@ -57,11 +50,6 @@ export function ContactSection() {
                   </TextLink>
                 </div>
               </>
-            ) : process.env.NODE_ENV === "development" ? (
-              <DevNote>
-                Add a real email in <code>src/config/site.ts</code> to turn the closing
-                invitation into a working action.
-              </DevNote>
             ) : null}
           </div>
           {hasAside ? (
@@ -109,11 +97,6 @@ export function ContactSection() {
                 </ul>
               ) : null}
             </aside>
-          ) : process.env.NODE_ENV === "development" && pending.length > 0 ? (
-            <DevNote>
-              Hidden until real values exist:{" "}
-              {pending.map((field) => field.key).join(", ")}.
-            </DevNote>
           ) : null}
         </div>
       </Container>

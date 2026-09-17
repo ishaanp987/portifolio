@@ -67,7 +67,7 @@ All of this lives in [`src/config/site.ts`](src/config/site.ts).
 | Focus line used in generated assets         | `focus`                                                      |
 | Canonical site URL                          | `url` (or `NEXT_PUBLIC_SITE_URL`)                            |
 
-Empty strings and detected placeholders hide the related row, button, or metadata. Example: a GitHub URL that still contains `your-username` does not appear in navigation. In development, a small note lists fields that are still empty. Production never shows that note.
+Empty strings and detected placeholders hide the related row, button, or metadata. Example: a GitHub URL that still contains `your-username` does not appear in navigation. Sample projects and template experience are visible in development so layouts can be checked, and they are omitted from production.
 
 Social links are derived from this file in [`src/data/social.ts`](src/data/social.ts), filtered through [`src/lib/content.ts`](src/lib/content.ts).
 
