@@ -21,10 +21,6 @@ export function Header() {
   const active = onProjects ? "projects" : sectionActive;
 
   useEffect(() => {
-    setOpen(false);
-  }, [pathname]);
-
-  useEffect(() => {
     if (!open) return;
     const onKey = (event: KeyboardEvent) => {
       if (event.key === "Escape") setOpen(false);
@@ -70,6 +66,7 @@ export function Header() {
             variant="plain"
             className="brand-mark"
             ariaLabel={`${site.name}, home`}
+            onClick={() => setOpen(false)}
           >
             {site.name}
           </TextLink>

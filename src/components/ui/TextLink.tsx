@@ -22,6 +22,7 @@ type TextLinkProps = {
     | "mobile";
   ariaLabel?: string;
   active?: boolean;
+  onClick?: () => void;
 };
 
 export function TextLink({
@@ -31,6 +32,7 @@ export function TextLink({
   variant = "underline",
   ariaLabel,
   active = false,
+  onClick,
 }: TextLinkProps) {
   const httpExternal = isExternalHref(href);
   const mail = href.startsWith("mailto:");
@@ -73,7 +75,14 @@ export function TextLink({
     const rel = mail ? undefined : "noopener noreferrer";
     const target = mail ? undefined : "_blank";
     return (
-      <a href={href} className={classes} target={target} rel={rel} {...extra}>
+      <a
+        href={href}
+        className={classes}
+        target={target}
+        rel={rel}
+        onClick={onClick}
+        {...extra}
+      >
         {children}
         {mark}
       </a>
@@ -81,7 +90,7 @@ export function TextLink({
   }
 
   return (
-    <Link href={href} className={classes} {...extra}>
+    <Link href={href} className={classes} onClick={onClick} {...extra}>
       {children}
       {variant === "underline" || variant === "plain" || variant === "nav" ? null : mark}
     </Link>
