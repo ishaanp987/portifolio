@@ -39,7 +39,9 @@ export function isPlaceholderCopy(value: string | undefined | null): boolean {
     normalized.includes("placeholder content") ||
     normalized.includes("placeholder text") ||
     normalized.includes("placeholder copy") ||
-    normalized.startsWith("short placeholder")
+    normalized.startsWith("short placeholder") ||
+    normalized.includes("without turning the section into an autobiography") ||
+    normalized.includes("keep the focus on systems you owned")
   ) {
     return true;
   }
