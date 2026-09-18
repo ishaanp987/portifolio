@@ -9,8 +9,8 @@ src/
   app/                  Routes, metadata, sitemap, robots, Open Graph
   components/
     ui/                 Links, labels, meta lists
-    media/              Quiet frames and the hero identity panel
-    motion/             IntersectionObserver reveals and subtle pointer shift
+    media/              Quiet frames for project covers without screenshots
+    motion/             IntersectionObserver section reveals
     layout/             Frame, header, footer, container
     sections/           Homepage sections
     projects/           Featured bands, archive index, case study
@@ -31,7 +31,7 @@ public/projects/        Screenshots keyed by project slug
 
 Components should not contain names, bios, or project copy.
 
-The public UI omits `sample` projects, template experience, placeholder skills, unused contact methods, and empty sections.
+The public UI omits unpublished projects (`published !== true`), template experience, placeholder skills, unused contact methods, and empty sections.
 
 ## Design tokens
 
@@ -39,7 +39,7 @@ The public UI omits `sample` projects, template experience, placeholder skills, 
 
 `src/config/theme.ts` duplicates the palette only for `ImageResponse` assets (Open Graph, Apple icon).
 
-The visual identity is an editorial engineering portfolio: compact top navigation, a name-led hero with a monogram or photograph, full-width project bands when real work exists, a dark About section, and `#59D78B` as a signal rather than a theme.
+The visual identity is an editorial engineering portfolio: compact top navigation, a name-led hero, full-width project bands when real work exists, a dark About section, and `#59D78B` as a signal rather than a theme.
 
 ## Project rendering
 
@@ -60,7 +60,7 @@ Each case study renders optional blocks (problem, solution, architecture, decisi
 ## Other decisions
 
 - **No UI kit.** Custom CSS keeps the identity specific. Lucide is the only icon dependency.
-- **Almost no client JavaScript.** `Header`, `Reveal`, and `SubtleShift` are the client components on the happy path. Everything else is a Server Component. `error.tsx` is the other client exception.
-- **Dark throughout.** Surface depth comes from `#090C0A` / `#111612` / `#151B16`, borders, and type — not a paper inversion.
+- **Almost no client JavaScript.** `Header` and `Reveal` are the client components on the happy path. Everything else is a Server Component. `error.tsx` is the other client exception.
+- **Dark throughout.** Surface depth comes from `#090C0A` / `#101511` / `#151B16`, borders, and type — not a paper inversion.
 - **Capability-based CSS.** Hover motion is gated by `(hover: hover) and (pointer: fine)`. `prefers-reduced-motion` disables transforms, stagger, and smooth scrolling. Touch targets stay at least 44px.
 - **Validation without Zod.** A small assert in `lib` is enough: malformed data should fail loudly for the developer, not silently in the UI.

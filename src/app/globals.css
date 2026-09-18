@@ -4,16 +4,17 @@
   color-scheme: dark;
 
   --background: #090c0a;
-  --background-secondary: #111612;
-  --surface: #151b16;
-  --surface-elevated: #1a221c;
+  --surface: #101511;
+  --surface-raised: #151b16;
+  --background-secondary: var(--surface);
+  --surface-elevated: var(--surface-raised);
 
   --text-primary: #f2f4f0;
-  --text-secondary: #b5bbb5;
-  --text-muted: #9aa19a;
+  --text-secondary: #b7bdb7;
+  --text-muted: #858d86;
 
   --border: rgba(242, 244, 240, 0.1);
-  --border-strong: rgba(242, 244, 240, 0.16);
+  --border-strong: rgba(242, 244, 240, 0.18);
 
   --accent: #59d78b;
   --accent-hover: #79e2a4;
@@ -38,7 +39,7 @@
   --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
   --ease-standard: cubic-bezier(0.4, 0, 0.2, 1);
 
-  --container-readable: 40rem;
+  --container-readable: 65ch;
   --container-main: 88rem;
   --container-wide: 108rem;
   --header-height: 3.75rem;
@@ -48,10 +49,10 @@
   --text-project: 1.75rem;
   --text-page: 1.65rem;
   --text-lead: 1.125rem;
-  --text-body: 1.0625rem;
+  --text-body: 1rem;
   --text-small: 0.9375rem;
-  --text-meta: 0.8125rem;
-  --text-nav: 1rem;
+  --text-meta: 0.75rem;
+  --text-nav: 0.9375rem;
 
   --leading-hero: 0.96;
   --leading-title: 1.08;
@@ -63,6 +64,7 @@
   --color-background-secondary: var(--background-secondary);
   --color-surface: var(--surface);
   --color-surface-elevated: var(--surface-elevated);
+  --color-surface-raised: var(--surface-raised);
   --color-foreground: var(--text-primary);
   --color-secondary: var(--text-secondary);
   --color-muted: var(--text-muted);
@@ -187,14 +189,15 @@
   .reveal.is-visible,
   .hero-copy > *,
   .hero-media,
+  .hero-next,
   .site-header,
   .mobile-nav,
   .mobile-link,
   .nav-indicator,
   .section-kicker-rule,
   .media-zoom,
-  .subtle-shift,
-  .hero-next {
+  .btn,
+  .link-mark {
     animation: none !important;
     transition: none !important;
     transform: none !important;
@@ -438,9 +441,10 @@
     cursor: pointer;
     font-family: var(--font-sans);
     transition:
-      color var(--duration-fast) var(--ease-standard),
-      background-color var(--duration-fast) var(--ease-standard),
-      border-color var(--duration-fast) var(--ease-standard);
+      color 160ms var(--ease-standard),
+      background-color 160ms var(--ease-standard),
+      border-color 160ms var(--ease-standard),
+      transform 160ms var(--ease-out);
   }
 
   .action-link {
@@ -558,9 +562,17 @@
     min-width: 0;
   }
 
-  .hero-copy,
+  .hero-copy {
+    min-width: 0;
+    max-width: 40rem;
+  }
+
   .hero-media {
     min-width: 0;
+  }
+
+  .hero-stage.has-media .hero-copy {
+    max-width: none;
   }
 
   .hero-kicker {
@@ -583,10 +595,10 @@
 
   .hero-statement {
     margin: 1rem 0 0;
-    max-width: 22rem;
+    max-width: 28rem;
     font-family: var(--font-sans);
     font-size: 1.28rem;
-    line-height: 1.28;
+    line-height: 1.32;
     letter-spacing: 0;
     color: var(--text-secondary);
     font-weight: 500;
@@ -612,8 +624,8 @@
   .hero-facts {
     display: flex;
     flex-wrap: wrap;
-    gap: 0.55rem 1.35rem;
-    margin: 1.15rem 0 0;
+    gap: 0.85rem 1.5rem;
+    margin: 1.25rem 0 0;
   }
 
   .hero-next {
@@ -640,7 +652,6 @@
   }
 
   .hero-media .media-frame,
-  .hero-media .identity-panel,
   .hero-media .quiet-frame {
     height: 100%;
     min-height: 12.5rem;
@@ -650,7 +661,6 @@
 
   .media-frame,
   .quiet-frame,
-  .identity-panel,
   .about-card {
     position: relative;
     overflow: hidden;
@@ -681,56 +691,6 @@
     min-height: 7.5rem;
     max-height: 11rem;
     aspect-ratio: 16 / 10;
-  }
-
-  .identity-panel {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    gap: 1.25rem;
-    padding: 1.2rem 1.2rem 1.15rem;
-    min-height: 12.5rem;
-    background: var(--surface);
-  }
-
-  .identity-mono {
-    margin: 0;
-    font-family: var(--font-display);
-    font-size: clamp(4.4rem, 14vw, 7.25rem);
-    line-height: 0.82;
-    font-weight: 500;
-    letter-spacing: 0;
-    color: var(--text-primary);
-  }
-
-  .identity-role {
-    margin: 0;
-    color: var(--accent);
-    font-size: 1rem;
-    font-weight: 500;
-  }
-
-  .identity-meta {
-    margin: 0.35rem 0 0;
-    color: var(--text-secondary);
-    font-size: 0.98rem;
-    line-height: 1.5;
-  }
-
-  .identity-note {
-    margin: 0.85rem 0 0;
-    max-width: 16rem;
-    color: var(--text-primary);
-    font-size: 1.02rem;
-    line-height: 1.45;
-    font-weight: 500;
-  }
-
-  .subtle-shift {
-    height: 100%;
-    min-height: inherit;
-    will-change: transform;
-    transition: transform 160ms linear;
   }
 
   .project-band {
@@ -949,11 +909,11 @@
   .about-card {
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    justify-content: flex-start;
     gap: 1.25rem;
-    min-height: 16rem;
+    min-height: 0;
     padding: 1.25rem 1.2rem 1.2rem;
-    background: var(--surface);
+    background: var(--surface-raised);
   }
 
   .about-mono {
@@ -1037,7 +997,11 @@
   .action-link:hover .link-mark,
   .btn:hover .link-mark,
   .mobile-link:hover .link-mark {
-    transform: translateX(0.14rem);
+    transform: translateX(3px);
+  }
+
+  .btn:hover {
+    transform: translateY(-1px);
   }
 
   .btn-primary:hover {
@@ -1069,8 +1033,12 @@
     transform: translateX(0.18rem);
   }
 
-  .contact-email:hover {
-    color: var(--accent-hover);
+  .skill-row:hover {
+    color: var(--text-primary);
+  }
+
+  .skill-row:hover .skill-item {
+    color: var(--text-primary);
   }
 }
 
@@ -1171,7 +1139,7 @@
     padding-bottom: 1.75rem;
   }
 
-  .hero-stage {
+  .hero-stage.has-media {
     grid-template-columns: minmax(0, 1.18fr) minmax(15rem, 0.82fr);
     gap: 1.5rem 2.25rem;
     align-items: stretch;
@@ -1184,7 +1152,6 @@
 
   .hero-media,
   .hero-media .media-frame,
-  .hero-media .identity-panel,
   .hero-media .quiet-frame {
     min-height: 18.5rem;
     height: 100%;
@@ -1256,7 +1223,7 @@
     padding-bottom: 2rem;
   }
 
-  .hero-stage {
+  .hero-stage.has-media {
     grid-template-columns: minmax(0, 1.12fr) minmax(17rem, 0.88fr);
     gap: 1.75rem 3rem;
     align-items: stretch;
@@ -1264,12 +1231,11 @@
 
   .hero-statement {
     font-size: 1.5rem;
-    max-width: 24rem;
+    max-width: 32rem;
   }
 
   .hero-media,
   .hero-media .media-frame,
-  .hero-media .identity-panel,
   .hero-media .quiet-frame {
     min-height: 20rem;
     height: 100%;
@@ -1277,7 +1243,6 @@
     aspect-ratio: auto;
   }
 
-  .identity-panel,
   .about-card {
     padding: 1.55rem 1.5rem 1.4rem;
   }
@@ -1336,7 +1301,6 @@
 
   .hero-media,
   .hero-media .media-frame,
-  .hero-media .identity-panel,
   .hero-media .quiet-frame {
     height: 100%;
     min-height: 21rem;
@@ -1349,38 +1313,38 @@
 
 @media (prefers-reduced-motion: no-preference) {
   .site-header {
-    animation: fade-in 300ms var(--ease-out) both;
+    animation: hero-in 400ms var(--ease-out) both;
   }
 
   .hero-copy > * {
-    animation: hero-in 420ms var(--ease-out) both;
+    animation: hero-in 400ms var(--ease-out) both;
   }
 
   .hero-copy > *:nth-child(1) {
-    animation-delay: 40ms;
+    animation-delay: 50ms;
   }
   .hero-copy > *:nth-child(2) {
-    animation-delay: 110ms;
+    animation-delay: 100ms;
   }
   .hero-copy > *:nth-child(3) {
-    animation-delay: 180ms;
+    animation-delay: 150ms;
   }
   .hero-copy > *:nth-child(4) {
-    animation-delay: 250ms;
+    animation-delay: 200ms;
   }
   .hero-copy > *:nth-child(5) {
-    animation-delay: 310ms;
+    animation-delay: 250ms;
   }
   .hero-copy > *:nth-child(6) {
-    animation-delay: 360ms;
+    animation-delay: 300ms;
   }
 
   .hero-media {
-    animation: hero-visual 500ms var(--ease-out) 180ms both;
+    animation: hero-visual 450ms var(--ease-out) 200ms both;
   }
 
   .hero-next {
-    animation: fade-in 400ms var(--ease-out) 420ms both;
+    animation: fade-in 350ms var(--ease-out) 320ms both;
   }
 
   .reveal {

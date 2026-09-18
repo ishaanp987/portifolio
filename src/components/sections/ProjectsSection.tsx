@@ -68,7 +68,7 @@ export function ProjectsSection() {
         ) : featured.length > 0 ? (
           <div className="mt-12">
             <TextLink href="/projects" variant="ghost">
-              Open project index
+              View projects
             </TextLink>
           </div>
         ) : null}

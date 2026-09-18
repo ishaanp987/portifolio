@@ -3,7 +3,6 @@ import { homepageSections } from "@/config/sections";
 import {
   getAboutParagraphs,
   getCurrentlyBuilding,
-  getProfileFacts,
   hasContactAction,
 } from "@/lib/content";
 import { formatIndex } from "@/lib/format";
@@ -30,13 +29,13 @@ function sectionHasContent(id: HomepageSectionId): boolean {
     case "building":
       return Boolean(getCurrentlyBuilding());
     case "facts":
-      return getProfileFacts().length > 0;
+      return false;
     case "experience":
       return getVisibleExperience().length > 0;
     case "skills":
       return getSkillCategories().length > 0;
     case "about":
-      return getAboutParagraphs().length > 0 || getProfileFacts().length > 0;
+      return getAboutParagraphs().length > 0;
     case "contact":
       return hasContactAction();
     default:
@@ -83,7 +82,7 @@ export function getNextSectionAfter(
 
 export function getHeroPrimaryAction(): { href: string; label: string } | null {
   if (isSectionEnabled("projects")) {
-    return { href: "/#projects", label: "Selected work" };
+    return { href: "/#projects", label: "View projects" };
   }
   if (isSectionEnabled("about")) {
     return { href: "/#about", label: `About ${site.firstName}` };

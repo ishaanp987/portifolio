@@ -4,18 +4,28 @@ import { Container } from "@/components/layout/Container";
 import { ProjectIndex } from "@/components/projects/ProjectIndex";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { site } from "@/config/site";
-import { getVisibleProjects } from "@/lib/projects";
+import { getPublishedProjects } from "@/lib/projects";
 
-export const metadata: Metadata = {
-  title: "Projects",
-  description: `Project index — ${site.name}.`,
-  alternates: {
-    canonical: "/projects",
-  },
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const projects = getPublishedProjects();
+  if (projects.length === 0) {
+    return {
+      title: "Projects",
+      robots: { index: false, follow: false },
+    };
+  }
+
+  return {
+    title: "Projects",
+    description: `Project index — ${site.name}.`,
+    alternates: {
+      canonical: "/projects",
+    },
+  };
+}
 
 export default function ProjectsPage() {
-  const projects = getVisibleProjects();
+  const projects = getPublishedProjects();
   if (projects.length === 0) {
     redirect("/");
   }

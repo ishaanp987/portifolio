@@ -1,6 +1,7 @@
 import { Container } from "@/components/layout/Container";
 import { Reveal } from "@/components/motion/Reveal";
 import { SectionHeading } from "@/components/ui/SectionHeading";
+import { formatIndex } from "@/lib/format";
 import { getSectionIndex } from "@/lib/sections";
 import { getSkillCategories } from "@/lib/skills";
 
@@ -18,19 +19,23 @@ export function SkillsSection() {
         <Reveal>
           <SectionHeading index={getSectionIndex("skills")} label="Methods" />
         </Reveal>
-        <Reveal delay={70}>
-          <h2 id="skills-heading" className="max-w-[16ch] text-[length:var(--text-page)]">
+        <Reveal delay={60}>
+          <h2
+            id="skills-heading"
+            className="max-w-[18ch] text-[1.35rem] font-medium sm:text-[1.5rem]"
+          >
             Methods and tools.
           </h2>
-          <p className="empty-copy mt-5">
-            A working list, not a claim of mastery. The projects should do the convincing.
-          </p>
         </Reveal>
         <Reveal delay={120}>
-          <ul className="skill-matrix mt-10">
-            {categories.map((category) => (
+          <ul className="skill-matrix mt-8">
+            {categories.map((category, index) => (
               <li key={category.id} className="skill-row">
-                <p className="skill-label">{category.label}</p>
+                <p className="skill-label">
+                  <span className="kicker-index">{formatIndex(index)}</span>
+                  <span className="text-muted"> · </span>
+                  {category.label}
+                </p>
                 <div className="skill-items">
                   {category.items.map((item) => (
                     <span key={item} className="skill-item">

@@ -144,6 +144,7 @@ export function Header({ navigation, utilityLinks, brandName }: HeaderProps) {
               aria-controls={menuId}
               aria-label={open ? "Close menu" : "Open menu"}
               onClick={() => setOpen((value) => !value)}
+              hidden={navigation.length === 0 && utilityLinks.length === 0}
             >
               {open ? (
                 <X size={22} strokeWidth={1.75} aria-hidden="true" />

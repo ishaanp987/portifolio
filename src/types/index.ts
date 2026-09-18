@@ -47,6 +47,7 @@ export type Project = {
   featured?: boolean;
   hidden?: boolean;
   sample?: boolean;
+  published?: boolean;
   status?: ProjectStatus | string;
   priority?: number;
   order?: number;

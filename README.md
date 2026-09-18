@@ -2,9 +2,9 @@
 
 Personal portfolio for **Ishaan Patel** — an editorial engineering site for software, robotics, AI, physical systems, and product work.
 
-The visual system is dark green-gray (`#090C0A`, `#111612`, `#151B16`) with a single accent (`#59D78B`). Headings use Archivo. Navigation, body copy, and buttons use Source Sans 3. IBM Plex Mono is reserved for indexes, dates, and compact labels.
+The visual system is dark green-gray (`#090C0A`, `#101511`, `#151B16`) with a single accent (`#59D78B`). Headings use Archivo. Navigation, body copy, and buttons use Source Sans 3. IBM Plex Mono is reserved for indexes, dates, and compact labels.
 
-Personal information lives in typed files. Optional fields, placeholder values, and sample projects stay out of the public UI.
+Personal information lives in typed files. Optional fields, placeholder values, and unpublished sample projects stay out of the public UI. See [`CONTENT_NEEDED.md`](CONTENT_NEEDED.md) for the remaining genuine details to add.
 
 ## Stack
 
@@ -26,6 +26,7 @@ The app runs at [http://localhost:43211](http://localhost:43211).
 ```bash
 npm run typecheck
 npm run lint
+npm run test
 npm run format
 npm run build
 npm start
@@ -85,7 +86,8 @@ Projects are defined in [`src/data/projects.ts`](src/data/projects.ts). Adding o
 - **Add a project:** append an object with at least `title`, `slug`, and `description`. Use a stable kebab-case slug; the URL will be `/projects/your-slug`.
 - **Remove a project:** delete the object, or set `hidden: true` if you want to keep the draft in the repo.
 - **Hide a project:** `hidden: true`. Hidden projects are omitted from the homepage, `/projects`, sitemap, and public routes.
-- **Mark a sample:** `sample: true` (or a title/slug starting with `example`). Sample entries are never shown in the public UI.
+- **Mark a sample:** `sample: true` (or a title/slug starting with `example`). Sample entries are never shown.
+- **Publish a project:** set `published: true`. The public site only shows projects with `published: true` that are not `hidden`.
 - **Reorder projects:** set `order` (lower appears first). `priority` is used if `order` is missing.
 - **Feature / unfeature:** `featured: true` is the candidate pool. The homepage shows at most three (`HOMEPAGE_FEATURED_LIMIT` in [`src/lib/projects.ts`](src/lib/projects.ts)). Additional featured items fall into the archive.
 - **Add a case study:** fill optional fields such as `problem`, `solution`, `architecture`, `technicalDecisions`, `challenges`, `learnings`, `role`, `images`, `github`, and `demo`. Missing or placeholder fields are not rendered.
@@ -127,7 +129,7 @@ Navigation labels and hashes live in [`src/config/navigation.ts`](src/config/nav
 Live site tokens are in [`src/app/globals.css`](src/app/globals.css) under `:root`. Mirror the palette in [`src/config/theme.ts`](src/config/theme.ts) after changing colors (Open Graph images cannot read CSS variables).
 
 - **Accent:** `--accent` is `#59D78B`. Use it for active navigation, important words, markers, primary buttons, timeline pips, and focus.
-- **Surfaces:** `--background` `#090C0A`, `--background-secondary` `#111612`, `--surface` `#151B16`. Keep the whole site dark; do not add a white band.
+- **Surfaces:** `--background` `#090C0A`, `--surface` `#101511`, `--surface-raised` `#151B16`. Keep the whole site dark; do not add a white band.
 - **Type:** Archivo for headings, Source Sans 3 for interface copy, IBM Plex Mono for metadata. Letter-spacing stays at `0`. Body copy is 17–19px. Navigation is 15–16px.
 - **Shape / space:** media and cards use 6–8px corners, `--space-gutter`, `--space-section`, `--container-wide`.
 - **Motion:** page entrance, section reveals, and a sliding nav underline. `prefers-reduced-motion` removes transforms, stagger, and smooth scrolling.
@@ -140,10 +142,10 @@ Live site tokens are in [`src/app/globals.css`](src/app/globals.css) under `:roo
 
 Replacing a file with the same name does not require component changes. Projects without screenshots render a quiet neutral frame — never a public “asset needed” instruction.
 
-Hero still: set `heroImage` (preferred) or `avatar` in `src/config/site.ts`. If both are empty, the hero uses a monogram profile built from real site facts.
+Hero still: set `heroImage` (preferred) or `avatar` in `src/config/site.ts`. If both are empty, the hero stays a single column with a compact facts row. It does not render an empty frame or a name-repeat panel.
 
 See [`public/projects/README.md`](public/projects/README.md).
 
 ## Quality checks
 
-GitHub Actions runs typecheck, lint, and a production build on `main` and pull requests ([`.github/workflows/ci.yml`](.github/workflows/ci.yml)).
+GitHub Actions runs typecheck, lint, tests, and a production build on `main` and pull requests ([`.github/workflows/ci.yml`](.github/workflows/ci.yml)).

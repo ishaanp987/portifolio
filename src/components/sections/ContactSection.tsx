@@ -4,10 +4,18 @@ import { SectionHeading } from "@/components/ui/SectionHeading";
 import { TextLink } from "@/components/ui/TextLink";
 import { site } from "@/config/site";
 import { social } from "@/data/social";
-import { isRealValue, isUsableEmail, isUsableHref, mailtoHref } from "@/lib/content";
+import {
+  hasContactAction,
+  isRealValue,
+  isUsableEmail,
+  isUsableHref,
+  mailtoHref,
+} from "@/lib/content";
 import { getSectionIndex } from "@/lib/sections";
 
 export function ContactSection() {
+  if (!hasContactAction()) return null;
+
   const emailReady = isUsableEmail(site.email);
   const resumeReady = isUsableHref(site.resume);
   const otherSocial = social.filter((item) => item.id !== "email");

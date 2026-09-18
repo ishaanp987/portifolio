@@ -3,6 +3,9 @@ import type { Project } from "@/types";
 /**
  * Add, hide, feature, and reorder projects here.
  * Case study pages render automatically from this list.
+ *
+ * A project is public only when `published: true` and it is not `hidden`.
+ * Sample entries below are unpublished on purpose.
  */
 export const projects: Project[] = [
   {

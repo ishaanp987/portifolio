@@ -66,7 +66,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       lang="en"
       className={`${display.variable} ${sans.variable} ${mono.variable} h-full antialiased`}
     >
-      <body className="min-h-full bg-background font-sans text-foreground">
+      <body className={`${sans.className} min-h-full bg-background text-foreground`}>
         <noscript>
           <style>{`.reveal{opacity:1;transform:none}`}</style>
         </noscript>

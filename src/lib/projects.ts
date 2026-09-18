@@ -1,5 +1,6 @@
 import { projects } from "@/data/projects";
-import { isRealValue, isSampleProject, isUsableHref, publicItems } from "@/lib/content";
+import { isRealValue, isUsableHref, publicItems } from "@/lib/content";
+import { isPublishedProject } from "@/lib/publish";
 import type { Project } from "@/types";
 
 const SLUG_PATTERN = /^[a-z0-9]+(?:-[a-z0-9]+)*$/;
@@ -43,11 +44,12 @@ function byOrder(a: Project, b: Project): number {
   return a.title.localeCompare(b.title);
 }
 
+export function getPublishedProjects(): Project[] {
+  return projects.filter((project) => isPublishedProject(project)).sort(byOrder);
+}
+
 export function getVisibleProjects(): Project[] {
-  return projects
-    .filter((project) => !project.hidden)
-    .filter((project) => !isSampleProject(project))
-    .sort(byOrder);
+  return getPublishedProjects();
 }
 
 export const HOMEPAGE_FEATURED_LIMIT = 3;
@@ -57,7 +59,9 @@ export function getFeaturedProjects(): Project[] {
 }
 
 export function getHomepageFeatured(): Project[] {
-  return getFeaturedProjects().slice(0, HOMEPAGE_FEATURED_LIMIT);
+  const featured = getFeaturedProjects();
+  if (featured.length > 0) return featured.slice(0, HOMEPAGE_FEATURED_LIMIT);
+  return getVisibleProjects().slice(0, HOMEPAGE_FEATURED_LIMIT);
 }
 
 export function getArchiveProjects(): Project[] {

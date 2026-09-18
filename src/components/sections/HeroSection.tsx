@@ -1,7 +1,5 @@
 import Image from "next/image";
-import { IdentityPanel } from "@/components/media/IdentityPanel";
 import { Container } from "@/components/layout/Container";
-import { SubtleShift } from "@/components/motion/SubtleShift";
 import { TextLink } from "@/components/ui/TextLink";
 import { site } from "@/config/site";
 import {
@@ -28,7 +26,7 @@ export function HeroSection() {
   return (
     <section id="index" aria-labelledby="site-name" className="section-anchor">
       <Container width="wide" className="hero-shell">
-        <div className="hero-stage">
+        <div className={visual ? "hero-stage has-media" : "hero-stage"}>
           <div className="hero-copy">
             {isRealValue(site.greeting) ? (
               <p className="hero-kicker">{site.greeting}</p>
@@ -48,6 +46,16 @@ export function HeroSection() {
             {isRealValue(site.headline) ? (
               <p className="hero-support">{site.headline}</p>
             ) : null}
+            {facts.length > 0 ? (
+              <dl className="hero-facts">
+                {facts.map((fact) => (
+                  <div key={fact.label} className="min-w-0">
+                    <dt className="meta m-0">{fact.label}</dt>
+                    <dd className="m-0 mt-1 text-secondary">{fact.value}</dd>
+                  </div>
+                ))}
+              </dl>
+            ) : null}
             {primary || secondary ? (
               <div className="hero-actions">
                 {primary ? (
@@ -62,35 +70,21 @@ export function HeroSection() {
                 ) : null}
               </div>
             ) : null}
-            {facts.length > 0 ? (
-              <dl className="hero-facts">
-                {facts.map((fact) => (
-                  <div key={fact.label} className="min-w-0">
-                    <dt className="meta m-0">{fact.label}</dt>
-                    <dd className="m-0 mt-1 text-secondary">{fact.value}</dd>
-                  </div>
-                ))}
-              </dl>
-            ) : null}
           </div>
-          <div className="hero-media">
-            <SubtleShift>
-              {visual ? (
-                <div className="media-frame media-portrait group/cover h-full">
-                  <Image
-                    src={visual.src}
-                    alt={visual.alt}
-                    fill
-                    priority
-                    sizes="(min-width: 1024px) 32vw, 100vw"
-                    className="media-zoom object-cover"
-                  />
-                </div>
-              ) : (
-                <IdentityPanel />
-              )}
-            </SubtleShift>
-          </div>
+          {visual ? (
+            <div className="hero-media">
+              <div className="media-frame media-portrait group/cover h-full">
+                <Image
+                  src={visual.src}
+                  alt={visual.alt}
+                  fill
+                  priority
+                  sizes="(min-width: 1024px) 32vw, 100vw"
+                  className="media-zoom object-cover"
+                />
+              </div>
+            </div>
+          ) : null}
           {next ? (
             <p className="hero-next">
               <TextLink

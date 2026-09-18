@@ -4,11 +4,11 @@
  */
 export const theme = {
   background: "#090C0A",
-  backgroundSecondary: "#111612",
+  backgroundSecondary: "#101511",
   surface: "#151B16",
   foreground: "#F2F4F0",
-  secondary: "#B5BBB5",
-  muted: "#9AA19A",
+  secondary: "#B7BDB7",
+  muted: "#858D86",
   border: "rgba(242, 244, 240, 0.10)",
   accent: "#59D78B",
   accentMuted: "#2FA866",

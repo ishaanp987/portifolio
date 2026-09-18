@@ -3,25 +3,22 @@ import { Container } from "@/components/layout/Container";
 import { Reveal } from "@/components/motion/Reveal";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { site } from "@/config/site";
-import {
-  getAboutParagraphs,
-  getAboutVisual,
-  getPersonalNote,
-  getProfileFacts,
-} from "@/lib/content";
+import { getAboutParagraphs, getAboutVisual, getProfileFacts } from "@/lib/content";
 import { getSectionIndex } from "@/lib/sections";
 
 export function AboutSection() {
   const paragraphs = getAboutParagraphs();
+  if (paragraphs.length === 0) return null;
+
   const facts = getProfileFacts();
-  const note = getPersonalNote();
   const visual = getAboutVisual();
+  const hasAside = Boolean(visual) || facts.length > 0;
 
   return (
     <section
       id="about"
       aria-labelledby="about-heading"
-      className="section-anchor border-t border-border bg-background-secondary"
+      className="section-anchor border-t border-border bg-surface"
     >
       <Container width="wide" className="section-space">
         <Reveal>
@@ -35,32 +32,26 @@ export function AboutSection() {
             >
               A short note on {site.firstName}.
             </h2>
-            {paragraphs.length > 0 ? (
-              <div className="prose-block mt-8">
-                {paragraphs.map((paragraph) => (
-                  <p key={paragraph}>{paragraph}</p>
-                ))}
-              </div>
-            ) : null}
+            <div className="prose-block mt-8">
+              {paragraphs.map((paragraph) => (
+                <p key={paragraph}>{paragraph}</p>
+              ))}
+            </div>
           </Reveal>
-          <Reveal delay={140} className="min-w-0">
-            <aside className="about-card">
-              {visual ? (
-                <div className="media-frame media-portrait relative min-h-[14rem] overflow-hidden border-0">
-                  <Image
-                    src={visual.src}
-                    alt={visual.alt}
-                    fill
-                    sizes="(min-width: 768px) 22rem, 100vw"
-                    className="object-cover"
-                  />
-                </div>
-              ) : (
-                <p className="about-mono" aria-hidden="true">
-                  {site.initials}
-                </p>
-              )}
-              <div className="min-w-0">
+          {hasAside ? (
+            <Reveal delay={140} className="min-w-0">
+              <aside className="about-card">
+                {visual ? (
+                  <div className="media-frame media-portrait relative min-h-[14rem] overflow-hidden border-0">
+                    <Image
+                      src={visual.src}
+                      alt={visual.alt}
+                      fill
+                      sizes="(min-width: 768px) 22rem, 100vw"
+                      className="object-cover"
+                    />
+                  </div>
+                ) : null}
                 {facts.length > 0 ? (
                   <dl className="grid gap-3">
                     {facts.map((fact) => (
@@ -71,10 +62,9 @@ export function AboutSection() {
                     ))}
                   </dl>
                 ) : null}
-                {note ? <p className="about-note mt-6">{note}</p> : null}
-              </div>
-            </aside>
-          </Reveal>
+              </aside>
+            </Reveal>
+          ) : null}
         </div>
       </Container>
     </section>

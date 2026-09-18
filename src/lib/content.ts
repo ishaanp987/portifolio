@@ -122,8 +122,20 @@ export function getPendingSiteFields(): PendingField[] {
     }));
 }
 
-export function getHeroFacts(): Array<{ label: string; value: string }> {
-  const facts: Array<{ label: string; value: string }> = [];
+export function isUsableMediaSrc(value: string | undefined | null): value is string {
+  if (!isRealValue(value)) return false;
+  const src = value.trim();
+  if (src.startsWith("/")) return !src.startsWith("//");
+  return isUsableHref(src);
+}
+
+export function getHeroFacts(): ProfileFact[] {
+  const facts: ProfileFact[] = [];
+  if (isRealValue(site.role)) facts.push({ label: "Role", value: site.role });
+  const interests = publicItems([...site.focusAreas]);
+  if (interests.length > 0) {
+    facts.push({ label: "Interests", value: interests.join(" · ") });
+  }
   if (isRealValue(site.location)) facts.push({ label: "Location", value: site.location });
   if (isRealValue(site.availability)) {
     facts.push({ label: "Status", value: site.availability });
@@ -136,8 +148,9 @@ export function getProfileFacts(): ProfileFact[] {
   if (isRealValue(site.role)) facts.push({ label: "Role", value: site.role });
   if (isRealValue(site.focus)) facts.push({ label: "Focus", value: site.focus });
   if (isRealValue(site.location)) facts.push({ label: "Location", value: site.location });
-  if (site.disciplines.length > 0) {
-    facts.push({ label: "Field", value: site.disciplines.join(" / ") });
+  const interests = publicItems([...site.focusAreas]);
+  if (interests.length > 0) {
+    facts.push({ label: "Interests", value: interests.join(" · ") });
   }
   return facts;
 }
@@ -187,23 +200,23 @@ export function getAboutParagraphs(): string[] {
 }
 
 export function getHeroVisual(): { src: string; alt: string } | null {
-  if (isUsableHref(site.heroImage)) {
+  if (isUsableMediaSrc(site.heroImage)) {
     return {
       src: site.heroImage,
       alt: isRealValue(site.heroImageAlt) ? site.heroImageAlt : site.name,
     };
   }
-  if (isUsableHref(site.avatar)) {
+  if (isUsableMediaSrc(site.avatar)) {
     return { src: site.avatar, alt: site.name };
   }
   return null;
 }
 
 export function getAboutVisual(): { src: string; alt: string } | null {
-  if (isUsableHref(site.avatar)) {
+  if (isUsableMediaSrc(site.avatar)) {
     return { src: site.avatar, alt: site.name };
   }
-  if (isUsableHref(site.heroImage)) {
+  if (isUsableMediaSrc(site.heroImage)) {
     return {
       src: site.heroImage,
       alt: isRealValue(site.heroImageAlt) ? site.heroImageAlt : site.name,
