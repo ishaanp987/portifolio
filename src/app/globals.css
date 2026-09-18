@@ -545,10 +545,10 @@
   .hero-shell {
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: flex-start;
     min-height: auto;
-    padding-top: 1.5rem;
-    padding-bottom: 1.75rem;
+    padding-top: 1.35rem;
+    padding-bottom: 1.35rem;
   }
 
   .hero-stage {
@@ -636,15 +636,15 @@
   }
 
   .hero-media {
-    min-height: 16rem;
+    min-height: 12.5rem;
   }
 
   .hero-media .media-frame,
   .hero-media .identity-panel,
   .hero-media .quiet-frame {
     height: 100%;
-    min-height: 16rem;
-    max-height: 22rem;
+    min-height: 12.5rem;
+    max-height: 20rem;
     aspect-ratio: auto;
   }
 
@@ -689,7 +689,7 @@
     justify-content: space-between;
     gap: 1.25rem;
     padding: 1.2rem 1.2rem 1.15rem;
-    min-height: 16rem;
+    min-height: 12.5rem;
     background: var(--surface);
   }
 
@@ -1166,9 +1166,9 @@
   }
 
   .hero-shell {
-    min-height: calc(70svh - var(--header-height));
-    padding-top: 1.75rem;
-    padding-bottom: 2rem;
+    min-height: auto;
+    padding-top: 1.85rem;
+    padding-bottom: 1.75rem;
   }
 
   .hero-stage {
@@ -1186,9 +1186,9 @@
   .hero-media .media-frame,
   .hero-media .identity-panel,
   .hero-media .quiet-frame {
-    min-height: 20.5rem;
+    min-height: 18.5rem;
     height: 100%;
-    max-height: min(28rem, 58svh);
+    max-height: none;
     aspect-ratio: auto;
   }
 
@@ -1251,9 +1251,9 @@
   }
 
   .hero-shell {
-    min-height: calc(72svh - var(--header-height));
-    padding-top: 1.85rem;
-    padding-bottom: 2.15rem;
+    min-height: auto;
+    padding-top: 2rem;
+    padding-bottom: 2rem;
   }
 
   .hero-stage {
@@ -1271,8 +1271,8 @@
   .hero-media .media-frame,
   .hero-media .identity-panel,
   .hero-media .quiet-frame {
-    min-height: 22rem;
-    height: min(28rem, 58svh);
+    min-height: 20rem;
+    height: 100%;
     max-height: none;
     aspect-ratio: auto;
   }
@@ -1331,14 +1331,15 @@
   }
 
   .hero-shell {
-    min-height: calc(74svh - var(--header-height));
+    min-height: auto;
   }
 
   .hero-media,
   .hero-media .media-frame,
   .hero-media .identity-panel,
   .hero-media .quiet-frame {
-    height: min(30rem, 60svh);
+    height: 100%;
+    min-height: 21rem;
   }
 
   .media-lead:not(.quiet-frame) {
