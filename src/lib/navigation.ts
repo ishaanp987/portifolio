@@ -1,20 +1,15 @@
 import { navigation, utilityLinks } from "@/config/navigation";
-import { getVisibleExperience } from "@/lib/experience";
-import { getVisibleProjects } from "@/lib/projects";
+import { isSectionEnabled } from "@/lib/sections";
 import type { NavItem } from "@/types";
 
 export function getPrimaryNavigation(): NavItem[] {
-  const hasProjects = getVisibleProjects().length > 0;
-  const hasExperience = getVisibleExperience().length > 0;
-
-  return navigation
-    .filter((item) => (item.id === "experience" ? hasExperience : true))
-    .map((item) => {
-      if (item.id === "projects" && !hasProjects) {
-        return { ...item, href: "/projects" };
-      }
-      return item;
-    });
+  return navigation.filter((item) => {
+    if (item.id === "projects") return isSectionEnabled("projects");
+    if (item.id === "experience") return isSectionEnabled("experience");
+    if (item.id === "about") return isSectionEnabled("about");
+    if (item.id === "contact") return isSectionEnabled("contact");
+    return true;
+  });
 }
 
 export function getUtilityLinks(): NavItem[] {

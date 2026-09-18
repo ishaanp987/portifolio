@@ -13,7 +13,14 @@ export type NavItem = {
 };
 
 export type HomepageSectionId =
-  "hero" | "projects" | "experience" | "skills" | "about" | "contact";
+  | "hero"
+  | "projects"
+  | "building"
+  | "facts"
+  | "experience"
+  | "skills"
+  | "about"
+  | "contact";
 
 export type HomepageSectionConfig = {
   id: HomepageSectionId;
@@ -79,4 +86,9 @@ export type SkillCategory = {
   id: string;
   label: string;
   items: string[];
+};
+
+export type ProfileFact = {
+  label: string;
+  value: string;
 };

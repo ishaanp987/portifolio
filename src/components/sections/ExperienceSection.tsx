@@ -1,4 +1,5 @@
 import { Container } from "@/components/layout/Container";
+import { Reveal } from "@/components/motion/Reveal";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { TextLink } from "@/components/ui/TextLink";
 import { isRealValue, isUsableHref, publicItems } from "@/lib/content";
@@ -11,6 +12,7 @@ import { getSectionIndex } from "@/lib/sections";
 
 export function ExperienceSection() {
   const items = getVisibleExperience();
+  if (items.length === 0) return null;
 
   return (
     <section
@@ -19,15 +21,19 @@ export function ExperienceSection() {
       className="section-anchor border-t border-border"
     >
       <Container width="wide" className="section-space">
-        <SectionHeading index={getSectionIndex("experience")} label="Experience" />
-        <h2
-          id="experience-heading"
-          className="max-w-[14ch] text-[length:var(--text-page)]"
-        >
-          Roles and labs.
-        </h2>
+        <Reveal>
+          <SectionHeading index={getSectionIndex("experience")} label="Experience" />
+        </Reveal>
+        <Reveal delay={70}>
+          <h2
+            id="experience-heading"
+            className="max-w-[14ch] text-[length:var(--text-page)]"
+          >
+            Roles and labs.
+          </h2>
+        </Reveal>
 
-        {items.length === 0 ? null : (
+        <Reveal delay={120}>
           <ol className="timeline mt-10">
             {items.map((item) => {
               const highlights = publicItems(item.highlights);
@@ -62,12 +68,12 @@ export function ExperienceSection() {
                       ) : null}
                     </p>
                     {description ? (
-                      <p className="mt-3 max-w-[40rem] text-[0.97rem] leading-7 text-secondary">
+                      <p className="mt-3 max-w-[40rem] text-[length:var(--text-body)] leading-[var(--leading-body)] text-secondary">
                         {description}
                       </p>
                     ) : null}
                     {highlights.length > 0 ? (
-                      <ul className="mt-4 max-w-[40rem] list-disc space-y-2 pl-5 text-[0.95rem] leading-7 text-secondary">
+                      <ul className="mt-4 max-w-[40rem] list-disc space-y-2 pl-5 text-[length:var(--text-body)] leading-[var(--leading-body)] text-secondary">
                         {highlights.map((highlight) => (
                           <li key={highlight}>{highlight}</li>
                         ))}
@@ -81,7 +87,7 @@ export function ExperienceSection() {
               );
             })}
           </ol>
-        )}
+        </Reveal>
       </Container>
     </section>
   );

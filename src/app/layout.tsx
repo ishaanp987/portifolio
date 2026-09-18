@@ -1,11 +1,18 @@
 import type { Metadata } from "next";
-import { IBM_Plex_Mono, IBM_Plex_Sans } from "next/font/google";
+import { Archivo, IBM_Plex_Mono, Source_Sans_3 } from "next/font/google";
 import { SiteFrame } from "@/components/layout/SiteFrame";
 import { site } from "@/config/site";
 import { getSiteDescription, getSiteUrl } from "@/lib/site";
 import "./globals.css";
 
-const sans = IBM_Plex_Sans({
+const display = Archivo({
+  subsets: ["latin"],
+  weight: ["400", "500", "600"],
+  variable: "--font-display-family",
+  display: "swap",
+});
+
+const sans = Source_Sans_3({
   subsets: ["latin"],
   weight: ["400", "500", "600"],
   variable: "--font-sans-family",
@@ -55,8 +62,14 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html lang="en" className={`${sans.variable} ${mono.variable} h-full antialiased`}>
+    <html
+      lang="en"
+      className={`${display.variable} ${sans.variable} ${mono.variable} h-full antialiased`}
+    >
       <body className="min-h-full bg-background font-sans text-foreground">
+        <noscript>
+          <style>{`.reveal{opacity:1;transform:none}`}</style>
+        </noscript>
         <SiteFrame>{children}</SiteFrame>
       </body>
     </html>

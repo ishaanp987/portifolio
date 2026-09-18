@@ -1,5 +1,5 @@
 import { projects } from "@/data/projects";
-import { isDevelopment, isSampleProject } from "@/lib/content";
+import { isRealValue, isSampleProject, isUsableHref, publicItems } from "@/lib/content";
 import type { Project } from "@/types";
 
 const SLUG_PATTERN = /^[a-z0-9]+(?:-[a-z0-9]+)*$/;
@@ -46,7 +46,7 @@ function byOrder(a: Project, b: Project): number {
 export function getVisibleProjects(): Project[] {
   return projects
     .filter((project) => !project.hidden)
-    .filter((project) => isDevelopment() || !isSampleProject(project))
+    .filter((project) => !isSampleProject(project))
     .sort(byOrder);
 }
 
@@ -104,4 +104,20 @@ export function formatProjectIndex(index: number): string {
 
 export function getProjectCoverAlt(project: Project): string {
   return project.coverAlt ?? `Cover figure for ${project.title}`;
+}
+
+export function hasCaseStudyContent(project: Project): boolean {
+  return Boolean(
+    isRealValue(project.longDescription) ||
+    isRealValue(project.description) ||
+    isRealValue(project.problem) ||
+    isRealValue(project.solution) ||
+    isRealValue(project.architecture) ||
+    isRealValue(project.role) ||
+    publicItems(project.technicalDecisions).length > 0 ||
+    publicItems(project.challenges).length > 0 ||
+    publicItems(project.learnings).length > 0 ||
+    project.images?.some((image) => image.src && isRealValue(image.alt)) ||
+    isUsableHref(project.coverImage),
+  );
 }

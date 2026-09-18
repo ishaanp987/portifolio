@@ -1,33 +1,40 @@
 import Image from "next/image";
 import { IdentityPanel } from "@/components/media/IdentityPanel";
 import { Container } from "@/components/layout/Container";
+import { SubtleShift } from "@/components/motion/SubtleShift";
 import { TextLink } from "@/components/ui/TextLink";
 import { site } from "@/config/site";
 import {
   getHeroFacts,
   getHeroSecondaryAction,
+  getHeroVisual,
   isRealValue,
-  isUsableHref,
 } from "@/lib/content";
 import { highlightPhrase } from "@/lib/highlight";
-import { isSectionEnabled } from "@/lib/sections";
+import {
+  getHeroPrimaryAction,
+  getNextSectionAfter,
+  getSectionHref,
+  getSectionLabel,
+} from "@/lib/sections";
 
 export function HeroSection() {
-  const projectsHref = isSectionEnabled("projects") ? "/#projects" : "/projects";
+  const primary = getHeroPrimaryAction();
   const secondary = getHeroSecondaryAction();
   const facts = getHeroFacts();
-  const visual = isUsableHref(site.heroImage)
-    ? { src: site.heroImage, alt: site.heroImageAlt || site.name }
-    : isUsableHref(site.avatar)
-      ? { src: site.avatar, alt: site.name }
-      : null;
+  const visual = getHeroVisual();
+  const next = getNextSectionAfter("hero");
 
   return (
     <section id="index" aria-labelledby="site-name" className="section-anchor">
       <Container width="wide" className="hero-shell">
         <div className="hero-stage">
           <div className="hero-copy">
-            {isRealValue(site.role) ? <p className="hero-kicker">{site.role}</p> : null}
+            {isRealValue(site.greeting) ? (
+              <p className="hero-kicker">{site.greeting}</p>
+            ) : isRealValue(site.role) ? (
+              <p className="hero-kicker">{site.role}</p>
+            ) : null}
             <h1 id="site-name" className="hero-name">
               {site.name}
             </h1>
@@ -39,52 +46,66 @@ export function HeroSection() {
               ))}
             </p>
             {isRealValue(site.headline) ? (
-              <p className="mt-6 max-w-[34rem] text-[length:var(--text-lead)] leading-7 text-secondary">
-                {site.headline}
-              </p>
+              <p className="hero-support">{site.headline}</p>
             ) : null}
-            {site.focusAreas.length > 0 ? (
-              <p className="mt-5 max-w-[40rem] text-secondary">
-                {site.focusAreas.join(" · ")}
-              </p>
+            {primary || secondary ? (
+              <div className="hero-actions">
+                {primary ? (
+                  <TextLink href={primary.href} variant="primary">
+                    {primary.label}
+                  </TextLink>
+                ) : null}
+                {secondary ? (
+                  <TextLink href={secondary.href} variant="secondary">
+                    {secondary.label}
+                  </TextLink>
+                ) : null}
+              </div>
             ) : null}
-            <div className="hero-actions">
-              <TextLink href={projectsHref} variant="primary">
-                View projects
-              </TextLink>
-              {secondary ? (
-                <TextLink href={secondary.href} variant="secondary">
-                  {secondary.label}
-                </TextLink>
-              ) : null}
-            </div>
             {facts.length > 0 ? (
               <dl className="hero-facts">
                 {facts.map((fact) => (
                   <div key={fact.label} className="min-w-0">
                     <dt className="meta m-0">{fact.label}</dt>
-                    <dd className="m-0 mt-1 text-sm text-secondary">{fact.value}</dd>
+                    <dd className="m-0 mt-1 text-secondary">{fact.value}</dd>
                   </div>
                 ))}
               </dl>
             ) : null}
           </div>
           <div className="hero-media">
-            {visual ? (
-              <div className="media-frame media-portrait group/cover h-full">
-                <Image
-                  src={visual.src}
-                  alt={visual.alt}
-                  fill
-                  priority
-                  sizes="(min-width: 1024px) 32vw, 100vw"
-                  className="media-zoom object-cover"
-                />
-              </div>
-            ) : (
-              <IdentityPanel />
-            )}
+            <SubtleShift>
+              {visual ? (
+                <div className="media-frame media-portrait group/cover h-full">
+                  <Image
+                    src={visual.src}
+                    alt={visual.alt}
+                    fill
+                    priority
+                    sizes="(min-width: 1024px) 32vw, 100vw"
+                    className="media-zoom object-cover"
+                  />
+                </div>
+              ) : (
+                <IdentityPanel />
+              )}
+            </SubtleShift>
           </div>
+          {next ? (
+            <p className="hero-next">
+              <TextLink
+                href={getSectionHref(next.id)}
+                variant="plain"
+                className="hero-next-link"
+              >
+                <span className="kicker-index" aria-hidden="true">
+                  ↓
+                </span>
+                {getSectionLabel(next.id)}
+              </TextLink>
+              <span className="section-kicker-rule" aria-hidden="true" />
+            </p>
+          ) : null}
         </div>
       </Container>
     </section>

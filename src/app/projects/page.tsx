@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { redirect } from "next/navigation";
 import { Container } from "@/components/layout/Container";
 import { ProjectIndex } from "@/components/projects/ProjectIndex";
 import { SectionHeading } from "@/components/ui/SectionHeading";
@@ -15,6 +16,9 @@ export const metadata: Metadata = {
 
 export default function ProjectsPage() {
   const projects = getVisibleProjects();
+  if (projects.length === 0) {
+    redirect("/");
+  }
 
   return (
     <div className="section-space">

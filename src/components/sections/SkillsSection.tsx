@@ -1,27 +1,32 @@
 import { Container } from "@/components/layout/Container";
+import { Reveal } from "@/components/motion/Reveal";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { getSectionIndex } from "@/lib/sections";
 import { getSkillCategories } from "@/lib/skills";
 
 export function SkillsSection() {
   const categories = getSkillCategories();
+  if (categories.length === 0) return null;
 
   return (
     <section
       id="skills"
       aria-labelledby="skills-heading"
-      className="section-anchor border-t border-border bg-background-secondary"
+      className="section-anchor border-t border-border"
     >
       <Container width="wide" className="section-space">
-        <SectionHeading index={getSectionIndex("skills")} label="Capabilities" />
-        <h2 id="skills-heading" className="max-w-[16ch] text-[length:var(--text-page)]">
-          Methods and tools.
-        </h2>
-        <p className="empty-copy mt-5">
-          A working list, not a claim of mastery. The projects should do the convincing.
-        </p>
-
-        {categories.length === 0 ? null : (
+        <Reveal>
+          <SectionHeading index={getSectionIndex("skills")} label="Methods" />
+        </Reveal>
+        <Reveal delay={70}>
+          <h2 id="skills-heading" className="max-w-[16ch] text-[length:var(--text-page)]">
+            Methods and tools.
+          </h2>
+          <p className="empty-copy mt-5">
+            A working list, not a claim of mastery. The projects should do the convincing.
+          </p>
+        </Reveal>
+        <Reveal delay={120}>
           <ul className="skill-matrix mt-10">
             {categories.map((category) => (
               <li key={category.id} className="skill-row">
@@ -36,7 +41,7 @@ export function SkillsSection() {
               </li>
             ))}
           </ul>
-        )}
+        </Reveal>
       </Container>
     </section>
   );

@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useId, useMemo, useState } from "react";
+import { useEffect, useId, useLayoutEffect, useMemo, useRef, useState } from "react";
 import { usePathname } from "next/navigation";
 import { Menu, X } from "lucide-react";
 import { Container } from "@/components/layout/Container";
@@ -18,6 +18,8 @@ export function Header({ navigation, utilityLinks, brandName }: HeaderProps) {
   const onProjects = pathname.startsWith("/projects");
   const [sectionActive, setSectionActive] = useState("");
   const [open, setOpen] = useState(false);
+  const [indicator, setIndicator] = useState({ left: 0, width: 0, ready: false });
+  const navRef = useRef<HTMLDivElement>(null);
   const menuId = useId();
   const active = onProjects ? "projects" : sectionActive;
   const sectionIds = useMemo(
@@ -67,6 +69,30 @@ export function Header({ navigation, utilityLinks, brandName }: HeaderProps) {
     };
   }, [pathname, onProjects, sectionIds]);
 
+  useLayoutEffect(() => {
+    const nav = navRef.current;
+    if (!nav) return;
+
+    const place = () => {
+      const activeLink = nav.querySelector('[data-active="true"]') as HTMLElement | null;
+      if (!activeLink) {
+        setIndicator((current) => ({ ...current, ready: false, width: 0 }));
+        return;
+      }
+      const navBox = nav.getBoundingClientRect();
+      const linkBox = activeLink.getBoundingClientRect();
+      setIndicator({
+        left: linkBox.left - navBox.left + 11,
+        width: Math.max(linkBox.width - 22, 12),
+        ready: true,
+      });
+    };
+
+    place();
+    window.addEventListener("resize", place);
+    return () => window.removeEventListener("resize", place);
+  }, [active, navigation]);
+
   return (
     <header className="site-header">
       <Container width="wide">
@@ -82,18 +108,25 @@ export function Header({ navigation, utilityLinks, brandName }: HeaderProps) {
           </TextLink>
 
           <nav aria-label="Primary" className="desktop-nav">
-            <ul className="nav-list">
-              {navigation.map((item) => {
-                const id = item.href.split("#")[1] ?? item.id;
-                return (
-                  <li key={item.id}>
-                    <TextLink href={item.href} variant="nav" active={active === id}>
-                      {item.label}
-                    </TextLink>
-                  </li>
-                );
-              })}
-            </ul>
+            <div className="relative" ref={navRef}>
+              <span
+                className={indicator.ready ? "nav-indicator is-ready" : "nav-indicator"}
+                style={{ left: indicator.left, width: indicator.width }}
+                aria-hidden="true"
+              />
+              <ul className="nav-list">
+                {navigation.map((item) => {
+                  const id = item.href.split("#")[1] ?? item.id;
+                  return (
+                    <li key={item.id}>
+                      <TextLink href={item.href} variant="nav" active={active === id}>
+                        {item.label}
+                      </TextLink>
+                    </li>
+                  );
+                })}
+              </ul>
+            </div>
           </nav>
 
           <div className="header-end">
@@ -106,7 +139,7 @@ export function Header({ navigation, utilityLinks, brandName }: HeaderProps) {
             </div>
             <button
               type="button"
-              className="menu-toggle"
+              className="menu-toggle md:hidden"
               aria-expanded={open}
               aria-controls={menuId}
               aria-label={open ? "Close menu" : "Open menu"}
@@ -125,36 +158,38 @@ export function Header({ navigation, utilityLinks, brandName }: HeaderProps) {
       <div
         id={menuId}
         className={open ? "mobile-nav is-open" : "mobile-nav"}
-        hidden={!open}
+        inert={!open}
       >
-        <Container width="wide">
-          <nav aria-label="Mobile" onClick={() => setOpen(false)}>
-            {navigation.map((item) => {
-              const id = item.href.split("#")[1] ?? item.id;
-              return (
+        <div className="mobile-nav-inner">
+          <Container width="wide">
+            <nav aria-label="Mobile" onClick={() => setOpen(false)}>
+              {navigation.map((item) => {
+                const id = item.href.split("#")[1] ?? item.id;
+                return (
+                  <TextLink
+                    key={item.id}
+                    href={item.href}
+                    variant="mobile"
+                    active={active === id}
+                    className="w-full"
+                  >
+                    {item.label}
+                  </TextLink>
+                );
+              })}
+              {utilityLinks.map((item) => (
                 <TextLink
                   key={item.id}
                   href={item.href}
                   variant="mobile"
-                  active={active === id}
                   className="w-full"
                 >
                   {item.label}
                 </TextLink>
-              );
-            })}
-            {utilityLinks.map((item) => (
-              <TextLink
-                key={item.id}
-                href={item.href}
-                variant="mobile"
-                className="w-full"
-              >
-                {item.label}
-              </TextLink>
-            ))}
-          </nav>
-        </Container>
+              ))}
+            </nav>
+          </Container>
+        </div>
       </div>
     </header>
   );

@@ -12,9 +12,7 @@ export function ProjectIndex({
   startIndex?: number;
   caption?: string;
 }) {
-  if (projects.length === 0) {
-    return <p className="empty-copy">No public projects yet.</p>;
-  }
+  if (projects.length === 0) return null;
 
   return (
     <div className="min-w-0">
@@ -44,14 +42,14 @@ export function ProjectIndex({
               >
                 <span className="meta text-accent">{number}</span>
                 <span className="min-w-0">
-                  <span className="index-title block text-[1.02rem] text-foreground">
+                  <span className="index-title block text-[1.05rem] text-foreground">
                     {project.title}
                   </span>
-                  <span className="mt-1 block text-sm leading-6 text-muted md:hidden">
+                  <span className="mt-1 block text-[0.95rem] leading-6 text-secondary md:hidden">
                     {[category, year, status].filter(Boolean).join("  ·  ")}
                   </span>
                 </span>
-                <span className="hidden min-w-0 text-sm text-secondary md:block">
+                <span className="hidden min-w-0 text-[0.95rem] text-secondary md:block">
                   {category ?? "—"}
                 </span>
                 <span className="meta hidden md:block">{year ?? "—"}</span>

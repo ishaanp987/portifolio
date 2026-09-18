@@ -2,7 +2,7 @@ import { ProjectCover } from "@/components/projects/ProjectCover";
 import { TextLink } from "@/components/ui/TextLink";
 import { isRealValue, isUsableHref, publicItems } from "@/lib/content";
 import { formatStatus } from "@/lib/format";
-import { formatProjectIndex, getProjectHref } from "@/lib/projects";
+import { formatProjectIndex, getProjectHref, hasCaseStudyContent } from "@/lib/projects";
 import type { Project } from "@/types";
 
 type FeaturedProjectProps = {
@@ -24,15 +24,15 @@ export function FeaturedProject({ project, index }: FeaturedProjectProps) {
   const layout = layoutFor(index);
   const lead = index === 0;
   const description = isRealValue(project.description) ? project.description : undefined;
-  const problem = isRealValue(project.problem) ? project.problem : undefined;
   const contribution = isRealValue(project.role) ? project.role : undefined;
   const technologies = publicItems(project.technologies);
   const category = isRealValue(project.category) ? project.category : undefined;
   const year = isRealValue(project.year) ? project.year : undefined;
   const status = isRealValue(project.status) ? formatStatus(project.status) : undefined;
+  const caseStudy = hasCaseStudyContent(project);
 
   return (
-    <article className="border-t border-border py-12 md:py-16 lg:py-20">
+    <article className="project-feature border-t border-border py-12 md:py-16 lg:py-20">
       <div className={`project-band is-${layout}`}>
         <div className="p-head">
           <p className="meta m-0">
@@ -51,9 +51,13 @@ export function FeaturedProject({ project, index }: FeaturedProjectProps) {
             ) : null}
           </p>
           <h3 className="mt-4 max-w-none text-[length:var(--text-project)] font-medium text-foreground sm:max-w-[18ch]">
-            <TextLink href={href} variant="plain" className="title-link">
-              {project.title}
-            </TextLink>
+            {caseStudy ? (
+              <TextLink href={href} variant="plain" className="title-link">
+                {project.title}
+              </TextLink>
+            ) : (
+              project.title
+            )}
           </h3>
           <hr className="accent-rule mt-5 mb-0" />
         </div>
@@ -66,22 +70,16 @@ export function FeaturedProject({ project, index }: FeaturedProjectProps) {
         </div>
         <div className="p-copy grid gap-5">
           {description ? (
-            <p className="max-w-[36rem] text-[0.98rem] leading-7 text-secondary">
+            <p className="max-w-[36rem] text-[length:var(--text-body)] leading-[var(--leading-body)] text-secondary">
               {description}
             </p>
           ) : null}
-          {problem ? (
-            <div>
-              <p className="m-0 text-sm font-medium text-foreground">Problem</p>
-              <p className="mt-2 max-w-[36rem] text-[0.95rem] leading-7 text-secondary">
-                {problem}
-              </p>
-            </div>
-          ) : null}
           {contribution ? (
             <div>
-              <p className="m-0 text-sm font-medium text-foreground">Contribution</p>
-              <p className="mt-2 max-w-[36rem] text-[0.95rem] leading-7 text-secondary">
+              <p className="m-0 text-[0.98rem] font-medium text-foreground">
+                Contribution
+              </p>
+              <p className="mt-2 max-w-[36rem] text-[length:var(--text-body)] leading-[var(--leading-body)] text-secondary">
                 {contribution}
               </p>
             </div>
@@ -106,13 +104,15 @@ export function FeaturedProject({ project, index }: FeaturedProjectProps) {
           <div className="p-spec" />
         )}
         <div className="p-action flex flex-wrap items-center gap-x-5">
-          <TextLink
-            href={href}
-            variant="action"
-            ariaLabel={`View case study: ${project.title}`}
-          >
-            Case study
-          </TextLink>
+          {caseStudy ? (
+            <TextLink
+              href={href}
+              variant="action"
+              ariaLabel={`View case study: ${project.title}`}
+            >
+              Case study
+            </TextLink>
+          ) : null}
           {isUsableHref(project.github) ? (
             <TextLink
               href={project.github}

@@ -1,6 +1,6 @@
 import { site } from "@/config/site";
 import { hasContent } from "@/lib/links";
-import type { Experience, Project } from "@/types";
+import type { Experience, ProfileFact, Project } from "@/types";
 
 const PLACEHOLDER_FRAGMENTS = [
   "example.com",
@@ -111,6 +111,7 @@ export function getPendingSiteFields(): PendingField[] {
     ["url", site.url],
     ["heroImage", site.heroImage],
     ["avatar", site.avatar],
+    ["currentlyBuilding", site.currentlyBuilding],
   ];
 
   return fields
@@ -130,12 +131,40 @@ export function getHeroFacts(): Array<{ label: string; value: string }> {
   return facts;
 }
 
+export function getProfileFacts(): ProfileFact[] {
+  const facts: ProfileFact[] = [];
+  if (isRealValue(site.role)) facts.push({ label: "Role", value: site.role });
+  if (isRealValue(site.focus)) facts.push({ label: "Focus", value: site.focus });
+  if (isRealValue(site.location)) facts.push({ label: "Location", value: site.location });
+  if (site.disciplines.length > 0) {
+    facts.push({ label: "Field", value: site.disciplines.join(" / ") });
+  }
+  return facts;
+}
+
+export function getPersonalNote(): string | undefined {
+  return publicText(site.personalNote);
+}
+
+export function getCurrentlyBuilding(): string | undefined {
+  return publicText(site.currentlyBuilding);
+}
+
+export function hasContactAction(): boolean {
+  return (
+    isUsableEmail(site.email) ||
+    isUsableHref(site.github) ||
+    isUsableHref(site.linkedin) ||
+    isUsableHref(site.resume)
+  );
+}
+
 export function getHeroSecondaryAction(): { href: string; label: string } | null {
   if (isUsableHref(site.resume)) {
     return { href: site.resume, label: "Résumé" };
   }
   if (isUsableEmail(site.email)) {
-    return { href: mailtoHref(site.email), label: "Contact" };
+    return { href: mailtoHref(site.email), label: "Write" };
   }
   return null;
 }
@@ -155,4 +184,30 @@ export function isSampleExperience(item: Experience): boolean {
 export function getAboutParagraphs(): string[] {
   const source = site.about.length > 0 ? [...site.about] : [site.bio];
   return source.filter(isRealValue);
+}
+
+export function getHeroVisual(): { src: string; alt: string } | null {
+  if (isUsableHref(site.heroImage)) {
+    return {
+      src: site.heroImage,
+      alt: isRealValue(site.heroImageAlt) ? site.heroImageAlt : site.name,
+    };
+  }
+  if (isUsableHref(site.avatar)) {
+    return { src: site.avatar, alt: site.name };
+  }
+  return null;
+}
+
+export function getAboutVisual(): { src: string; alt: string } | null {
+  if (isUsableHref(site.avatar)) {
+    return { src: site.avatar, alt: site.name };
+  }
+  if (isUsableHref(site.heroImage)) {
+    return {
+      src: site.heroImage,
+      alt: isRealValue(site.heroImageAlt) ? site.heroImageAlt : site.name,
+    };
+  }
+  return null;
 }

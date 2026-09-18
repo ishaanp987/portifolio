@@ -231,7 +231,7 @@ function getCaseBlocks(project: Project): CaseBlock[] {
 function listBlock(items: string[]) {
   if (items.length === 0) return null;
   return (
-    <ul className="max-w-[40rem] list-disc space-y-3 pl-5 text-[1.02rem] leading-7 text-secondary">
+    <ul className="max-w-[40rem] list-disc space-y-3 pl-5 text-[length:var(--text-body)] leading-[var(--leading-body)] text-secondary">
       {items.map((item) => (
         <li key={item}>{item}</li>
       ))}

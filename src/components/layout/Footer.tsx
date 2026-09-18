@@ -12,10 +12,9 @@ export function Footer() {
         width="wide"
         className="flex flex-col gap-4 py-8 sm:flex-row sm:items-center sm:justify-between"
       >
-        <p className="meta m-0">
+        <p className="m-0 text-[0.95rem] text-secondary">
           {site.name}
-          <span className="text-border-strong"> · </span>
-          {year}
+          <span className="meta"> · {year}</span>
         </p>
         {social.length > 0 ? (
           <ul className="-mx-2 flex flex-wrap items-center">
