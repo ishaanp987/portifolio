@@ -17,7 +17,7 @@ const SECTION_LABELS: Record<HomepageSectionId, string> = {
   building: "Currently building",
   facts: "A few facts",
   experience: "Experience",
-  skills: "Methods and tools",
+  skills: "Methods",
   about: "About",
   contact: "Contact",
 };

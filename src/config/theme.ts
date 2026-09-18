@@ -3,13 +3,13 @@
  * Keep these in sync with the CSS tokens in `src/app/globals.css`.
  */
 export const theme = {
-  background: "#090C0A",
-  backgroundSecondary: "#101511",
-  surface: "#151B16",
-  foreground: "#F2F4F0",
-  secondary: "#B7BDB7",
-  muted: "#858D86",
-  border: "rgba(242, 244, 240, 0.10)",
-  accent: "#59D78B",
+  background: "#080B09",
+  backgroundSecondary: "#0E1510",
+  surface: "#141C16",
+  foreground: "#F3F5F1",
+  secondary: "#C2C8C2",
+  muted: "#8D948E",
+  border: "rgba(210, 220, 212, 0.12)",
+  accent: "#5AD68C",
   accentMuted: "#2FA866",
 } as const;

@@ -16,8 +16,8 @@ export const site = {
   focusAreas: ["Software", "Robotics", "AI", "Engineering", "Products"],
   bio: "Student and builder interested in systems that sit between software, engineering, robotics, and AI. I build software and engineered systems at the intersection of software, engineering, and products.",
   about: [
-    "Student and builder interested in systems that sit between software, engineering, robotics, and AI. I build software and engineered systems — work that lives at the intersection of software, engineering, and products.",
-    "I keep returning to software, robotics, AI, engineering, and products: the fields where something has to work as both software and an engineered system. That thread — software and engineered systems — is what I want the work to keep circling.",
+    "Student and builder interested in systems that sit between software, engineering, robotics, and AI.",
+    "I keep returning to the fields where something has to work as both software and an engineered system. That thread is what I want the work to keep circling.",
   ],
   personalNote: "Software and engineered systems.",
   currentlyBuilding: "",

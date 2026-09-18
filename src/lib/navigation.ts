@@ -6,6 +6,7 @@ export function getPrimaryNavigation(): NavItem[] {
   return navigation.filter((item) => {
     if (item.id === "projects") return isSectionEnabled("projects");
     if (item.id === "experience") return isSectionEnabled("experience");
+    if (item.id === "skills") return isSectionEnabled("skills");
     if (item.id === "about") return isSectionEnabled("about");
     if (item.id === "contact") return isSectionEnabled("contact");
     return true;

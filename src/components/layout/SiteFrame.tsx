@@ -11,10 +11,15 @@ export function SiteFrame({ children }: { children: React.ReactNode }) {
   return (
     <div className="site-shell">
       <SkipLink />
-      <Header navigation={navigation} utilityLinks={utilityLinks} brandName={site.name} />
+      <Header
+        navigation={navigation}
+        utilityLinks={utilityLinks}
+        brandName={site.name}
+        initials={site.initials}
+      />
       <div className="site-frame">
         <main id="main">{children}</main>
-        <Footer />
+        <Footer navigation={navigation} />
       </div>
     </div>
   );

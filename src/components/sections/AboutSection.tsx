@@ -3,66 +3,77 @@ import { Container } from "@/components/layout/Container";
 import { Reveal } from "@/components/motion/Reveal";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { site } from "@/config/site";
-import { getAboutParagraphs, getAboutVisual, getProfileFacts } from "@/lib/content";
+import {
+  getAboutFacts,
+  getAboutParagraphs,
+  getAboutVisual,
+  getInterestList,
+} from "@/lib/content";
 import { getSectionIndex } from "@/lib/sections";
 
 export function AboutSection() {
   const paragraphs = getAboutParagraphs();
   if (paragraphs.length === 0) return null;
 
-  const facts = getProfileFacts();
+  const facts = getAboutFacts().filter((fact) => fact.label !== "Interests");
+  const interests = getInterestList();
   const visual = getAboutVisual();
-  const hasAside = Boolean(visual) || facts.length > 0;
+  const hasSpec = Boolean(visual) || facts.length > 0 || interests.length > 0;
 
   return (
     <section
       id="about"
       aria-labelledby="about-heading"
-      className="section-anchor border-t border-border bg-surface"
+      className="section-anchor about-section"
     >
       <Container width="wide" className="section-space">
         <Reveal>
           <SectionHeading index={getSectionIndex("about")} label="About" />
         </Reveal>
         <div className="about-layout">
-          <Reveal delay={70} className="min-w-0">
-            <h2
-              id="about-heading"
-              className="max-w-[14ch] text-[length:var(--text-page)]"
-            >
+          <Reveal delay={60} className="about-copy">
+            <h2 id="about-heading" className="about-title">
               A short note on {site.firstName}.
             </h2>
-            <div className="prose-block mt-8">
+            <div className="prose-block">
               {paragraphs.map((paragraph) => (
                 <p key={paragraph}>{paragraph}</p>
               ))}
             </div>
           </Reveal>
-          {hasAside ? (
-            <Reveal delay={140} className="min-w-0">
-              <aside className="about-card">
-                {visual ? (
-                  <div className="media-frame media-portrait relative min-h-[14rem] overflow-hidden border-0">
-                    <Image
-                      src={visual.src}
-                      alt={visual.alt}
-                      fill
-                      sizes="(min-width: 768px) 22rem, 100vw"
-                      className="object-cover"
-                    />
+          {hasSpec ? (
+            <Reveal delay={120} className="about-spec">
+              {visual ? (
+                <div className="media-frame media-portrait relative min-h-[14rem] overflow-hidden">
+                  <Image
+                    src={visual.src}
+                    alt={visual.alt}
+                    fill
+                    sizes="(min-width: 768px) 22rem, 100vw"
+                    className="object-cover"
+                  />
+                </div>
+              ) : null}
+              <dl className="about-dl">
+                {facts.map((fact) => (
+                  <div key={fact.label} className="about-pair">
+                    <dt className="meta-key">{fact.label}</dt>
+                    <dd className="meta-val">{fact.value}</dd>
+                  </div>
+                ))}
+                {interests.length > 0 ? (
+                  <div className="about-pair">
+                    <dt className="meta-key">Interests</dt>
+                    <dd className="meta-val">
+                      <ul className="about-interests">
+                        {interests.map((item) => (
+                          <li key={item}>{item}</li>
+                        ))}
+                      </ul>
+                    </dd>
                   </div>
                 ) : null}
-                {facts.length > 0 ? (
-                  <dl className="grid gap-3">
-                    {facts.map((fact) => (
-                      <div key={fact.label} className="meta-pair">
-                        <dt className="meta-key">{fact.label}</dt>
-                        <dd className="meta-val">{fact.value}</dd>
-                      </div>
-                    ))}
-                  </dl>
-                ) : null}
-              </aside>
+              </dl>
             </Reveal>
           ) : null}
         </div>

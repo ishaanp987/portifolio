@@ -1,9 +1,11 @@
+import { Fragment } from "react";
 import { AboutSection } from "@/components/sections/AboutSection";
 import { BuildingSection } from "@/components/sections/BuildingSection";
 import { ContactSection } from "@/components/sections/ContactSection";
 import { ExperienceSection } from "@/components/sections/ExperienceSection";
 import { FactsSection } from "@/components/sections/FactsSection";
 import { HeroSection } from "@/components/sections/HeroSection";
+import { InterludeSection } from "@/components/sections/InterludeSection";
 import { ProjectsSection } from "@/components/sections/ProjectsSection";
 import { SkillsSection } from "@/components/sections/SkillsSection";
 import { getEnabledSections } from "@/lib/sections";
@@ -27,7 +29,12 @@ export default function Home() {
     <>
       {sections.map((section) => {
         const Section = sectionComponents[section.id];
-        return <Section key={section.id} />;
+        return (
+          <Fragment key={section.id}>
+            <Section />
+            {section.id === "skills" ? <InterludeSection /> : null}
+          </Fragment>
+        );
       })}
     </>
   );

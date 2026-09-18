@@ -8,6 +8,7 @@ import { getSkillCategories } from "@/lib/skills";
 export function SkillsSection() {
   const categories = getSkillCategories();
   if (categories.length === 0) return null;
+  const index = getSectionIndex("skills");
 
   return (
     <section
@@ -17,36 +18,42 @@ export function SkillsSection() {
     >
       <Container width="wide" className="section-space">
         <Reveal>
-          <SectionHeading index={getSectionIndex("skills")} label="Methods" />
+          <SectionHeading index={index} label="Methods" />
         </Reveal>
-        <Reveal delay={60}>
-          <h2
-            id="skills-heading"
-            className="max-w-[18ch] text-[1.35rem] font-medium sm:text-[1.5rem]"
-          >
-            Methods and tools.
-          </h2>
-        </Reveal>
-        <Reveal delay={120}>
-          <ul className="skill-matrix mt-8">
-            {categories.map((category, index) => (
-              <li key={category.id} className="skill-row">
-                <p className="skill-label">
-                  <span className="kicker-index">{formatIndex(index)}</span>
-                  <span className="text-muted"> · </span>
-                  {category.label}
-                </p>
-                <div className="skill-items">
-                  {category.items.map((item) => (
-                    <span key={item} className="skill-item">
-                      {item}
-                    </span>
-                  ))}
-                </div>
-              </li>
-            ))}
-          </ul>
-        </Reveal>
+        <div className="methods-head">
+          <Reveal delay={50}>
+            <h2 id="skills-heading" className="methods-title">
+              Methods and tools.
+            </h2>
+          </Reveal>
+          <Reveal delay={90}>
+            <p className="methods-count meta m-0">
+              {String(categories.length).padStart(2, "0")} groups
+            </p>
+          </Reveal>
+        </div>
+        <ul className="skill-matrix">
+          {categories.map((category, categoryIndex) => (
+            <Reveal
+              key={category.id}
+              as="li"
+              delay={Math.min(categoryIndex * 55, 280)}
+              className="skill-row"
+            >
+              <span className="skill-index kicker-index">
+                {index}.{formatIndex(categoryIndex)}
+              </span>
+              <p className="skill-label">{category.label}</p>
+              <div className="skill-items">
+                {category.items.map((item) => (
+                  <span key={item} className="skill-item">
+                    {item}
+                  </span>
+                ))}
+              </div>
+            </Reveal>
+          ))}
+        </ul>
       </Container>
     </section>
   );

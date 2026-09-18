@@ -6,11 +6,11 @@ type RevealProps = {
   children: React.ReactNode;
   className?: string;
   delay?: number;
-  as?: "div" | "section";
+  as?: "div" | "section" | "li";
 };
 
 export function Reveal({ children, className, delay = 0, as = "div" }: RevealProps) {
-  const ref = useRef<HTMLDivElement>(null);
+  const ref = useRef<HTMLElement>(null);
   const [visible, setVisible] = useState(false);
   const Tag = as;
 
@@ -38,7 +38,7 @@ export function Reveal({ children, className, delay = 0, as = "div" }: RevealPro
 
   return (
     <Tag
-      ref={ref}
+      ref={ref as never}
       className={["reveal", visible ? "is-visible" : "", className]
         .filter(Boolean)
         .join(" ")}

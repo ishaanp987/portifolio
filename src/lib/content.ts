@@ -155,6 +155,25 @@ export function getProfileFacts(): ProfileFact[] {
   return facts;
 }
 
+export function getAboutFacts(): ProfileFact[] {
+  return getProfileFacts().filter((fact) => fact.label !== "Role");
+}
+
+export function getInterestList(): string[] {
+  return publicItems([...site.focusAreas]);
+}
+
+export function getInterludeTerms(): string[] {
+  const available = publicItems([...site.disciplines]);
+  if (available.length === 0) return [];
+  const preferred = ["Software", "Engineering", "Systems"];
+  const ordered = preferred.filter((term) => available.includes(term));
+  for (const term of available) {
+    if (!ordered.includes(term)) ordered.push(term);
+  }
+  return ordered;
+}
+
 export function getPersonalNote(): string | undefined {
   return publicText(site.personalNote);
 }
