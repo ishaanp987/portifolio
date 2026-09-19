@@ -16,7 +16,9 @@ export function Footer({ navigation }: FooterProps) {
       <Container width="wide" className="footer-bar">
         <div className="footer-identity">
           <p className="footer-name">
-            <span className="footer-initials">{site.initials}</span>
+            <span className="footer-initials" aria-hidden="true">
+              {site.initials}
+            </span>
             <span>{site.name}</span>
           </p>
           <p className="footer-year">{year}</p>
