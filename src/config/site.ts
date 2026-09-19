@@ -14,10 +14,10 @@ export const site = {
   focus: "Software / Engineering / Products",
   disciplines: ["Engineering", "Software", "Systems"],
   focusAreas: ["Software", "Robotics", "AI", "Engineering", "Products"],
-  bio: "Student and builder interested in systems that sit between software, engineering, robotics, and AI. I build software and engineered systems at the intersection of software, engineering, and products.",
+  bio: "Student and builder. Robotics, AI, and physical systems sit close to the work I care about. I keep returning to problems that have to hold as both software and an engineered system.",
   about: [
-    "Student and builder interested in systems that sit between software, engineering, robotics, and AI.",
-    "I keep returning to the fields where something has to work as both software and an engineered system. That thread is what I want the work to keep circling.",
+    "Student and builder. Robotics, AI, and physical systems sit close to the work I care about.",
+    "I keep returning to problems that have to hold as both software and an engineered system. That thread is what I want the work to keep circling.",
   ],
   personalNote: "Software and engineered systems.",
   currentlyBuilding: "",
@@ -30,6 +30,7 @@ export const site = {
   resume: "",
   availability: "Replace with availability — e.g. Open to internships",
   avatar: "",
+  /** Public path such as `/media/portrait.webp`. Empty uses the IP brand plate. */
   heroImage: "",
   heroImageAlt: "",
   url: "https://your-domain.example",

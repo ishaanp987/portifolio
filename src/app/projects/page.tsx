@@ -33,7 +33,7 @@ export default function ProjectsPage() {
   return (
     <div className="section-space">
       <Container width="wide">
-        <SectionHeading index="01" label="Index" />
+        <SectionHeading label="Projects" />
         <h1 className="contact-title max-w-[12ch] text-foreground">All projects</h1>
         <p className="mt-6 max-w-[36rem] text-secondary">A register of published work.</p>
         <div className="mt-12">

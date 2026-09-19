@@ -38,4 +38,4 @@ Biography paragraphs live in `site.about`. If that array is empty (or only place
 
 ## Images
 
-Do not invent screenshots. Until a real portrait, prototype, CAD still, or project photograph exists, the hero stays a single column and does not render an empty frame.
+Until a real portrait exists, the hero uses an IP brand plate in the same frame. Set `heroImage` to a public path such as `/media/portrait.webp` to replace it. Do not ship visitor-facing “image coming soon” copy.

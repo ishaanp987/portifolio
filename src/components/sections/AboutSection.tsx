@@ -9,7 +9,6 @@ import {
   getAboutVisual,
   getInterestList,
 } from "@/lib/content";
-import { getSectionIndex } from "@/lib/sections";
 
 export function AboutSection() {
   const paragraphs = getAboutParagraphs();
@@ -18,7 +17,7 @@ export function AboutSection() {
   const facts = getAboutFacts().filter((fact) => fact.label !== "Interests");
   const interests = getInterestList();
   const visual = getAboutVisual();
-  const hasSpec = Boolean(visual) || facts.length > 0 || interests.length > 0;
+  const hasAside = Boolean(visual) || facts.length > 0 || interests.length > 0;
 
   return (
     <section
@@ -28,7 +27,7 @@ export function AboutSection() {
     >
       <Container width="wide" className="section-space">
         <Reveal>
-          <SectionHeading index={getSectionIndex("about")} label="About" />
+          <SectionHeading label="About" />
         </Reveal>
         <div className="about-layout">
           <Reveal delay={60} className="about-copy">
@@ -41,15 +40,15 @@ export function AboutSection() {
               ))}
             </div>
           </Reveal>
-          {hasSpec ? (
-            <Reveal delay={120} className="about-spec">
+          {hasAside ? (
+            <Reveal delay={120} className="about-aside">
               {visual ? (
-                <div className="media-frame media-portrait relative min-h-[14rem] overflow-hidden">
+                <div className="about-portrait">
                   <Image
                     src={visual.src}
                     alt={visual.alt}
                     fill
-                    sizes="(min-width: 768px) 22rem, 100vw"
+                    sizes="(min-width: 768px) 20rem, 100vw"
                     className="object-cover"
                   />
                 </div>

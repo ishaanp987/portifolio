@@ -20,7 +20,7 @@ export default function NotFound() {
         </p>
         <h1 className="contact-title max-w-[12ch]">This page does not exist.</h1>
         <p className="mt-6 max-w-[32rem] text-secondary">
-          The page may have been moved, or it is not part of the public index.
+          The page may have been moved, or it is not part of the public site.
         </p>
         <div className="mt-10 flex flex-wrap gap-x-6 gap-y-3">
           <TextLink href="/" variant="primary">

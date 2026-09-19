@@ -4,7 +4,6 @@ import { useEffect, useId, useLayoutEffect, useMemo, useRef, useState } from "re
 import { usePathname } from "next/navigation";
 import { Menu, X } from "lucide-react";
 import { Container } from "@/components/layout/Container";
-import { RegistrationMark } from "@/components/media/RegistrationMark";
 import { TextLink } from "@/components/ui/TextLink";
 import type { NavItem } from "@/types";
 
@@ -22,6 +21,7 @@ export function Header({ navigation, utilityLinks, brandName, initials }: Header
   const onProjects = pathname.startsWith("/projects");
   const [sectionActive, setSectionActive] = useState("");
   const [open, setOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
   const [indicator, setIndicator] = useState({ left: 0, width: 0, ready: false });
   const navRef = useRef<HTMLDivElement>(null);
   const menuId = useId();
@@ -38,6 +38,13 @@ export function Header({ navigation, utilityLinks, brandName, initials }: Header
         .filter((id): id is string => Boolean(id)),
     [navigation],
   );
+
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 10);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
 
   useEffect(() => {
     if (!open) return;
@@ -103,17 +110,16 @@ export function Header({ navigation, utilityLinks, brandName, initials }: Header
   }, [active, links]);
 
   return (
-    <header className="site-header">
+    <header className={scrolled ? "site-header is-scrolled" : "site-header"}>
       <Container width="wide">
         <div className={useDrawer ? "header-bar has-drawer" : "header-bar"}>
           <TextLink
-            href="/"
+            href="/#top"
             variant="plain"
             className="brand-mark"
             ariaLabel={`${brandName}, home`}
             onClick={() => setOpen(false)}
           >
-            <RegistrationMark />
             <span className="brand-initials">{initials}</span>
             <span className="brand-name">{brandName}</span>
           </TextLink>

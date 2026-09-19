@@ -8,7 +8,6 @@ import {
   formatExperienceDates,
   getVisibleExperience,
 } from "@/lib/experience";
-import { getSectionIndex } from "@/lib/sections";
 
 export function ExperienceSection() {
   const items = getVisibleExperience();
@@ -22,7 +21,7 @@ export function ExperienceSection() {
     >
       <Container width="wide" className="section-space">
         <Reveal>
-          <SectionHeading index={getSectionIndex("experience")} label="Experience" />
+          <SectionHeading label="Experience" />
         </Reveal>
         <Reveal delay={70}>
           <h2

@@ -9,7 +9,7 @@ src/
   app/                  Routes, metadata, sitemap, robots, Open Graph
   components/
     ui/                 Links, labels, meta lists
-    media/              Quiet frames for project covers without screenshots
+    media/              Hero still and quiet frames for project covers without screenshots
     motion/             IntersectionObserver section reveals
     layout/             Frame, header, footer, container
     sections/           Homepage sections
@@ -39,7 +39,7 @@ The public UI omits unpublished projects (`published !== true`), template experi
 
 `src/config/theme.ts` duplicates the palette only for `ImageResponse` assets (Open Graph, Apple icon).
 
-The visual identity is an editorial engineering portfolio: compact top navigation, a name-led hero, full-width project bands when real work exists, a dark About section, and `#59D78B` as a signal rather than a theme.
+The visual identity is a personal engineering portfolio: compact top navigation, a two-column name-led hero with a single media frame, a methods index, a dark-green About band, and `#5AD68C` as a signal rather than a theme.
 
 ## Project rendering
 

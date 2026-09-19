@@ -2,7 +2,6 @@ import { Container } from "@/components/layout/Container";
 import { Reveal } from "@/components/motion/Reveal";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { getCurrentlyBuilding } from "@/lib/content";
-import { getSectionIndex } from "@/lib/sections";
 
 export function BuildingSection() {
   const text = getCurrentlyBuilding();
@@ -16,7 +15,7 @@ export function BuildingSection() {
     >
       <Container width="wide" className="section-space">
         <Reveal>
-          <SectionHeading index={getSectionIndex("building")} label="Now" />
+          <SectionHeading label="Now" />
         </Reveal>
         <Reveal delay={80}>
           <h2

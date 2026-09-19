@@ -5,7 +5,6 @@ import {
   getCurrentlyBuilding,
   hasContactAction,
 } from "@/lib/content";
-import { formatIndex } from "@/lib/format";
 import { getVisibleExperience } from "@/lib/experience";
 import { getVisibleProjects } from "@/lib/projects";
 import { getSkillCategories } from "@/lib/skills";
@@ -51,14 +50,6 @@ export function getEnabledSections(): HomepageSectionConfig[] {
 
 export function isSectionEnabled(id: HomepageSectionId): boolean {
   return getEnabledSections().some((section) => section.id === id);
-}
-
-export function getSectionIndex(id: HomepageSectionId): string {
-  if (id === "hero") return "00";
-  const enabled = getEnabledSections().filter((section) => section.id !== "hero");
-  const index = enabled.findIndex((section) => section.id === id);
-  if (index === -1) return "00";
-  return formatIndex(index);
 }
 
 export function getSectionLabel(id: HomepageSectionId): string {

@@ -5,13 +5,11 @@ import { ProjectIndex } from "@/components/projects/ProjectIndex";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { TextLink } from "@/components/ui/TextLink";
 import { getHomepageArchive, getHomepageFeatured } from "@/lib/projects";
-import { getSectionIndex } from "@/lib/sections";
 
 export function ProjectsSection() {
   const featured = getHomepageFeatured();
   const archive = getHomepageArchive();
   const archivePreview = archive.slice(0, 4);
-  const index = getSectionIndex("projects");
   if (featured.length === 0 && archivePreview.length === 0) return null;
 
   return (
@@ -22,7 +20,7 @@ export function ProjectsSection() {
     >
       <Container width="wide" className="pt-[var(--space-section)] pb-4">
         <Reveal>
-          <SectionHeading index={index} label="Selected work" />
+          <SectionHeading label="Selected work" />
         </Reveal>
         <Reveal delay={70}>
           <h2
@@ -54,11 +52,7 @@ export function ProjectsSection() {
             className="mt-6 border-t border-border pt-12 md:mt-10 md:pt-16"
           >
             <div className="mb-8 flex flex-wrap items-end justify-between gap-4">
-              <SectionHeading
-                index={`${index}.1`}
-                label="Archive"
-                className="mb-0 min-w-[12rem] flex-1"
-              />
+              <SectionHeading label="Archive" className="mb-0 min-w-[12rem] flex-1" />
               <TextLink href="/projects" variant="action">
                 Full index
               </TextLink>

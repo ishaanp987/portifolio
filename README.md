@@ -1,8 +1,8 @@
 # Portfolio
 
-Personal portfolio for **Ishaan Patel** — an editorial engineering site for software, robotics, AI, physical systems, and product work.
+Personal portfolio for **Ishaan Patel** — a dark, editorial site for software, robotics, AI, engineering, and product work.
 
-The visual system is dark green-gray (`#090C0A`, `#101511`, `#151B16`) with a single accent (`#59D78B`). Headings use Archivo. Navigation, body copy, and buttons use Source Sans 3. IBM Plex Mono is reserved for indexes, dates, and compact labels.
+The visual system is near-black and forest green (`#080B09`, `#0E1510`, `#141C16`) with a single mint accent (`#5AD68C`). Headings use Archivo. Navigation, body copy, and buttons use Source Sans 3. IBM Plex Mono is reserved for compact labels such as initials and dates.
 
 Personal information lives in typed files. Optional fields, placeholder values, and unpublished sample projects stay out of the public UI. See [`CONTENT_NEEDED.md`](CONTENT_NEEDED.md) for the remaining genuine details to add.
 
@@ -128,11 +128,11 @@ Navigation labels and hashes live in [`src/config/navigation.ts`](src/config/nav
 
 Live site tokens are in [`src/app/globals.css`](src/app/globals.css) under `:root`. Mirror the palette in [`src/config/theme.ts`](src/config/theme.ts) after changing colors (Open Graph images cannot read CSS variables).
 
-- **Accent:** `--accent` is `#59D78B`. Use it for active navigation, important words, markers, primary buttons, timeline pips, and focus.
-- **Surfaces:** `--background` `#090C0A`, `--surface` `#101511`, `--surface-raised` `#151B16`. Keep the whole site dark; do not add a white band.
-- **Type:** Archivo for headings, Source Sans 3 for interface copy, IBM Plex Mono for metadata. Letter-spacing stays at `0`. Body copy is 17–19px. Navigation is 15–16px.
-- **Shape / space:** media and cards use 6–8px corners, `--space-gutter`, `--space-section`, `--container-wide`.
-- **Motion:** page entrance, section reveals, and a sliding nav underline. `prefers-reduced-motion` removes transforms, stagger, and smooth scrolling.
+- **Accent:** `--accent` is `#5AD68C`. Use it for active navigation, the highlighted phrase, primary buttons, timeline pips, and focus.
+- **Surfaces:** `--background` `#080B09`, `--surface` `#0E1510`, `--about-band` `#121C16`. Keep the whole site dark; do not add a white band.
+- **Type:** Archivo for headings, Source Sans 3 for interface copy, IBM Plex Mono for compact labels. Letter-spacing stays at `0`. Body copy is 17–18px. Navigation is 15–16px. Hero type uses explicit rem sizes at breakpoints, never `vw`.
+- **Shape / space:** media frames use a 4px radius, `--space-gutter`, `--space-section`, `--container-wide`.
+- **Motion:** hero stagger on load, section reveals, a sliding nav underline, and a short media-frame lift on hover. `prefers-reduced-motion` removes transforms, stagger, and smooth scrolling.
 
 ### Media
 
@@ -142,7 +142,7 @@ Live site tokens are in [`src/app/globals.css`](src/app/globals.css) under `:roo
 
 Replacing a file with the same name does not require component changes. Projects without screenshots render a quiet neutral frame — never a public “asset needed” instruction.
 
-Hero still: set `heroImage` (preferred) or `avatar` in `src/config/site.ts`. If both are empty, the hero stays a single column with a compact facts row. It does not render an empty frame or a name-repeat panel.
+Hero still: set `heroImage` (preferred) or `avatar` in `src/config/site.ts` to a public path such as `/media/portrait.webp`. Until that file exists, the right column uses a quiet IP brand plate in the same 4:5 frame. A real photograph fills that frame with `object-fit: cover`. Do not leave `heroImage` pointing at a missing file.
 
 See [`public/projects/README.md`](public/projects/README.md).
 

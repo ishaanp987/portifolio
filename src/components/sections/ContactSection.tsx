@@ -11,7 +11,6 @@ import {
   isUsableHref,
   mailtoHref,
 } from "@/lib/content";
-import { getSectionIndex } from "@/lib/sections";
 
 export function ContactSection() {
   if (!hasContactAction()) return null;
@@ -34,7 +33,7 @@ export function ContactSection() {
     >
       <Container width="wide" className="section-space">
         <Reveal>
-          <SectionHeading index={getSectionIndex("contact")} label="Contact" />
+          <SectionHeading label="Contact" />
         </Reveal>
         <div className="contact-layout">
           <Reveal delay={70} className="min-w-0">
